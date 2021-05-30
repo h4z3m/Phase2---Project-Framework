@@ -44,12 +44,20 @@ void AddTriangleAction::ReadActionParameters()
 //Execute the action
 void AddTriangleAction::Execute()
 {
+	Input* pIn = pManager->GetInput();
+	Output* pOut = pManager->GetOutput();
 	//This action needs to read some parameters first
 	ReadActionParameters();
+	if (pIn->DrawArea_ValidClick(P1.x, P1.y, UI.height) && pIn->DrawArea_ValidClick(P2.x, P2.y, UI.height) && pIn->DrawArea_ValidClick(P3.x, P3.y, UI.height)) {
 
-	//Create a triangle with the parameters read from the user
-	CTriangle* T = new CTriangle(P1, P2, P3, TriangleGfxInfo);
+		//Create a triangle with the parameters read from the user
+		CTriangle* T = new CTriangle(P1, P2, P3, TriangleGfxInfo);
 
-	//Add the triangle to the list of figures
-	pManager->AddFigure(T);
+		//Add the triangle to the list of figures
+		pManager->AddFigure(T);
+	}
+	else
+	{
+		pOut->PrintMessage("ERROR: Please click in the drawing area!");
+	}
 }

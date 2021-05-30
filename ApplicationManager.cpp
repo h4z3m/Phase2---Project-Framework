@@ -2,7 +2,7 @@
 #include "Actions\AddRectAction.h"
 #include "Actions\AddLineAction.h"
 #include "Actions\AddCircleAction.h"
-#include"Actions\AddTriangleAction.h"
+#include "Actions\AddTriangleAction.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -41,76 +41,104 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 	case DRAW_LINE:
 		pAct = new AddLineAction(this);
-
 		break;
-
-
+	
 	case DRAW_CIRC:
 		pAct = new AddCircleAction(this);
 		break;
+	
 	case DRAW_TRI:
 		pAct = new AddTriangleAction(this);
 		break;
+	
 	case CHNG_FILL_CLR:
 		break;
+	
 	case CHNG_BK_CLR:
 		break;
+	
 	case CHNG_DRAW_CLR:
 		break;
+	
 	case DEL:
 		break;
+	
 	case MOVE:
 		break;
+	
 	case RESIZE:
 		break;
+	
 	case ROTATE:
 		break;
+	
 	case SEND_BACK:
 		break;
+	
 	case BRNG_FRNT:
 		break;
+	
 	case SAVE:
 		break;
+	
 	case LOAD:
 		break;
+	
 	case UNDO:
 		break;
+	
 	case REDO:
 		break;
+	
 	case SELECT_FIGURE:
 		break;
+	
 	case ZOOM_IN:
 		break;
+	
 	case ZOOM_OUT:
 		break;
+	
 	case COPY:
 		break;
+	
 	case CUT:
 		break;
+	
 	case PASTE:
 		break;
+	
 	case Figure_Type:
 		break;
+	
 	case Figure_Fill_Color:
 		break;
+	
 	case Figure_Fill_Type:
 		break;
+	
 	case Figure_Area:
 		break;
+	
 	case DRAWING_AREA:
 		break;
+	
 	case GAMING_AREA:
 		break;
+	
 	case EMPTY:
 		break;
+	
 	case TO_DRAW:
 		break;
+	
 	case TO_PLAY:
 		break;
+	
 	case EXIT:
 		///create ExitAction here
-
 		break;
+	
 	case STATUS:	//a click on the status bar ==> no action
 		return;
 	}

@@ -32,18 +32,26 @@ void AddLineAction::ReadActionParameters()
 	LineGfxInfo.BorderWdth = pOut->getCrntPenWidth();
 
 	pOut->ClearStatusBar();
-
 }
 
 //Execute the action
 void AddLineAction::Execute()
 {
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
+
 	//This action needs to read some parameters first
 	ReadActionParameters();
+	if (pIn->DrawArea_ValidClick(P1.x, P1.y, UI.height) && pIn->DrawArea_ValidClick(P2.x, P2.y, UI.height)) {
 
-	//Create a rectangle with the parameters read from the user
-	CLine* L = new CLine(P1, P2, LineGfxInfo);
+		//Create a rectangle with the parameters read from the user
+		CLine* L = new CLine(P1, P2, LineGfxInfo);
 
-	//Add the rectangle to the list of figures
-	pManager->AddFigure(L);
+		//Add the rectangle to the list of figures
+		pManager->AddFigure(L);
+	}
+	else
+	{
+		pOut->PrintMessage("ERROR: Please click in the drawing area!");
+	}
 }

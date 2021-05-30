@@ -8,8 +8,8 @@ Output::Output()
 
 	UI.width = 1300;
 	UI.height = 700;
-	UI.wx = 5;
-	UI.wy = 5;
+	UI.wx = 100;
+	UI.wy = 100;
 
 
 	UI.StatusBarHeight = 50;
@@ -214,9 +214,6 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 		style = FRAME;
 
 	pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);
-	
-	// Ensure that the draw toolbar is always on top of drawn figures
-	//CreateDrawToolBar();
 }
 
 void Output::DrawTri(Point P1, Point P2, Point P3, GfxInfo TriGfxInfo, bool selected) const {

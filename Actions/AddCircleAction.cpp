@@ -11,6 +11,7 @@ AddCircleAction::AddCircleAction(ApplicationManager* pApp) :Action(pApp)
 
 void AddCircleAction::ReadActionParameters()
 {
+	//
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();

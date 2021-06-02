@@ -26,6 +26,16 @@ ActionType ApplicationManager::GetUserAction() const
 	//Ask the input to get the action from the user.
 	return pIn->GetUserAction();
 }
+void ApplicationManager::SaveAll() {
+	ofstream saveFile("savefile.txt");
+
+	for (int i = 0; i < FigCount; i++) {
+		FigList[i]->Save(saveFile);
+	}
+	saveFile.close();
+	return;
+
+}
 ////////////////////////////////////////////////////////////////////////////////////
 //Creates an action and executes it
 void ApplicationManager::ExecuteAction(ActionType ActType)
@@ -80,6 +90,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	
 	case SAVE:
+		SaveAll();
 		break;
 	
 	case LOAD:

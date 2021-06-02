@@ -11,6 +11,7 @@ private:
 public:
 	CCircle(Point, Point, GfxInfo FigureGfxInfo);
 	virtual void Draw(Output* pOut) const;
+	void Save(ofstream&);
 };
 
 #endif

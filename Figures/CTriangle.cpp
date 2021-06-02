@@ -1,6 +1,6 @@
 #include "CTriangle.h"
 
-CTriangle::CTriangle(Point P1, Point P2, Point P3,GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
+CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
 	Point1 = P1;
 	Point2 = P2;
 	Point3 = P3;
@@ -9,5 +9,25 @@ CTriangle::CTriangle(Point P1, Point P2, Point P3,GfxInfo FigureGfxInfo) :CFigur
 void CTriangle::Draw(Output* pOut) const
 {
 	//Call Output::DrawTri to draw a line on the screen	
-	pOut->DrawTri(Point1, Point2, Point3,FigGfxInfo, Selected);
+	pOut->DrawTri(Point1, Point2, Point3, FigGfxInfo, Selected);
+
+}void CTriangle::Save(std::ofstream& outfile) {
+	//TRIANGLE  int(ID)  int(point1.x)  int(point1.y)  int(point2.x)  int(point2.y)  int(point3.x)  int(point3.y)  DrawClr  FillClr
+	if (outfile.is_open()) {
+		outfile << "TRIANGLE ";
+		outfile << ID;
+		outfile << " ";
+
+		outfile << Point1.x << " ";
+		outfile << Point1.y << " ";
+		outfile << Point2.x << " ";
+		outfile << Point2.y << " ";
+		outfile << Point3.x << " ";
+		outfile << Point3.y << " ";
+
+		//TODO: figure out how to get figure draw and fill colors as strings
+		outfile << "DrawClr ";
+		outfile << "FillClr";
+		outfile << "\n";
+	}
 }

@@ -14,7 +14,7 @@ void AddCircleAction::ReadActionParameters()
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-
+	
 	pOut->PrintMessage("New Circle: Click at first point");
 
 	//Read center and store in point P1
@@ -43,7 +43,7 @@ void AddCircleAction::Execute()
 
 	//Create a circle with the parameters read from the user
 	CCircle* C = new CCircle(P1, P2, CircleGfxInfo);
-
+	
 	//Add the circle to the list of figures
 	pManager->AddFigure(C);
 }

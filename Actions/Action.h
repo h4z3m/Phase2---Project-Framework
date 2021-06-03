@@ -2,7 +2,8 @@
 #define ACTION_H
 
 #include "..\DefS.h"
-
+#include <fstream>
+#include <string>
 class ApplicationManager; //forward class declaration
 
 

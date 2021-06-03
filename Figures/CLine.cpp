@@ -24,3 +24,6 @@ void CLine::Draw(Output* pOut) const
 		outfile << "\n";
 	}
 }
+void CLine::SetFilled(bool filled) {
+	FigGfxInfo.isFilled = filled;
+}

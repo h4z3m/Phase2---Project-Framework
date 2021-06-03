@@ -29,3 +29,6 @@ void CRectangle::Draw(Output* pOut) const
 	}
 
 }
+void CRectangle::SetFilled(bool filled) {
+	FigGfxInfo.isFilled = filled;
+}

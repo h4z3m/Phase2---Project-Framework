@@ -3,7 +3,8 @@
 #include "Actions\AddLineAction.h"
 #include "Actions\AddCircleAction.h"
 #include "Actions\AddTriangleAction.h"
-
+#include "Actions\SaveAction.h"
+#include "Actions\ChangeColorAction.h"
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -26,14 +27,14 @@ ActionType ApplicationManager::GetUserAction() const
 	//Ask the input to get the action from the user.
 	return pIn->GetUserAction();
 }
-void ApplicationManager::SaveAll() {
-	ofstream saveFile("savefile.txt");
-
-	for (int i = 0; i < FigCount; i++) {
-		FigList[i]->Save(saveFile);
+void ApplicationManager::SaveAll(ofstream &saveFile) {
+	//Check if file is open before appending lines
+	if (saveFile.is_open()) {
+		//Save each fig. using virtual function
+		for (int i = 0; i < FigCount; i++) {
+			FigList[i]->Save(saveFile);
+		}
 	}
-	saveFile.close();
-	return;
 
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -61,14 +62,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case DRAW_TRI:
 		pAct = new AddTriangleAction(this);
 		break;
-	
-	case CHNG_FILL_CLR:
-		break;
-	
-	case CHNG_BK_CLR:
-		break;
-	
+
 	case CHNG_DRAW_CLR:
+		pAct = new ChangeColorAction(this);
 		break;
 	
 	case DEL:
@@ -90,7 +86,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	
 	case SAVE:
-		SaveAll();
+		pAct = new SaveAction(this);
 		break;
 	
 	case LOAD:

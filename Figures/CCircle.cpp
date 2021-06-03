@@ -1,5 +1,4 @@
 #include "CCircle.h"
-#include<string>
 
 CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
@@ -23,8 +22,13 @@ void CCircle::Save(std::ofstream& outfile) {
 		outfile << sqrt(pow(R2.x - R1.x, 2) + pow(R2.y - R1.y, 2) * 1.0) << " ";
 
 		//TODO: figure out how to get figure draw and fill colors as strings
+
+		
 		outfile << "DrawClr ";
 		outfile << "FillClr";
 		outfile << "\n";
 	}
+}
+void CCircle::SetFilled(bool filled) {
+	FigGfxInfo.isFilled = filled;
 }

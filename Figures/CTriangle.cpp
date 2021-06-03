@@ -31,3 +31,6 @@ void CTriangle::Draw(Output* pOut) const
 		outfile << "\n";
 	}
 }
+void CTriangle::SetFilled(bool filled) {
+	FigGfxInfo.isFilled = filled;
+}

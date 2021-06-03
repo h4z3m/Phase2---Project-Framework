@@ -1,7 +1,7 @@
 #ifndef CFIGURE_H
 #define CFIGURE_H
 #include <fstream>
-
+#include <string>
 #include "..\defs.h"
 #include "..\GUI\Output.h"
 
@@ -12,7 +12,25 @@ protected:
 	int ID;		//Each figure has an ID
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
-	
+	enum colors
+	{
+		BLACK,
+		WHITE,
+		RED,
+		GREEN,
+		BLUE,
+		YELLOW,
+		AQUAMARINE
+
+	}; 
+	enum FigType
+	{
+		line,
+		rect,
+		tri,
+		circ
+
+	};
 	/// Add more parameters if needed.
 
 public:
@@ -24,6 +42,7 @@ public:
 	
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
+	virtual bool IsFilled()=0;
 
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure

@@ -2,7 +2,10 @@
 #include "Actions\AddRectAction.h"
 #include "Actions\AddLineAction.h"
 #include "Actions\AddCircleAction.h"
-#include"Actions\AddTriangleAction.h"
+#include "Actions\AddTriangleAction.h"
+#include "Actions\SwitchToPlayMode.h"
+#include "Actions\SwtichToDrawMode.h"
+
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -16,6 +19,8 @@ ApplicationManager::ApplicationManager()
 	//Create an array of figure pointers and set them to NULL		
 	for (int i = 0; i < MaxFigCount; i++)
 		FigList[i] = NULL;
+
+
 }
 
 //==================================================================================//
@@ -104,8 +109,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case EMPTY:
 		break;
 	case TO_DRAW:
+		pAct = new SwitchToDrawAction(this);
 		break;
 	case TO_PLAY:
+		pAct = new SwitchToPlayAction(this);
 		break;
 	case EXIT:
 		///create ExitAction here
@@ -144,6 +151,37 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 
 	return NULL;
 }
+
+////////////////////////////////////////////////////////////////////////////////////
+
+CFigure* ApplicationManager::GetSelectedFigure(int x, int y)
+{
+	/*
+	SelectedCount = 0;
+	FigListCount = 0;
+
+
+	for (int i = 0; i < FigCount; i++) {
+		if (FigList[i]->IsSelected()) {
+			SelectedCount++;
+
+			SelectedFigList[FigListCount] = FigList[i];
+			FigListCount++;
+		}
+	}
+	*/
+
+
+	for (int i = 0; i < FigCount; i++) {
+		if (FigList[i]->IsSelected()) {
+			return FigList[i];
+		}
+
+		pOut->PrintMessage("Select one figure first");
+		return NULL;
+	}
+}
+	
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
@@ -154,6 +192,7 @@ void ApplicationManager::UpdateInterface() const
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }
+
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
 Input* ApplicationManager::GetInput() const

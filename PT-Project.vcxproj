@@ -132,6 +132,9 @@
     <ClCompile Include="Actions\AddLineAction.cpp" />
     <ClCompile Include="Actions\AddCircleAction.cpp" />
     <ClCompile Include="Actions\AddTriangleAction.cpp" />
+    <ClCompile Include="Actions\MoveAction.cpp" />
+    <ClCompile Include="Actions\SwitchToPlayMode.cpp" />
+    <ClCompile Include="Actions\SwtichToDrawMode.cpp" />
     <ClCompile Include="Figures\CTriangle.cpp" />
     <ClCompile Include="Figures\CCircle.cpp" />
     <ClCompile Include="Figures\CLine.cpp" />
@@ -182,6 +185,9 @@
     <ClInclude Include="Actions\AddLineAction.h" />
     <ClInclude Include="Actions\AddCircleAction.h" />
     <ClInclude Include="Actions\AddTriangleAction.h" />
+    <ClInclude Include="Actions\MoveAction.h" />
+    <ClInclude Include="Actions\SwitchToPlayMode.h" />
+    <ClInclude Include="Actions\SwtichToDrawMode.h" />
     <ClInclude Include="Figures\CTriangle.h" />
     <ClInclude Include="Figures\CCircle.h" />
     <ClInclude Include="Figures\CLine.h" />

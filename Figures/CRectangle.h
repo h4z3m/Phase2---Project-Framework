@@ -6,11 +6,19 @@
 class CRectangle : public CFigure
 {
 private:
-	Point Corner1;	
+	Point Corner1;
 	Point Corner2;
-public:
-	CRectangle(Point , Point, GfxInfo FigureGfxInfo );
-	virtual void Draw(Output* pOut) const;
-};
+	Point RecCenter;
+	Point NewCenter;
 
+public:
+	CRectangle(Point, Point, GfxInfo FigureGfxInfo);
+	virtual void Draw(Output* pOut) const;
+	void GetNewCenter();
+
+	Point CenterCalc_corner1();
+	Point CenterCalc_corner2();
+
+
+};
 #endif

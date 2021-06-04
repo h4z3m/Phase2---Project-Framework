@@ -26,7 +26,7 @@ void CTriangle::Draw(Output* pOut) const
 		outfile << Point3.y << " ";
 
 		//TODO: figure out how to get figure draw and fill colors as strings
-		outfile << pOut->getColorName(FigGfxInfo.DrawClr)<<" ";
+		outfile << pOut->getColorName(FigGfxInfo.DrawClr) << " ";
 		outfile << pOut->getColorName(FigGfxInfo.FillClr);
 		outfile << "\n";
 	}
@@ -38,13 +38,15 @@ void CTriangle::Load(ifstream& Infile, Output* pOut, stringstream& line)
 		string FIG;
 		string DrawClr;
 		string FillClr;
-		while (line >> FIG >> ID >> Point1.x >> Point1.y >> Point2.x >> Point2.y >> Point3.x>> Point3.y >>DrawClr >> FillClr) {
-			if (FIG == "TRIANGLE") {
-				FigGfxInfo.DrawClr = pOut->getColorObj(DrawClr);
-				FigGfxInfo.FillClr = pOut->getColorObj(FillClr);
-				if (FigGfxInfo.FillClr == GRAY) {
-					FigGfxInfo.isFilled = false;
-				}
+		while (line >> FIG >> ID >> Point1.x >> Point1.y >> Point2.x >> Point2.y >> Point3.x >> Point3.y >> DrawClr >> FillClr) {
+
+			FigGfxInfo.DrawClr = pOut->getColorObj(DrawClr);
+			FigGfxInfo.FillClr = pOut->getColorObj(FillClr);
+			if (FillClr == "NO_FILL") {
+				FigGfxInfo.isFilled = false;
+			}
+			else {
+				FigGfxInfo.isFilled = true;
 			}
 
 		}

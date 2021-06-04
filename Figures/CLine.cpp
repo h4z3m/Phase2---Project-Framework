@@ -13,7 +13,7 @@ void CLine::Draw(Output* pOut) const
 	//LINE  int(ID)  int(point1.x)  int(point1.y)  int(point2.x)  int(point2.y)  DrawClr  FillClr
 	if (outfile.is_open()) {
 		outfile << "LINE ";
-		outfile << ID;
+		outfile << ID << " ";
 
 		outfile << Point1.x << " ";
 		outfile << Point2.y << " ";
@@ -35,10 +35,8 @@ void CLine::Load(ifstream& Infile, Output* pOut, stringstream& line)
 		while (line >> FIG >> ID >> Point1.x >> Point1.y >>Point2.x>>Point2.y>>DrawClr>>FillClr) {
 			if (FIG == "LINE") {
 				FigGfxInfo.DrawClr = pOut->getColorObj(DrawClr);
-				FigGfxInfo.FillClr = pOut->getColorObj(FillClr);
-				if (FigGfxInfo.FillClr == GRAY) {
-					FigGfxInfo.isFilled = false;
-				}
+
+				
 			}
 
 		}

@@ -42,7 +42,7 @@ void ApplicationManager::SaveAll(ofstream& saveFile) {
 }
 void ApplicationManager::SaveGraphColors(ofstream& outfile) {
 	if (outfile.is_open()) {
-		outfile << pOut->getColorName(pOut->getCrntDrawColor()) << " " << pOut->getColorName(pOut->getCrntFillColor()) << " " << pOut->getColorName(UI.BkGrndColor) << "\n";
+		outfile << pOut->getColorName(UI.DrawColor) << " " << pOut->getColorName(UI.FillColor)<< " " << pOut->getColorName(UI.BkGrndColor) << "\n";
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -198,7 +198,7 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {
-	pOut->ClearDrawArea();
+	//pOut->ClearDrawArea();
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }

@@ -217,6 +217,9 @@ string Output::getColorName(color& CLR) {
 		return "AQUAMARINE";
 
 	}
+	else if (CLR == LIGHTGOLDENRODYELLOW) {
+		return "LIGHTGOLDENRODYELLOW";
+	}
 	return "NO_FILL";
 }
 color Output::getColorObj(string str)
@@ -247,6 +250,9 @@ color Output::getColorObj(string str)
 	else if (str == "AQUAMARINE") {
 		return AQUAMARINE;
 
+	}
+	else if (str == "LIGHTGOLDENRODYELLOW") {
+		return LIGHTGOLDENRODYELLOW;
 	}
 	return GRAY;
 }

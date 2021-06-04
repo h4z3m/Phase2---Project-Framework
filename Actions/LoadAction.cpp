@@ -48,14 +48,12 @@ void LoadAction::Execute()
 				CRectangle* R = new CRectangle(defaultPoint, defaultPoint, defaultGfxInfo);
 				R->Load(file, pOut, ss);
 				pManager->AddFigure(R);
-
 			}
 			else if (line.find("LINE") != string::npos) {
 				stringstream ss(line);
 				CLine* L = new CLine(defaultPoint, defaultPoint, defaultGfxInfo);
 				L->Load(file, pOut, ss);
 				pManager->AddFigure(L);
-
 			}
 			else if (line.find("TRIANGLE") != string::npos) {
 				stringstream ss(line);

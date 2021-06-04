@@ -51,7 +51,6 @@ void AddTriangleAction::Execute()
 
 		//Create a triangle with the parameters read from the user
 		CTriangle* T = new CTriangle(P1, P2, P3, TriangleGfxInfo);
-
 		//Add the triangle to the list of figures
 		pManager->AddFigure(T);
 	}

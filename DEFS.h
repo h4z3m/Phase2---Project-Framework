@@ -69,7 +69,8 @@ enum colors
 	green,
 	blue,
 	yellow,
-	aqua
+	aqua,
+	lightgoldenrodyellow
 
 };
 enum FigType

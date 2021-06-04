@@ -132,6 +132,7 @@ void ChangeColorAction::Execute() {
 		case aqua:
 			UI.BkGrndColor = AQUAMARINE;
 			break;
+			
 		default:
 			UI.BkGrndColor = LIGHTGOLDENRODYELLOW;
 			break;

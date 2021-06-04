@@ -254,7 +254,7 @@ color Output::getColorObj(string str)
 	else if (str == "LIGHTGOLDENRODYELLOW") {
 		return LIGHTGOLDENRODYELLOW;
 	}
-	return GRAY;
+	return UI.FillColor;
 }
 //======================================================================================//
 //								Figures Drawing Functions								//

@@ -16,11 +16,13 @@ void CLine::Draw(Output* pOut) const
 		outfile << ID << " ";
 
 		outfile << Point1.x << " ";
+		outfile << Point1.y << " ";
+		outfile << Point2.x << " ";
 		outfile << Point2.y << " ";
 
 		//TODO: figure out how to get figure draw and fill colors as strings
 		outfile << pOut->getColorName(FigGfxInfo.DrawClr) << " ";
-		outfile << pOut->getColorName(FigGfxInfo.FillClr);
+		outfile << "NO_FILL";
 		outfile << "\n";
 	}
 }

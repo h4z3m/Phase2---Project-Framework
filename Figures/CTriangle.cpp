@@ -27,7 +27,12 @@ void CTriangle::Draw(Output* pOut) const
 
 		//TODO: figure out how to get figure draw and fill colors as strings
 		outfile << pOut->getColorName(FigGfxInfo.DrawClr) << " ";
-		outfile << pOut->getColorName(FigGfxInfo.FillClr);
+		if (FigGfxInfo.isFilled == true) {
+			outfile << pOut->getColorName(FigGfxInfo.FillClr);
+		}
+		else {
+			outfile << "NO_FILL";
+		}
 		outfile << "\n";
 	}
 }

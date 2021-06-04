@@ -24,7 +24,12 @@ void CCircle::Save(ofstream& outfile, Output* pOut) {
 
 
 		outfile << pOut->getColorName(FigGfxInfo.DrawClr) << " ";
-		outfile << pOut->getColorName(FigGfxInfo.FillClr);
+		if (FigGfxInfo.isFilled == true) {
+			outfile << pOut->getColorName(FigGfxInfo.FillClr);
+		}
+		else {
+			outfile << "NO_FILL";
+		}
 		outfile << "\n";
 	}
 }

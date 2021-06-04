@@ -184,3 +184,9 @@ const color LIGHTGREEN = color(144, 238, 144);
 
 
 #endif //COLOR_H
+inline bool operator   ==(color a, color b) {
+    if (a.ucRed == b.ucRed && a.ucBlue == b.ucBlue && a.ucGreen == b.ucGreen) {
+        return true;
+    }
+    return false;
+}

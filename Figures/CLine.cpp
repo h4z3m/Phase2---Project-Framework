@@ -9,7 +9,7 @@ void CLine::Draw(Output* pOut) const
 {
 	//Call Output::DrawLine to draw a line on the screen	
 	pOut->DrawLin(Point1, Point2, FigGfxInfo, Selected);
-}void CLine::Save(std::ofstream& outfile) {
+}void CLine::Save(std::ofstream& outfile, Output* pOut) {
 	//LINE  int(ID)  int(point1.x)  int(point1.y)  int(point2.x)  int(point2.y)  DrawClr  FillClr
 	if (outfile.is_open()) {
 		outfile << "LINE ";
@@ -19,8 +19,8 @@ void CLine::Draw(Output* pOut) const
 		outfile << Point2.y << " ";
 
 		//TODO: figure out how to get figure draw and fill colors as strings
-		outfile << "DrawClr ";
-		outfile << "FillClr";
+		outfile << pOut->getColorName(FigGfxInfo.DrawClr) << " ";
+		outfile << pOut->getColorName(FigGfxInfo.FillClr);
 		outfile << "\n";
 	}
 }

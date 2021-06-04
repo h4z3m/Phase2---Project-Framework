@@ -1,14 +1,14 @@
 #include "ChangeColorAction.h"
 #include "..\Figures\CFigure.h"
+
 #include "..\ApplicationManager.h"
 
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
-ChangeColorAction::ChangeColorAction(ApplicationManager* pApp) : Action(pApp){
+ChangeColorAction::ChangeColorAction(ApplicationManager* pApp) : Action(pApp) {
 }
 
 void ChangeColorAction::ReadActionParameters() {
-
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
@@ -16,7 +16,11 @@ void ChangeColorAction::ReadActionParameters() {
 	choice = pIn->GetSrting(pOut).at(0);
 
 }
+void ChangeColorAction::SetFillClrStatus(bool val) {
+	fillClrStatus = val;
+}
 void ChangeColorAction::Execute() {
+
 	ReadActionParameters();
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
@@ -30,10 +34,10 @@ void ChangeColorAction::Execute() {
 		switch (stoi(clr)) {
 		case black:
 			UI.DrawColor = BLACK;
-			
-			break;
+				break;
 		case white:
 			UI.DrawColor = WHITE;
+
 			break;
 		case red:
 			UI.DrawColor = RED;
@@ -63,26 +67,42 @@ void ChangeColorAction::Execute() {
 		switch (stoi(clr)) {
 		case black:
 			UI.FillColor = BLACK;
+			SetFillClrStatus(true);
+			break;
 		case white:
 			UI.FillColor = WHITE;
+			SetFillClrStatus(true);
+
 			break;
 		case red:
 			UI.FillColor = RED;
+			SetFillClrStatus(true);
+
 			break;
 		case green:
 			UI.FillColor = GREEN;
+			SetFillClrStatus(true);
+
 			break;
 		case blue:
 			UI.FillColor = BLUE;
+			SetFillClrStatus(true);
+
 			break;
 		case yellow:
 			UI.FillColor = YELLOW;
+			SetFillClrStatus(true);
+
 			break;
 		case aqua:
 			UI.FillColor = AQUAMARINE;
+			SetFillClrStatus(true);
+
 			break;
 		default:
 			UI.FillColor = PINK;
+			SetFillClrStatus(true);
+
 			break;
 		}
 		break;
@@ -122,5 +142,7 @@ void ChangeColorAction::Execute() {
 		pOut->ClearStatusBar();
 		break;
 	}
+
+
 
 }

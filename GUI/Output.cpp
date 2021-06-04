@@ -189,7 +189,36 @@ int Output::getCrntPenWidth() const		//get current pen width
 {
 	return UI.PenWidth;
 }
+string Output::getColorName(color& CLR) {
+	if (CLR == BLACK) {
+		return "BLACK";
+	}
+	else if (CLR == WHITE) {
+		return "WHITE";
 
+	}
+	else if (CLR == RED) {
+		return "RED";
+
+	}
+	else if (CLR == GREEN) {
+		return "GREEN";
+
+	}
+	else if (CLR == BLUE) {
+		return "BLUE";
+
+	}
+	else if (CLR == YELLOW) {
+		return "YELLOW";
+
+	}
+	else if (CLR == AQUAMARINE) {
+		return "AQUAMARINE";
+
+	}
+	return "NO_FILL";
+}
 //======================================================================================//
 //								Figures Drawing Functions								//
 //======================================================================================//

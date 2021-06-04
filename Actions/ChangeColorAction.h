@@ -8,21 +8,11 @@ class ChangeColorAction : public Action
 {
 private:
 	string choice="";
-	enum colors
-	{
-		no_fill,
-		black,
-		white,
-		red,
-		green,
-		blue,
-		yellow,
-		aqua
-
-	};
+	
 public:
 	ChangeColorAction::ChangeColorAction(ApplicationManager* pApp);
 	//Reads triangle parameters
+	static void SetFillClrStatus(bool);
 	virtual void ReadActionParameters();
 
 	//Add triangle to the ApplicationManager

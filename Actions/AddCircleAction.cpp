@@ -25,7 +25,7 @@ void AddCircleAction::ReadActionParameters()
 	//Read radius point and store in point P2
 	pIn->GetPointClicked(P2.x, P2.y);
 
-	CircleGfxInfo.isFilled = false;	//default is not filled
+	CircleGfxInfo.isFilled = fillClrStatus;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	CircleGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	CircleGfxInfo.FillClr = pOut->getCrntFillColor();

@@ -11,7 +11,7 @@ void CCircle::Draw(Output* pOut) const
 	//Call Output::DrawCir to draw a circle on the screen	
 	pOut->DrawCir(R1, R2, FigGfxInfo, Selected);
 }
-void CCircle::Save(std::ofstream& outfile) {
+void CCircle::Save(ofstream& outfile, Output* pOut) {
 	//CIRCLE  int(ID)  int(x)  int(y)  float(radius)  DrawClr  FillClr
 	if (outfile.is_open()) {
 		outfile << "CIRCLE ";
@@ -24,11 +24,9 @@ void CCircle::Save(std::ofstream& outfile) {
 		//TODO: figure out how to get figure draw and fill colors as strings
 
 		
-		outfile << "DrawClr ";
-		outfile << "FillClr";
+		outfile << pOut->getColorName(FigGfxInfo.DrawClr) << " ";
+		outfile << pOut->getColorName(FigGfxInfo.FillClr);
 		outfile << "\n";
 	}
 }
-void CCircle::SetFilled(bool filled) {
-	FigGfxInfo.isFilled = filled;
-}
+

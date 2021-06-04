@@ -11,8 +11,7 @@ private:
 public:
 	CRectangle(Point , Point, GfxInfo FigureGfxInfo );
 	virtual void Draw(Output* pOut) const;
-	virtual void Save(ofstream&);
-	void CCircle::SetFilled(bool filled);
+	virtual void Save(ofstream&, Output* pOut);
 };
 
 #endif

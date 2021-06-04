@@ -11,8 +11,8 @@ private:
 public:
 	CLine(Point, Point, GfxInfo FigureGfxInfo);
 	virtual void Draw(Output* pOut) const;
-	virtual void Save(ofstream&);
-	void CLine::SetFilled(bool);
+	virtual void Save(ofstream&, Output* pOut);
+	void SetFilled(bool);
 };
 
 #endif

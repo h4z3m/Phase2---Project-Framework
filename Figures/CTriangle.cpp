@@ -11,7 +11,7 @@ void CTriangle::Draw(Output* pOut) const
 	//Call Output::DrawTri to draw a line on the screen	
 	pOut->DrawTri(Point1, Point2, Point3, FigGfxInfo, Selected);
 
-}void CTriangle::Save(std::ofstream& outfile) {
+}void CTriangle::Save(std::ofstream& outfile, Output* pOut) {
 	//TRIANGLE  int(ID)  int(point1.x)  int(point1.y)  int(point2.x)  int(point2.y)  int(point3.x)  int(point3.y)  DrawClr  FillClr
 	if (outfile.is_open()) {
 		outfile << "TRIANGLE ";
@@ -26,11 +26,8 @@ void CTriangle::Draw(Output* pOut) const
 		outfile << Point3.y << " ";
 
 		//TODO: figure out how to get figure draw and fill colors as strings
-		outfile << "DrawClr ";
-		outfile << "FillClr";
+		outfile << pOut->getColorName(FigGfxInfo.DrawClr)<<" ";
+		outfile << pOut->getColorName(FigGfxInfo.FillClr);
 		outfile << "\n";
 	}
-}
-void CTriangle::SetFilled(bool filled) {
-	FigGfxInfo.isFilled = filled;
 }

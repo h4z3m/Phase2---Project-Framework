@@ -4,16 +4,15 @@
 #include "..\DefS.h"
 #include <fstream>
 #include <string>
+
 class ApplicationManager; //forward class declaration
-
-
 //Base class for all possible actions
 class Action
 {
 protected:
 	ApplicationManager *pManager;	//Actions needs AppMngr to do their job
-
-public:
+	static bool fillClrStatus;
+	public:
 
 	Action(ApplicationManager *pApp) { pManager = pApp; }	//constructor
 

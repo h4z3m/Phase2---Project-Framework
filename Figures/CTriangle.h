@@ -12,8 +12,7 @@ private:
 public:
 	CTriangle(Point, Point,Point, GfxInfo FigureGfxInfo);
 	virtual void Draw(Output* pOut) const;
-	virtual void Save(ofstream&);
-	void CFigure::SetFilled(bool);
+	virtual void Save(ofstream&, Output* pOut);
 
 };
 

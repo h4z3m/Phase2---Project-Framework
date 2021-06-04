@@ -11,7 +11,7 @@ void CRectangle::Draw(Output* pOut) const
 {
 	//Call Output::DrawRect to draw a rectangle on the screen	
 	pOut->DrawRect(Corner1, Corner2, FigGfxInfo, Selected);
-}void CRectangle::Save(std::ofstream& outfile) {
+}void CRectangle::Save(std::ofstream& outfile, Output* pOut) {
 	//RECTANGLE  int(ID)  int(CORNER1.x)  int(CORNER1.x)  int(CORNER2.x)  int(CORNER2.y)  DrawClr  FillClr
 	if (outfile.is_open()) {
 		outfile << "RECTANGLE ";
@@ -23,12 +23,9 @@ void CRectangle::Draw(Output* pOut) const
 		outfile << Corner2.x << " ";
 		outfile << Corner2.y << " ";
 		//TODO: figure out how to get figure draw and fill colors as strings
-		outfile << "DrawClr ";
-		outfile << "FillClr";
+		outfile << pOut->getColorName(FigGfxInfo.DrawClr) << " ";
+		outfile << pOut->getColorName(FigGfxInfo.FillClr);
 		outfile << "\n";
 	}
 
-}
-void CRectangle::SetFilled(bool filled) {
-	FigGfxInfo.isFilled = filled;
 }

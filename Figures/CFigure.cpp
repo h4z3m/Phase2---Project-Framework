@@ -4,7 +4,9 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
 	Selected = false;
 }
-
+void CFigure::SetID(int rID) {
+	ID = rID;
+}
 void CFigure::SetSelected(bool s)
 {
 	Selected = s;

@@ -1,5 +1,4 @@
 #include "CCircle.h"
-
 CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	R1 = P1;
@@ -9,7 +8,7 @@ CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxIn
 void CCircle::Draw(Output* pOut) const
 {
 	//Call Output::DrawCir to draw a circle on the screen	
-	pOut->DrawCir(R1, R2, FigGfxInfo, Selected);
+	pOut->DrawCir(R1, R2, FigGfxInfo, Selected,radius);
 }
 void CCircle::Save(ofstream& outfile, Output* pOut) {
 	//CIRCLE  int(ID)  int(x)  int(y)  float(radius)  DrawClr  FillClr
@@ -23,10 +22,33 @@ void CCircle::Save(ofstream& outfile, Output* pOut) {
 
 		//TODO: figure out how to get figure draw and fill colors as strings
 
-		
+
 		outfile << pOut->getColorName(FigGfxInfo.DrawClr) << " ";
 		outfile << pOut->getColorName(FigGfxInfo.FillClr);
 		outfile << "\n";
 	}
 }
+void CCircle::setRadius(float &iRadius)
+{
+	radius = iRadius;
+}
+void CCircle::Load(ifstream& Infile, Output* pOut,stringstream& line)
+{
+	if (Infile.is_open()) {
+		string FIG;
+		string DrawClr;
+		string FillClr;
+		float rRadius;
+		while (line >> FIG >> ID >> R1.x >> R1.y >> rRadius >>DrawClr >> FillClr) {
+			if (FIG == "CIRCLE") {
+				setRadius(rRadius);
+				FigGfxInfo.DrawClr = pOut->getColorObj(DrawClr);
+				FigGfxInfo.FillClr = pOut->getColorObj(FillClr);
+				if (FigGfxInfo.FillClr == GRAY) {
+					FigGfxInfo.isFilled = false;
+				}
+			}
 
+		}
+	}
+}

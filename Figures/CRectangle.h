@@ -12,6 +12,7 @@ public:
 	CRectangle(Point , Point, GfxInfo FigureGfxInfo );
 	virtual void Draw(Output* pOut) const;
 	virtual void Save(ofstream&, Output* pOut);
+	void Load(ifstream& Infile, Output* pOut, stringstream&);
 };
 
 #endif

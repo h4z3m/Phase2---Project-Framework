@@ -24,6 +24,23 @@ void CLine::Draw(Output* pOut) const
 		outfile << "\n";
 	}
 }
-void CLine::SetFilled(bool filled) {
-	FigGfxInfo.isFilled = filled;
+
+void CLine::Load(ifstream& Infile, Output* pOut, stringstream& line)
+{
+	if (Infile.is_open()) {
+		string FIG;
+		string DrawClr;
+		string FillClr;
+
+		while (line >> FIG >> ID >> Point1.x >> Point1.y >>Point2.x>>Point2.y>>DrawClr>>FillClr) {
+			if (FIG == "LINE") {
+				FigGfxInfo.DrawClr = pOut->getColorObj(DrawClr);
+				FigGfxInfo.FillClr = pOut->getColorObj(FillClr);
+				if (FigGfxInfo.FillClr == GRAY) {
+					FigGfxInfo.isFilled = false;
+				}
+			}
+
+		}
+	}
 }

@@ -4,6 +4,7 @@
 #include "Actions\AddCircleAction.h"
 #include "Actions\AddTriangleAction.h"
 #include "Actions\SaveAction.h"
+#include "Actions\LoadAction.h"
 #include "Actions\ChangeColorAction.h"
 bool Action::fillClrStatus = false;
 //Constructor
@@ -41,7 +42,7 @@ void ApplicationManager::SaveAll(ofstream& saveFile) {
 }
 void ApplicationManager::SaveGraphColors(ofstream& outfile) {
 	if (outfile.is_open()) {
-		outfile << pOut->getColorName(UI.DrawColor) << " " << pOut->getColorName(UI.FillColor) << " " << pOut->getColorName(UI.BkGrndColor) << "\n";
+		outfile << pOut->getColorName(pOut->getCrntDrawColor()) << " " << pOut->getColorName(pOut->getCrntFillColor()) << " " << pOut->getColorName(UI.BkGrndColor) << "\n";
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -97,6 +98,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case LOAD:
+		pAct = new LoadAction(this);
 		break;
 
 	case UNDO:
@@ -173,6 +175,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
+	pFig->SetID(rID++);
 	if (FigCount < MaxFigCount)
 		FigList[FigCount++] = pFig;
 }

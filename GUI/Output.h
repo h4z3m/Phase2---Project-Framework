@@ -26,7 +26,7 @@ public:
 
 	void DrawTri(Point P1, Point P2, Point P3, GfxInfo TriGfxInfo, bool selected = false) const;  //Draw a triangle
 
-	void DrawCir(Point P1, Point P2, GfxInfo CirGfxInfo, bool selected = false) const; //Draw a circle
+	void DrawCir(Point P1, Point P2, GfxInfo CirGfxInfo, bool selected = false,int radius=0) const; //Draw a circle
 
 	void DrawLin(Point P1, Point P2, GfxInfo LineGfxInfo, bool selected = false) const;
 
@@ -38,10 +38,11 @@ public:
 
 	color getCrntDrawColor() const;	//get current drwawing color
 	color getCrntFillColor() const;	//get current filling color
-	string getColorName(color&);
-
+	
 	int getCrntPenWidth() const;		//get current pen width
-
+	//TODO: Consider changing these funcs to static const
+	string getColorName(color&);
+	color getColorObj(string);
 	
 	~Output();
 };

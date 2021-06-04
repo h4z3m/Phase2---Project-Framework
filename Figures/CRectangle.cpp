@@ -29,3 +29,22 @@ void CRectangle::Draw(Output* pOut) const
 	}
 
 }
+
+void CRectangle::Load(ifstream& Infile, Output* pOut, stringstream& line)
+{
+	if (Infile.is_open()) {
+		string FIG;
+		string DrawClr;
+		string FillClr;
+		while (line >> FIG >> ID >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y >> DrawClr >> FillClr) {
+			if (FIG == "RECTANGLE") {
+				FigGfxInfo.DrawClr = pOut->getColorObj(DrawClr);
+				FigGfxInfo.FillClr = pOut->getColorObj(FillClr);
+				if (FigGfxInfo.FillClr == GRAY) {
+					FigGfxInfo.isFilled = false;
+				}
+			}
+
+		}
+	}
+}

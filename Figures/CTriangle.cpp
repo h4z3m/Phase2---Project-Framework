@@ -31,3 +31,22 @@ void CTriangle::Draw(Output* pOut) const
 		outfile << "\n";
 	}
 }
+
+void CTriangle::Load(ifstream& Infile, Output* pOut, stringstream& line)
+{
+	if (Infile.is_open()) {
+		string FIG;
+		string DrawClr;
+		string FillClr;
+		while (line >> FIG >> ID >> Point1.x >> Point1.y >> Point2.x >> Point2.y >> Point3.x>> Point3.y >>DrawClr >> FillClr) {
+			if (FIG == "TRIANGLE") {
+				FigGfxInfo.DrawClr = pOut->getColorObj(DrawClr);
+				FigGfxInfo.FillClr = pOut->getColorObj(FillClr);
+				if (FigGfxInfo.FillClr == GRAY) {
+					FigGfxInfo.isFilled = false;
+				}
+			}
+
+		}
+	}
+}

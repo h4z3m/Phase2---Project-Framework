@@ -219,6 +219,37 @@ string Output::getColorName(color& CLR) {
 	}
 	return "NO_FILL";
 }
+color Output::getColorObj(string str)
+{	
+	if (str == "BLACK") {
+		return BLACK;
+	}
+	else if (str== "WHITE") {
+		return WHITE;
+
+	}
+	else if (str == "RED") {
+		return RED;
+
+	}
+	else if (str == "GREEN") {
+		return GREEN;
+
+	}
+	else if (str == "BLUE") {
+		return BLUE;
+
+	}
+	else if (str == "YELLOW") {
+		return YELLOW;
+
+	}
+	else if (str == "AQUAMARINE") {
+		return AQUAMARINE;
+
+	}
+	return GRAY;
+}
 //======================================================================================//
 //								Figures Drawing Functions								//
 //======================================================================================//
@@ -270,7 +301,7 @@ void Output::DrawTri(Point P1, Point P2, Point P3, GfxInfo TriGfxInfo, bool sele
 	// Ensure that the draw toolbar is always on top of drawn figures
 	//CreateDrawToolBar();
 }
-void Output::DrawCir(Point P1, Point P2, GfxInfo CirGfxInfo, bool selected) const {
+void Output::DrawCir(Point P1, Point P2, GfxInfo CirGfxInfo, bool selected, int radius) const {
 
 	color DrawingClr;
 	if (selected)
@@ -288,10 +319,12 @@ void Output::DrawCir(Point P1, Point P2, GfxInfo CirGfxInfo, bool selected) cons
 	}
 	else
 		style = FRAME;
-
-	pWind->DrawCircle(P1.x, P1.y, sqrt(pow(P2.x - P1.x, 2) +
-		pow(P2.y - P1.y, 2) * 1.0), style);
-
+	if (radius == 0) {
+		pWind->DrawCircle(P1.x, P1.y, sqrt(pow(P2.x - P1.x, 2) + pow(P2.y - P1.y, 2) * 1.0), style);
+	}
+	else {
+		pWind->DrawCircle(P1.x, P1.y, radius, style);
+	}
 
 	// Ensure that the draw toolbar is always on top of drawn figures
 	//CreateDrawToolBar();

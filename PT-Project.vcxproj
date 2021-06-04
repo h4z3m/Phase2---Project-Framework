@@ -133,6 +133,7 @@
     <ClCompile Include="Actions\AddCircleAction.cpp" />
     <ClCompile Include="Actions\AddTriangleAction.cpp" />
     <ClCompile Include="Actions\ChangeColorAction.cpp" />
+    <ClCompile Include="Actions\LoadAction.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
     <ClCompile Include="Figures\CTriangle.cpp" />
     <ClCompile Include="Figures\CCircle.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="Actions\AddCircleAction.h" />
     <ClInclude Include="Actions\AddTriangleAction.h" />
     <ClInclude Include="Actions\ChangeColorAction.h" />
+    <ClInclude Include="Actions\LoadAction.h" />
     <ClInclude Include="Actions\SaveAction.h" />
     <ClInclude Include="Figures\CTriangle.h" />
     <ClInclude Include="Figures\CCircle.h" />

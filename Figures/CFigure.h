@@ -1,6 +1,8 @@
 #ifndef CFIGURE_H
 #define CFIGURE_H
 #include <fstream>
+#include <istream>
+#include <sstream>
 #include <string>
 #include "..\defs.h"
 #include "..\GUI\Output.h"
@@ -12,12 +14,13 @@ protected:
 	int ID;		//Each figure has an ID
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
-
+	FigType FigType;
 	
 	/// Add more parameters if needed.
 
 public:
 	CFigure(GfxInfo FigureGfxInfo);
+	void SetID(int rID);
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
 	virtual void Draw(Output* pOut) const  = 0 ;		//Draw the figure
@@ -35,7 +38,7 @@ public:
 	//virtual void Move() = 0;		//Move the figure
 
 	virtual void Save(ofstream &OutFile, Output* pOut) = 0;	//Save the figure parameters to the file
-	//virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
+	virtual void Load(ifstream &Infile, Output* pOut,stringstream&) = 0;	//Load the figure parameters to the file
 
 	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
 };

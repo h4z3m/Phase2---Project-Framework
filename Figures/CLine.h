@@ -12,7 +12,7 @@ public:
 	CLine(Point, Point, GfxInfo FigureGfxInfo);
 	virtual void Draw(Output* pOut) const;
 	virtual void Save(ofstream&, Output* pOut);
-	void SetFilled(bool);
+	void Load(ifstream& Infile, Output* pOut, stringstream&);
 };
 
 #endif

@@ -60,7 +60,7 @@ struct GfxInfo	//Graphical info of each figure (you may add more members)
 
 };
 
-enum colors
+enum colorNames
 {
 	no_fill,
 	black,
@@ -71,14 +71,6 @@ enum colors
 	yellow,
 	aqua,
 	lightgoldenrodyellow
-
-};
-enum FigType
-{
-	line,
-	rect,
-	tri,
-	circ
 
 };
 #endif

@@ -189,6 +189,7 @@ int Output::getCrntPenWidth() const		//get current pen width
 {
 	return UI.PenWidth;
 }
+
 string Output::getColorName(color& CLR) {
 	if (CLR == BLACK) {
 		return "BLACK";
@@ -303,11 +304,8 @@ void Output::DrawTri(Point P1, Point P2, Point P3, GfxInfo TriGfxInfo, bool sele
 		style = FRAME;
 
 	pWind->DrawTriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, style);
-
-	// Ensure that the draw toolbar is always on top of drawn figures
-	//CreateDrawToolBar();
 }
-void Output::DrawCir(Point P1, Point P2, GfxInfo CirGfxInfo, bool selected, int radius) const {
+void Output::DrawCir(Point P1, Point P2, GfxInfo CirGfxInfo, bool selected) const {
 
 	color DrawingClr;
 	if (selected)
@@ -325,15 +323,10 @@ void Output::DrawCir(Point P1, Point P2, GfxInfo CirGfxInfo, bool selected, int 
 	}
 	else
 		style = FRAME;
-	if (radius == 0) {
-		pWind->DrawCircle(P1.x, P1.y, sqrt(pow(P2.x - P1.x, 2) + pow(P2.y - P1.y, 2) * 1.0), style);
-	}
-	else {
-		pWind->DrawCircle(P1.x, P1.y, radius, style);
-	}
+	
+	pWind->DrawCircle(P1.x, P1.y, sqrt(pow(P2.x - P1.x, 2) + pow(P2.y - P1.y, 2) * 1.0), style);
 
-	// Ensure that the draw toolbar is always on top of drawn figures
-	//CreateDrawToolBar();
+
 }
 
 void Output::DrawLin(Point P1, Point P2, GfxInfo LineGfxInfo, bool selected) const {
@@ -357,8 +350,7 @@ void Output::DrawLin(Point P1, Point P2, GfxInfo LineGfxInfo, bool selected) con
 
 	pWind->DrawLine(P1.x, P1.y, P2.x, P2.y, style);
 
-	// Ensure that the draw toolbar is always on top of drawn figures
-	//CreateDrawToolBar();
+	
 }	// -- GILANY GILANY GILANY GILANY GILANY GILANY GILANY GILANY GILANY
 
 //////////////////////////////////////////////////////////////////////////////////////////

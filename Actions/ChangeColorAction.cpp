@@ -9,24 +9,28 @@ ChangeColorAction::ChangeColorAction(ApplicationManager* pApp) : Action(pApp) {
 }
 
 void ChangeColorAction::ReadActionParameters() {
+
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Select the color you want to change, (1) Draw color, (2) Fill color, (3) Background color: ");
-	choice = pIn->GetSrting(pOut).at(0);
-
+	uChoice = pIn->GetSrting(pOut).at(0);
 }
+
 void ChangeColorAction::SetFillClrStatus(bool val) {
 	fillClrStatus = val;
 }
+
 void ChangeColorAction::Execute() {
 
 	ReadActionParameters();
+
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	string clr="";
+
 	//Let user choose which color to change and choose the color
-	switch (stoi(choice))
+	switch (stoi(uChoice))
 	{
 	case 1:		//Draw color
 		pOut->PrintMessage("Choose a Drawing color: 1.Black 2.White 3.Red 4.Green 5.Blue 6.Yellow 7.Aquamarine: ");
@@ -34,10 +38,9 @@ void ChangeColorAction::Execute() {
 		switch (stoi(clr)) {
 		case black:
 			UI.DrawColor = BLACK;
-				break;
+			break;
 		case white:
 			UI.DrawColor = WHITE;
-
 			break;
 		case red:
 			UI.DrawColor = RED;
@@ -63,7 +66,7 @@ void ChangeColorAction::Execute() {
 	case 2:		//Fill color
 		pOut->PrintMessage("Choose a Fill color: 1.Black 2.White 3.Red 4.Green 5.Blue 6.Yellow 7.Aquamarine: ");
 		clr = pIn->GetSrting(pOut).at(0);
-
+		
 		switch (stoi(clr)) {
 		case black:
 			UI.FillColor = BLACK;
@@ -72,37 +75,30 @@ void ChangeColorAction::Execute() {
 		case white:
 			UI.FillColor = WHITE;
 			SetFillClrStatus(true);
-
 			break;
 		case red:
 			UI.FillColor = RED;
 			SetFillClrStatus(true);
-
 			break;
 		case green:
 			UI.FillColor = GREEN;
 			SetFillClrStatus(true);
-
 			break;
 		case blue:
 			UI.FillColor = BLUE;
 			SetFillClrStatus(true);
-
 			break;
 		case yellow:
 			UI.FillColor = YELLOW;
 			SetFillClrStatus(true);
-
 			break;
 		case aqua:
 			UI.FillColor = AQUAMARINE;
 			SetFillClrStatus(true);
-
 			break;
 		default:
-			UI.FillColor = PINK;
-			SetFillClrStatus(true);
-
+			UI.FillColor = GREEN;
+			SetFillClrStatus(false);
 			break;
 		}
 		break;
@@ -110,6 +106,7 @@ void ChangeColorAction::Execute() {
 	case 3:		//Background color
 		pOut->PrintMessage("Choose a Background color : 1.Black 2.White 3.Red 4.Green 5.Blue 6.Yellow 7.Aquamarine: ");
 		clr = pIn->GetSrting(pOut).at(0);
+
 		switch (stoi(clr)) {
 		case black:
 			UI.BkGrndColor = BLACK;

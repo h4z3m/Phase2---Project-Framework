@@ -11,11 +11,9 @@
 class CFigure
 {
 protected:
-	int ID;		//Each figure has an ID
+	int ID=rand();		//Each figure has an ID
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
-	FigType FigType;
-	
 	/// Add more parameters if needed.
 
 public:

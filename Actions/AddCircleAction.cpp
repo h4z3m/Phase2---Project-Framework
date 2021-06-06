@@ -22,11 +22,11 @@ void AddCircleAction::ReadActionParameters()
 
 	pOut->PrintMessage("New Circle: Click at second point");
 
-	//Read radius point and store in point P2
+	//Read point on circumferance and store in point P2
 	pIn->GetPointClicked(P2.x, P2.y);
 
 	CircleGfxInfo.isFilled = fillClrStatus;	//default is not filled
-	//get drawing, filling colors and pen width from the interface
+	//Get drawing, filling colors and pen width from the interface
 	CircleGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	CircleGfxInfo.FillClr = pOut->getCrntFillColor();
 	CircleGfxInfo.BorderWdth = pOut->getCrntPenWidth();

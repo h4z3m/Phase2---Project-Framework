@@ -29,10 +29,11 @@ void LoadAction::ReadActionParameters()
 void LoadAction::Execute()
 {
 	ReadActionParameters();
+	
 	Output* pOut = pManager->GetOutput();
 	string line;
-	//string fig[4] = { "LINE","RECTANGLE","TRIANGLE","CIRCLE" };
-	//size_t pos;
+	// Open file and search for figure strings then create a corresponding objects and load its data
+	// Data is passed as a stringstream to load virtual fn. (whole line is passed)
 	file.open(fileName);
 	if (file.is_open()) {
 		while (getline(file, line)) {
@@ -61,6 +62,7 @@ void LoadAction::Execute()
 				T->Load(file, pOut, ss);
 				pManager->AddFigure(T);
 			}
+			//First line which contains UI colors (draw,fill,background)
 			else {
 				string DrawClr;
 				string FillClr;
@@ -74,6 +76,5 @@ void LoadAction::Execute()
 			}
 		}
 		file.close();
-
 	}
 }

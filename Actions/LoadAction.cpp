@@ -6,6 +6,11 @@
 #include "..\Figures\CLine.h"
 #include "..\Figures\CRectangle.h"
 #include "..\Figures\CTriangle.h"
+/*///////////////////
+TODO:If there is a graph already drawn on the drawing area and the load operation is chosen, the 
+application must ask the user if he / she wants to save the current graph.Then, any needed
+cleanup of the current drawn graphand load the new one
+*////////////////////
 LoadAction::LoadAction(ApplicationManager* pApp) : Action(pApp)
 {
 }

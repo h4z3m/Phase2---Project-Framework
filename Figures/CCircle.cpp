@@ -77,5 +77,9 @@ string CCircle::PrintInfo(Output* pOut)
 
 bool CCircle::Fig(int x, int y)  //Determine the position of the point
 {
+	radius = (sqrt(pow(R2.x - R1.x, 2) + pow(R2.y - R1.y, 2) * 1.0));
+	double Center2Click= (sqrt(pow(x - R1.x, 2) + pow(y - R1.y, 2) * 1.0));
+	if(Center2Click+0.08*radius>radius && Center2Click-0.08*radius<radius)
+		return true;
 	return false;
 }

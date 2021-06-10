@@ -8,6 +8,7 @@ class CCircle : public CFigure
 private:
 	Point R1;
 	Point R2;
+	double radius;
 public:
 	CCircle(Point, Point, GfxInfo FigureGfxInfo);
 	virtual void Draw(Output* pOut) const;

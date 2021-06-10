@@ -55,3 +55,21 @@ void CRectangle::Load(ifstream& Infile, Output* pOut, stringstream& line)
 		}
 	}
 }
+bool CRectangle::Fig(int x, int y)
+{
+	if ((x >= min(Corner1.x, Corner2.x) && x <= max(Corner1.x, Corner2.x) && y >= min(Corner1.y, Corner2.y) && y <= max(Corner1.y, Corner2.y)))
+	{
+		return true;
+	}
+	return false;
+}
+string CRectangle::PrintInfo(Output* pOut)
+{
+	string id = to_string(ID);
+	string x1 = to_string(Corner1.x);
+	string y1 = to_string(Corner1.y);
+	string x2 = to_string(Corner2.x);
+	string y2 = to_string(Corner2.y);
+
+	return ("Rectangle - ID:" + id + " Corner1: (" + x1 + ", " + y1 + ")" + " Corner2: (" + x2 + ", " + y2 + ")");
+}

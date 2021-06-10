@@ -14,7 +14,8 @@ public:
 	virtual void Draw(Output* pOut) const;
 	virtual void Save(ofstream&, Output* pOut);
 	void Load(ifstream& Infile, Output* pOut, stringstream&);
-
+	virtual bool Fig(int, int);
+	virtual string PrintInfo(Output* pOut);
 };
 
 #endif

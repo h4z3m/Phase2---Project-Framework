@@ -6,6 +6,8 @@
 #include "Actions\SaveAction.h"
 #include "Actions\LoadAction.h"
 #include "Actions\ChangeColorAction.h"
+#include "Actions\SelectAction.h"
+#include "Actions\Delete.h"
 bool Action::fillClrStatus = false;
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -35,7 +37,7 @@ void ApplicationManager::SaveAll(ofstream& saveFile) {
 		SaveGraphColors(saveFile);
 		//Save each fig. using virtual function
 		for (int i = 0; i < FigCount; i++) {
-			FigList[i]->Save(saveFile,pOut);
+			FigList[i]->Save(saveFile, pOut);
 		}
 	}
 
@@ -72,6 +74,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case DEL:
+		pAct = new Delete(this);
 		break;
 
 	case MOVE:
@@ -104,6 +107,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case SELECT_FIGURE:
+		pAct = new SelectAction(this, &SelectInfo);
 		break;
 
 	case ZOOM_IN:
@@ -181,12 +185,27 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
 
-
-	///Add your code here to search for a figure given a point x,y	
-
+	/////////////Ali////////////////////////////////
+	for (int i = FigCount - 1; i >= 0; i--)
+		if (FigList[i]->Fig(x, y))
+		{
+			return FigList[i];
+		}
+	/////////////Ali////////////////////////////////
 	return NULL;
 }
-
+//Check if graph is empty
+bool ApplicationManager::isGraphEmpty() {
+	for (int i = 0; i < MaxFigCount; i++) {
+		if (FigList[i] == NULL) {
+			continue;
+		}
+		else {
+			return false;
+		}
+	}
+	return true;
+}
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
@@ -225,4 +244,55 @@ ApplicationManager::~ApplicationManager()
 	delete pIn;
 	delete pOut;
 
+}
+void ApplicationManager::Deleting() {
+
+
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+
+			for (int j = i; j < FigCount; j++)
+			{
+				if (j < FigCount)
+					FigList[j] = FigList[j + 1];
+				else
+				{
+					delete FigList[j];
+					FigList[j] = NULL;
+
+				}
+
+			}
+			i--;
+			FigCount--;
+		}
+	}
+	pOut->ClearDrawArea();
+	pOut->PrintMessage("Remaining figures: " + to_string(FigCount));
+
+}
+
+void ApplicationManager::DeleteAllFigs()
+{
+	for (int i = 0; i < MaxFigCount; i++) {
+		delete FigList[i];
+		FigList[i] = NULL;
+		
+	}
+	FigCount=0;
+}
+
+int ApplicationManager::SelectedNumber() {
+	c = 1;
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+
+			c = c + 1;
+		}
+	}
+	return c;
 }

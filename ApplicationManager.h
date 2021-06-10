@@ -12,15 +12,19 @@ class ApplicationManager
 	enum { MaxFigCount = 200 };	//Max no of figures
 
 private:
-	int FigCount;		//Actual number of figures
+	int FigCount,c;		//Actual number of figures
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 	int rID=0;
 	//Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
+	GfxInfo SelectInfo;
+
 
 public:	
-	ApplicationManager(); 
+	ApplicationManager();
+	bool isGraphEmpty();
+
 	~ApplicationManager();
 	
 	// -- Action-Related Functions
@@ -35,7 +39,10 @@ public:
 	// -- Interface Management Functions
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
-	void UpdateInterface() const;	//Redraws all the drawing window	
+	void UpdateInterface() const;	//Redraws all the drawing window
+	void Deleting();
+	void DeleteAllFigs();
+	int SelectedNumber();
 };
 
 #endif

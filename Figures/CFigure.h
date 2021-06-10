@@ -37,8 +37,8 @@ public:
 
 	virtual void Save(ofstream &OutFile, Output* pOut) = 0;	//Save the figure parameters to the file
 	virtual void Load(ifstream &Infile, Output* pOut,stringstream&) = 0;	//Load the figure parameters to the file
-
-	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
+	virtual string PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
+	virtual bool Fig(int, int) = 0;
 };
 
 #endif

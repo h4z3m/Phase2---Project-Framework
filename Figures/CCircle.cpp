@@ -62,3 +62,20 @@ void CCircle::Load(ifstream& Infile, Output* pOut, stringstream& line)
 		}
 	}
 }
+string CCircle::PrintInfo(Output* pOut)
+{
+
+	string id = to_string(ID);
+	string x = to_string(R1.x);
+	string y = to_string(R1.y);
+
+
+
+	return ("Circle ID: " + id + " Center: (" + x + ", " + y + ")");
+
+}
+
+bool CCircle::Fig(int x, int y)  //Determine the position of the point
+{
+	return false;
+}

@@ -57,3 +57,36 @@ void CTriangle::Load(ifstream& Infile, Output* pOut, stringstream& line)
 		}
 	}
 }
+float area(int x1, int y1, int x2, int y2, int x3, int y3)
+{
+	return abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0);
+}
+
+bool CTriangle::Fig(int x, int y)              //Function to inform me if the point in the figure or not
+{
+	float A = area(Point1.x, Point1.y, Point2.x, Point2.y, Point3.x, Point3.y);
+	float A1 = area(x, y, Point2.x, Point2.y, Point3.x, Point3.y);
+	float A2 = area(Point1.x, Point1.y, x, y, Point3.x, Point3.y);
+	float A3 = area(Point1.x, Point1.y, Point2.x, Point2.y, x, y);
+	if (A == A1 + A2 + A3)
+	{
+		return true;
+	}
+	return false;
+}
+
+string CTriangle::PrintInfo(Output* pOut)
+{
+	string id = to_string(ID);
+	string x1 = to_string(Point1.x);
+	string y1 = to_string(Point1.y);
+	string x2 = to_string(Point2.x);
+	string y2 = to_string(Point2.y);
+	string x3 = to_string(Point3.x);
+	string y3 = to_string(Point3.y);
+
+
+
+	return ("Triangle - ID:" + id + " Corner1: (" + x1 + ", " + y1 + ")" + " Corner2: (" + x2 + ", " + y2 + ")" + " Corner3: (" + x3 + ", " + y3 + ")");
+
+}

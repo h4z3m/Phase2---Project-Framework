@@ -1,4 +1,5 @@
 #include "LoadAction.h"
+#include "SaveAction.h"
 #include "..\ApplicationManager.h"
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
@@ -20,15 +21,33 @@ void LoadAction::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	defaultPoint = { 0,0 };
-
-	//Read filename from user input
-	pOut->PrintMessage("Please enter a graph savefile to load from: ");
-	fileName = pIn->GetSrting(pOut);
-	//Set default graphics info
-	defaultGfxInfo.isFilled = false;
-	defaultGfxInfo.BorderWdth = pOut->getCrntPenWidth();
-	defaultGfxInfo.DrawClr = pOut->getCrntDrawColor();
-	defaultGfxInfo.FillClr = pOut->getCrntFillColor();
+	if(pManager->isGraphEmpty()){//Read filename from user input
+		pOut->PrintMessage("Please enter a graph savefile to load from: ");
+		fileName = pIn->GetSrting(pOut);
+		//Set default graphics info
+		defaultGfxInfo.isFilled = false;
+		defaultGfxInfo.BorderWdth = pOut->getCrntPenWidth();
+		defaultGfxInfo.DrawClr = pOut->getCrntDrawColor();
+		defaultGfxInfo.FillClr = pOut->getCrntFillColor();
+		return;
+	}
+	else {
+		pOut->PrintMessage("Do you want to save the current graph before loading? (Y/N)");
+		string c = pIn->GetSrting(pOut);
+		if (c == "Y") {
+			pManager->ExecuteAction(SAVE);
+		}
+		//Delete all figures
+		pManager->DeleteAllFigs();
+		//Read filename from user input
+		pOut->PrintMessage("Please enter a graph savefile to load from: ");
+		fileName = pIn->GetSrting(pOut);
+		//Set default graphics info
+		defaultGfxInfo.isFilled = false;
+		defaultGfxInfo.BorderWdth = pOut->getCrntPenWidth();
+		defaultGfxInfo.DrawClr = pOut->getCrntDrawColor();
+		defaultGfxInfo.FillClr = pOut->getCrntFillColor();
+	}
 }
 
 void LoadAction::Execute()

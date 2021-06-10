@@ -42,3 +42,26 @@ void CLine::Load(ifstream& Infile, Output* pOut, stringstream& line)
 		}
 	}
 }
+bool CLine::Fig(int x, int y)
+{
+
+	if ((x >= min(Point1.x, Point2.x) && x <= max(Point1.x, Point2.x) && y >= min(Point1.y, Point2.y) && y <= max(Point1.y, Point2.y)))
+	{
+		return true;
+	}
+	return false;
+}
+
+
+string CLine::PrintInfo(Output* pOut)
+{
+	string id = to_string(ID);
+	string x1 = to_string(Point1.x);
+	string y1 = to_string(Point1.y);
+	string x2 = to_string(Point2.x);
+	string y2 = to_string(Point2.y);
+
+
+	return ("Line ID:" + id + " Point1: (" + x1 + ", " + y1 + ")" + " Point2: (" + x2 + ", " + y2 + ")");
+
+}

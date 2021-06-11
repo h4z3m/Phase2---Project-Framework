@@ -208,6 +208,7 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 	/////////////Ali////////////////////////////////
 	return NULL;
 }
+//Get object count
 int ApplicationManager::GetLineCount()
 {
 	int count = 0;
@@ -244,6 +245,7 @@ int ApplicationManager::GetRectCount()
 	}
 	return count;
 }
+//Get count of figures given a color
 int ApplicationManager::GetColorFillCount(color clr)
 {
 	int count = 0;
@@ -260,9 +262,11 @@ bool ApplicationManager::isGraphEmpty() {
 			continue;
 		}
 		else {
+			//If any figure is not NULL, return false
 			return false;
 		}
 	}
+	//If loop finishes and all figures are NULL
 	return true;
 }
 
@@ -335,7 +339,6 @@ void ApplicationManager::UpdateInterface() const
 		if (!FigList[i]->IsHidden()) {
 			FigList[i]->Draw(pOut);//Call Draw function (virtual member fn)
 		}
-
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
@@ -424,6 +427,7 @@ int ApplicationManager::GetFigCount()
 
 void ApplicationManager::UnhideAllFigs()
 {
+
 	if (!isGraphEmpty()) {
 		for (int i = 0; i < MaxFigCount; i++) {
 			FigList[i]->SetHidden(FALSE);

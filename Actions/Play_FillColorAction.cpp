@@ -45,10 +45,11 @@ void Play_FillColorAction::Execute()
 	int x, y;
 	//Loop until all figures have been picked
 	do {
+
 		//Temp figure that the user clicks on
 		pIn->GetPointClicked(x, y);
 		//Check for a click NOT in an empty place
-		if (pManager->GetFigure(x, y)) {
+		if (pManager->GetFigure(x, y) && pIn->DrawArea_ValidClick(x,y,UI.height)) {
 			CFigure* TempFig = pManager->GetFigure(x, y);
 			//Correct pick AND not a previously picked/hidden figure
 			if (RefColor == TempFig->GetFillColorObj() && !TempFig->IsHidden()) {
@@ -61,10 +62,12 @@ void Play_FillColorAction::Execute()
 				TempFig->SetHidden(true);
 			}
 			pManager->UpdateInterface(); //Updated with hidden figures
+
 			//Print correct & wrong picks for the user
 			pOut->PrintMessage("Correct picks: " + std::to_string(CorrectPicks) + " Wrong picks: " + std::to_string(WrongPicks));
 		}
 	} while (!(CorrectPicks == (pManager->GetColorFillCount(RefColor) - 1)) && !(pManager->GetFigCount() == (CorrectPicks + WrongPicks)));
+
 	//Printing final score
 	pOut->PrintMessage("Final score: " + std::to_string((((float)CorrectPicks - WrongPicks) / CorrectPicks * 100.0)));
 }

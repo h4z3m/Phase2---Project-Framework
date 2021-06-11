@@ -38,6 +38,8 @@ void AddCircleAction::ReadActionParameters()
 //Execute the action
 void AddCircleAction::Execute()
 {
+	Output* pOut = pManager->GetOutput();
+
 	//This action needs to read some parameters first
 	ReadActionParameters();
 
@@ -45,4 +47,5 @@ void AddCircleAction::Execute()
 	CCircle* C = new CCircle(P1, P2, CircleGfxInfo,circle);
 	//Add the circle to the list of figures
 	pManager->AddFigure(C);
+	pOut->CreateDrawToolBar();
 }

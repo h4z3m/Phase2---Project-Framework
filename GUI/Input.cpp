@@ -13,7 +13,7 @@ void Input::GetPointClicked(int &x, int &y) const
 }
 
 bool Input::DrawArea_ValidClick(int& x, int& y, int wHeight) const {
-	if (y > 53 && y < (wHeight - 50)) {
+	if (y > UI.ToolBarHeight+UI.PenWidth && y < (wHeight - UI.StatusBarHeight)) {
 		return true;
 	}
 	else {

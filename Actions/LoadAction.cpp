@@ -7,11 +7,7 @@
 #include "..\Figures\CLine.h"
 #include "..\Figures\CRectangle.h"
 #include "..\Figures\CTriangle.h"
-/*///////////////////
-TODO:If there is a graph already drawn on the drawing area and the load operation is chosen, the 
-application must ask the user if he / she wants to save the current graph.Then, any needed
-cleanup of the current drawn graphand load the new one
-*////////////////////
+
 LoadAction::LoadAction(ApplicationManager* pApp) : Action(pApp)
 {
 }
@@ -21,7 +17,7 @@ void LoadAction::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	defaultPoint = { 0,0 };
-	if(pManager->isGraphEmpty()){//Read filename from user input
+	if (pManager->isGraphEmpty()) {//Read filename from user input
 		pOut->PrintMessage("Please enter a graph savefile to load from: ");
 		fileName = pIn->GetSrting(pOut);
 		//Set default graphics info
@@ -53,7 +49,7 @@ void LoadAction::ReadActionParameters()
 void LoadAction::Execute()
 {
 	ReadActionParameters();
-	
+
 	Output* pOut = pManager->GetOutput();
 	string stline;
 	// Open file and search for figure strings then create a corresponding objects and load its data
@@ -64,19 +60,19 @@ void LoadAction::Execute()
 			if (stline.find("CIRCLE") != string::npos) {
 				stringstream ss(stline);
 				int radius;
-				CCircle* C = new CCircle(defaultPoint, defaultPoint, defaultGfxInfo,circle);
+				CCircle* C = new CCircle(defaultPoint, defaultPoint, defaultGfxInfo, circle);
 				C->Load(file, pOut, ss);
 				pManager->AddFigure(C);
 			}
 			else if (stline.find("RECTANGLE") != string::npos) {
 				stringstream ss(stline);
-				CRectangle* R = new CRectangle(defaultPoint, defaultPoint, defaultGfxInfo,rectangle);
+				CRectangle* R = new CRectangle(defaultPoint, defaultPoint, defaultGfxInfo, rectangle);
 				R->Load(file, pOut, ss);
 				pManager->AddFigure(R);
 			}
 			else if (stline.find("LINE") != string::npos) {
 				stringstream ss(stline);
-				CLine* L = new CLine(defaultPoint, defaultPoint, defaultGfxInfo,line);
+				CLine* L = new CLine(defaultPoint, defaultPoint, defaultGfxInfo, line);
 				L->Load(file, pOut, ss);
 				pManager->AddFigure(L);
 			}

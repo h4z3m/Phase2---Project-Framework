@@ -75,6 +75,7 @@ enum colorNames
 
 };
 enum Ftypes {
+	Null,
 	line,
 	triangle,
 	rectangle,

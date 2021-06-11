@@ -27,13 +27,13 @@ void ChangeColorAction::Execute() {
 
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	string clr="";
+	string clr = "";
 
 	//Let user choose which color to change and choose the color
 	switch (stoi(uChoice))
 	{
 	case 1:		//Draw color
-		pOut->PrintMessage("Choose a Drawing color: 1.Black 2.White 3.Red 4.Green 5.Blue 6.Yellow 7.Aquamarine: ");
+		pOut->PrintMessage("Choose a Drawing color: 1.Black 2.White 3.Red 4.Green 5.Blue 6.Yellow 7.Aquamarine (0 for default): ");
 		clr = pIn->GetSrting(pOut).at(0);
 		switch (stoi(clr)) {
 		case black:
@@ -64,9 +64,9 @@ void ChangeColorAction::Execute() {
 		break;
 
 	case 2:		//Fill color
-		pOut->PrintMessage("Choose a Fill color: 1.Black 2.White 3.Red 4.Green 5.Blue 6.Yellow 7.Aquamarine: ");
+		pOut->PrintMessage("Choose a Fill color: 1.Black 2.White 3.Red 4.Green 5.Blue 6.Yellow 7.Aquamarine (0 for default): ");
 		clr = pIn->GetSrting(pOut).at(0);
-		
+
 		switch (stoi(clr)) {
 		case black:
 			UI.FillColor = BLACK;
@@ -104,7 +104,7 @@ void ChangeColorAction::Execute() {
 		break;
 
 	case 3:		//Background color
-		pOut->PrintMessage("Choose a Background color : 1.Black 2.White 3.Red 4.Green 5.Blue 6.Yellow 7.Aquamarine: ");
+		pOut->PrintMessage("Choose a Background color : 1.Black 2.White 3.Red 4.Green 5.Blue 6.Yellow 7.Aquamarine (0 for default): ");
 		clr = pIn->GetSrting(pOut).at(0);
 
 		switch (stoi(clr)) {
@@ -129,7 +129,7 @@ void ChangeColorAction::Execute() {
 		case aqua:
 			UI.BkGrndColor = AQUAMARINE;
 			break;
-			
+
 		default:
 			UI.BkGrndColor = LIGHTGOLDENRODYELLOW;
 			break;

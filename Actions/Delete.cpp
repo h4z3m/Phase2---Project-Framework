@@ -7,15 +7,6 @@ void  Delete::ReadActionParameters()
 {}
 
 void Delete::Execute() {
-	Output* pOut = pManager->GetOutput();
-	
-
-		pManager->Deleting();
-		
-	
-
-
-
-	
+	pManager->Deleting();
 }
 

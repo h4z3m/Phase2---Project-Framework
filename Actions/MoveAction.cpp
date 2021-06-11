@@ -23,7 +23,7 @@ void MoveAction::ReadActionParameters() {
 
 	//check validation of point
 	if (newPoint.y < UI.StatusBarHeight || newPoint.y > UI.height - UI.ToolBarHeight) {
-		pOut->PrintMessage("Not a valid point ya haywan");
+		pOut->PrintMessage("Not a valid point");
 
 		bool NotInValidPoint = true;
 		while (NotInValidPoint) {
@@ -48,45 +48,42 @@ void MoveAction::Execute() {
 
 	MainRefrence = pManager->MakeRefrencePoint(); //GET A REFRENCE POINT TO MOVE THE FIGURES WITH RESPECT TO IT  
 
+	CRectangle* recPtr[10];
+	CCircle* cirPtr[10];
+	CLine* linPtr[10];
+	CTriangle* triPtr[10];
 
+	// LOOP TO CHECK EACH FIGURE OF THE SELECTED FIGURES WITH ITS OWN
+	for (int i = 0; i < MovedFigVector.size(); i++) {
 
+		//CHECK THE TYPE OF THE FIGURE 
+		CRectangle* rect = dynamic_cast<CRectangle*> (MovedFigVector[i]);
+		CLine* line = dynamic_cast<CLine*> (MovedFigVector[i]);
+		CTriangle* tri = dynamic_cast<CTriangle*> (MovedFigVector[i]);
+		CCircle* cir = dynamic_cast<CCircle*> (MovedFigVector[i]);
 
-		CRectangle* recPtr[10];
-		CCircle* cirPtr[10];
-		CLine* linPtr[10];
-		CTriangle* triPtr[10];
+		//IF THE FIGURE IS RECTANGLE
+		if (rect != NULL) {
+			rect->ChangeRecCorners(newPoint, MainRefrence);
+			pOut->ClearStatusBar();
+		}
 
-		// LOOP TO CHECK EACH FIGURE OF THE SELECTED FIGURES WITH ITS OWN
-		for (int i = 0; i < MovedFigVector.size(); i++) {
+		//IF THE FIGURE IS TRIANGLE
+		if (tri != NULL) {
+			tri->ChangeTriPoints(newPoint, MainRefrence);
+			pOut->ClearStatusBar();
+		}
 
-			//CHECK THE TYPE OF THE FIGURE 
-			CRectangle* rect = dynamic_cast<CRectangle*> (MovedFigVector[i]);
-			CLine* line = dynamic_cast<CLine*> (MovedFigVector[i]);
-			CTriangle* tri = dynamic_cast<CTriangle*> (MovedFigVector[i]);
-			CCircle* cir = dynamic_cast<CCircle*> (MovedFigVector[i]);
+		//IF THE FIGURE IS LINE
+		if (line != NULL) {
+			line->ChangeLinPoints(newPoint, MainRefrence);
+			pOut->ClearStatusBar();
+		}
+		else if (cir != NULL) {
 
-			//IF THE FIGURE IS RECTANGLE
-			if (rect != NULL) {
-				rect->ChangeRecCorners(newPoint, MainRefrence);
-				pOut->ClearStatusBar();
-			}
-
-			//IF THE FIGURE IS TRIANGLE
-			if (tri != NULL) {
-				tri->ChangeTriPoints(newPoint, MainRefrence);
-				pOut->ClearStatusBar();
-			}
-
-			//IF THE FIGURE IS LINE
-			if (line != NULL) {
-				line->ChangeLinPoints(newPoint, MainRefrence);
-				pOut->ClearStatusBar();
-			}
-			else if (cir != NULL) {
-
-				cir->ChangeCirPoints(newPoint);
-				pOut->ClearStatusBar();
-			}
+			cir->ChangeCirPoints(newPoint);
+			pOut->ClearStatusBar();
 		}
 	}
+}
 

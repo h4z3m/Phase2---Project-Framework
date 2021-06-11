@@ -12,17 +12,10 @@ private:
 
 	vector <CFigure*> MovedFigVector;
 
-
-
-
-
-
 	Point SecondNewPoint;
 	Point ThirdNewPoint;
 
 	Point Refrence1;
-
-
 
 	CFigure* MovedFigure;
 
@@ -41,16 +34,6 @@ public:
 
 	//Add  to the ApplicationManager
 	virtual void Execute();
-
-
-
-
-
 };
-
-
-
-
-
 
 #endif

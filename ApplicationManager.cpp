@@ -1,6 +1,3 @@
-//test kda allahomsaly3alanby
-
-
 #include "ApplicationManager.h"
 #include "Actions\AddRectAction.h"
 #include "Actions\AddLineAction.h"
@@ -250,8 +247,8 @@ int ApplicationManager::GetRectCount()
 int ApplicationManager::GetColorFillCount(color clr)
 {
 	int count = 0;
-	for (int i = 0; i < FigCount ; i++) {
-		if (clr == FigList[i]->GetFillColorObj() )
+	for (int i = 0; i < FigCount; i++) {
+		if (clr == FigList[i]->GetFillColorObj())
 			count++;
 	}
 	return count;

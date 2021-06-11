@@ -7,16 +7,12 @@
 #include "..\GUI\Output.h"
 
 
-class Delete :
-	public Action
+class Delete :	public Action
 {
 	CFigure* deleted;
 public:
-
 	Delete(ApplicationManager*);
 	virtual void ReadActionParameters();
 	virtual void Execute();
-
-
 };
 

@@ -17,14 +17,19 @@ protected:
 	/// Add more parameters if needed.
 
 public:
+	int FigType;
 	CFigure(GfxInfo FigureGfxInfo);
 	void SetID(int rID);
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
+	bool IsFilled() const;		//check if figure is filled
+	bool IsHidden() const;
+	color GetFillColorObj() const;	//gets color of a figure
 	virtual void Draw(Output* pOut) const  = 0 ;		//Draw the figure
 	
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
+	void SetHidden(bool);
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure
 

@@ -14,7 +14,7 @@ void AddCircleAction::ReadActionParameters()
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	
+
 	pOut->PrintMessage("New Circle: Click at first point");
 
 	//Read center and store in point P1
@@ -26,11 +26,11 @@ void AddCircleAction::ReadActionParameters()
 	pIn->GetPointClicked(P2.x, P2.y);
 
 	CircleGfxInfo.isFilled = fillClrStatus;	//default is not filled
+	CircleGfxInfo.isHidden = false;
 	//Get drawing, filling colors and pen width from the interface
 	CircleGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	CircleGfxInfo.FillClr = pOut->getCrntFillColor();
 	CircleGfxInfo.BorderWdth = pOut->getCrntPenWidth();
-
 	pOut->ClearStatusBar();
 
 }
@@ -43,7 +43,7 @@ void AddCircleAction::Execute()
 
 	//Create a circle with the parameters read from the user
 	CCircle* C = new CCircle(P1, P2, CircleGfxInfo);
-	
+	C->FigType = circle;
 	//Add the circle to the list of figures
 	pManager->AddFigure(C);
 }

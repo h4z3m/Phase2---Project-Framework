@@ -42,6 +42,12 @@ public:
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig); //Adds a new figure to the FigList
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
+	int GetLineCount();
+	int GetCirCount();
+	int GetTriCount();
+	int GetRectCount();
+	int GetColorFillCount(color);
+
 	// -- Interface Management Functions
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
@@ -49,7 +55,8 @@ public:
 	void Deleting();
 	void DeleteAllFigs();
 	int SelectedNumber();
-
+	int GetFigCount();
+	void UnhideAllFigs();
 	//////////////********** GILANY'S PART ************//////////////////
 	void MakeItSelected(CFigure*);
 	void MakeItUnSelected(CFigure*);

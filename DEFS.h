@@ -56,6 +56,7 @@ struct GfxInfo	//Graphical info of each figure (you may add more members)
 	color DrawClr;	//Draw color of the figure
 	color FillClr;	//Fill color of the figure
 	bool isFilled;	//Figure Filled or not
+	bool isHidden;
 	int BorderWdth;	//Width of figure borders
 
 };
@@ -72,5 +73,11 @@ enum colorNames
 	aqua,
 	lightgoldenrodyellow
 
+};
+enum Ftypes {
+	line,
+	triangle,
+	rectangle,
+	circle
 };
 #endif

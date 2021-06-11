@@ -27,6 +27,7 @@ void AddRectAction::ReadActionParameters()
 
 
 	RectGfxInfo.isFilled = fillClrStatus;	//default is not filled
+	RectGfxInfo.isHidden = false;
 	//get drawing, filling colors and pen width from the interface
 	RectGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	RectGfxInfo.FillClr = pOut->getCrntFillColor();
@@ -49,6 +50,7 @@ void AddRectAction::Execute()
 
 		//Create a rectangle with the parameters read from the user
 		CRectangle* R = new CRectangle(P1, P2, RectGfxInfo);
+		R->FigType = rectangle;
 
 		//Add the rectangle to the list of figures
 		pManager->AddFigure(R);

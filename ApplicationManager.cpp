@@ -12,14 +12,14 @@
 #include "Actions\SelectAction.h"
 #include "Actions\Delete.h"
 #include "Actions\MoveAction.h"
-#include "Figures/CFigure.h"
-#include "Figures/CRectangle.h"
-#include "Figures/CCircle.h"
-#include "Figures/CTriangle.h"
-#include "Figures/CLine.h"
-#include "Actions/SwitchToPlayMode.h"
-#include "Actions/SwitchToDrawAction.h"
-
+#include "Actions\SwitchToPlayMode.h"
+#include "Actions\SwitchToDrawAction.h"
+#include "Actions\Play_FillColorAction.h"
+#include "Figures\CFigure.h"
+#include "Figures\CRectangle.h"
+#include "Figures\CCircle.h"
+#include "Figures\CTriangle.h"
+#include "Figures\CLine.h"
 
 bool Action::fillClrStatus = false;
 //Constructor
@@ -143,6 +143,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case Figure_Fill_Color:
+		pAct = new Play_FillColorAction(this);
 		break;
 
 	case Figure_Fill_Type:
@@ -209,6 +210,51 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 		}
 	/////////////Ali////////////////////////////////
 	return NULL;
+}
+int ApplicationManager::GetLineCount()
+{
+	int count = 0;
+	for (int i = 0; i < FigCount; i++) {
+		if (FigList[i]->FigType == line)
+			count++;
+	}
+	return count;
+}
+int ApplicationManager::GetCirCount()
+{
+	int count = 0;
+	for (int i = 0; i < FigCount; i++) {
+		if (FigList[i]->FigType == circle)
+			count++;
+	}
+	return count;
+}
+int ApplicationManager::GetTriCount()
+{
+	int count = 0;
+	for (int i = 0; i < FigCount; i++) {
+		if (FigList[i]->FigType == triangle)
+			count++;
+	}
+	return count;
+}
+int ApplicationManager::GetRectCount()
+{
+	int count = 0;
+	for (int i = 0; i < FigCount; i++) {
+		if (FigList[i]->FigType == rectangle)
+			count++;
+	}
+	return count;
+}
+int ApplicationManager::GetColorFillCount(color clr)
+{
+	int count = 0;
+	for (int i = 0; i < FigCount ; i++) {
+		if (clr == FigList[i]->GetFillColorObj() )
+			count++;
+	}
+	return count;
 }
 //Check if graph is empty
 bool ApplicationManager::isGraphEmpty() {
@@ -289,7 +335,9 @@ void ApplicationManager::UpdateInterface() const
 {
 	pOut->ClearDrawArea();
 	for (int i = 0; i < FigCount; i++)
-		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+		if (!FigList[i]->IsHidden()) {
+			FigList[i]->Draw(pOut);//Call Draw function (virtual member fn)
+		}
 
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -354,9 +402,9 @@ void ApplicationManager::DeleteAllFigs()
 	for (int i = 0; i < MaxFigCount; i++) {
 		delete FigList[i];
 		FigList[i] = NULL;
-		
+
 	}
-	FigCount=0;
+	FigCount = 0;
 }
 
 int ApplicationManager::SelectedNumber() {
@@ -370,4 +418,18 @@ int ApplicationManager::SelectedNumber() {
 		}
 	}
 	return c;
+}
+
+int ApplicationManager::GetFigCount()
+{
+	return FigCount;
+}
+
+void ApplicationManager::UnhideAllFigs()
+{
+	if (!isGraphEmpty()) {
+		for (int i = 0; i < MaxFigCount; i++) {
+			FigList[i]->SetHidden(FALSE);
+		}
+	}
 }

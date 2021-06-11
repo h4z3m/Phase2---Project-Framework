@@ -31,6 +31,7 @@ void AddTriangleAction::ReadActionParameters()
 	pIn->GetPointClicked(P3.x, P3.y);
 
 	TriangleGfxInfo.isFilled = fillClrStatus;	//default is not filled
+	TriangleGfxInfo.isHidden = false;
 	//get drawing, filling colors and pen width from the interface
 	TriangleGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	TriangleGfxInfo.FillClr = pOut->getCrntFillColor();
@@ -51,6 +52,7 @@ void AddTriangleAction::Execute()
 
 		//Create a triangle with the parameters read from the user
 		CTriangle* T = new CTriangle(P1, P2, P3, TriangleGfxInfo);
+		T->FigType = triangle;
 		//Add the triangle to the list of figures
 		pManager->AddFigure(T);
 	}

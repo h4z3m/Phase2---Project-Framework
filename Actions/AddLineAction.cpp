@@ -26,6 +26,7 @@ void AddLineAction::ReadActionParameters()
 	pIn->GetPointClicked(P2.x, P2.y);
 
 	LineGfxInfo.isFilled = false;	//default is not filled
+	LineGfxInfo.isHidden = false;
 	//get drawing, filling colors and pen width from the interface
 	LineGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	LineGfxInfo.FillClr = pOut->getCrntFillColor();
@@ -46,7 +47,7 @@ void AddLineAction::Execute()
 
 		//Create a rectangle with the parameters read from the user
 		CLine* L = new CLine(P1, P2, LineGfxInfo);
-
+		L->FigType = line;
 		//Add the rectangle to the list of figures
 		pManager->AddFigure(L);
 	}

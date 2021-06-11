@@ -13,7 +13,6 @@ void Play_FillColorAction::ReadActionParameters()
 {
 	//User click coordinates
 	int x, y;
-
 	//Get the first figure the user clicks so we can use its color
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
@@ -32,7 +31,7 @@ void Play_FillColorAction::ReadActionParameters()
 	RefFig = pManager->GetFigure(x, y);
 	RefColor = RefFig->GetFillColorObj();
 	RefFig->SetHidden(true); //Hide reference figure
-
+	pManager->UpdateInterface(); //Updated with hidden figure
 	pOut->PrintMessage("Select all figures with the color " + pOut->getColorName(RefColor));
 
 }
@@ -62,9 +61,9 @@ void Play_FillColorAction::Execute()
 				TempFig->SetHidden(true);
 			}
 			pManager->UpdateInterface(); //Updated with hidden figures
-			pOut->PrintMessage("Correct picks: " + std::to_string(CorrectPicks) + " Wrong picks: " + std::to_string(WrongPicks) + "Total score: ");
+			pOut->PrintMessage("Correct picks: " + std::to_string(CorrectPicks) + " Wrong picks: " + std::to_string(WrongPicks) + " Total score: "+ std::to_string((((float)CorrectPicks - WrongPicks) / CorrectPicks * 100.0)));
 		}
-	} while ( !(CorrectPicks==(pManager->GetColorFillCount(RefColor)-1)));
+	} while ( !(CorrectPicks==(pManager->GetColorFillCount(RefColor)-1)) && !(pManager->GetFigCount()==(CorrectPicks+WrongPicks)));
 	//Printing final score
-	pOut->PrintMessage("Final score: " + std::to_string((((float)CorrectPicks - WrongPicks) / (float)pManager->GetFigCount()*100.0)));
+	pOut->PrintMessage("Final score: " + std::to_string((((float)CorrectPicks - WrongPicks) / CorrectPicks*100.0)));
 }

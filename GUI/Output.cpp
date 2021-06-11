@@ -238,6 +238,9 @@ string Output::getColorName(color& CLR) {
 	else if (CLR == LIGHTGOLDENRODYELLOW) {
 		return "LIGHTGOLDENRODYELLOW";
 	}
+	else if (CLR == FinalBG) {
+		return "FinalBG";
+	}
 	return "NO_FILL";
 }
 color Output::getColorObj(string str)
@@ -271,6 +274,9 @@ color Output::getColorObj(string str)
 	}
 	else if (str == "LIGHTGOLDENRODYELLOW") {
 		return LIGHTGOLDENRODYELLOW;
+	}
+	else if (str == "FinalBG") {
+		return FinalBG;
 	}
 	return UI.FillColor;
 }

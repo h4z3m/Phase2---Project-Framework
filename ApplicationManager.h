@@ -24,6 +24,7 @@ private:
 
 	//////////////********** GILANY'S PART ************//////////////////
 	vector <CFigure*> FigVector;
+	int MoveLoopCount;
 	//////////////********** GILANY'S PART ************//////////////////
 
 
@@ -62,6 +63,9 @@ public:
 	void MakeItUnSelected(CFigure*);
 	Point MakeRefrencePoint();
 	vector <CFigure*> GetFigVector();
+	CFigure* MoveLoop();
+	int GetVectorSize();
+	void ResetCount();
 	//////////////********** GILANY'S PART ************//////////////////
 
 };

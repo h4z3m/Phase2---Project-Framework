@@ -20,6 +20,8 @@ public:
 	//////////////********** GILANY'S PART ************//////////////////
 	void ChangeTriPoints(Point, Point);
 	Point GetTriHighPoint();
+	virtual void ChangeCorners(Point, Point);
+
 	//////////////********** GILANY'S PART ************//////////////////
 };
 

@@ -19,6 +19,8 @@ public:
 	//////////////********** GILANY'S PART ************//////////////////
 	void ChangeLinPoints(Point, Point);
 	Point GetLinHighPoint();
+	virtual void ChangeCorners(Point, Point);
+
 	//////////////********** GILANY'S PART ************//////////////////
 };
 

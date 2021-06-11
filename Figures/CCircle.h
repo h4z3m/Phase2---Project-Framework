@@ -21,6 +21,8 @@ public:
 	//////////////********** GILANY'S PART ************//////////////////
 	void ChangeCirPoints(Point);
 	Point GetCirHighPoint();
+	virtual void ChangeCorners(Point, Point);
+
 	//////////////********** GILANY'S PART ************//////////////////
 };
 

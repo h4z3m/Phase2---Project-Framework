@@ -99,4 +99,14 @@ void CCircle::ChangeCirPoints(Point P1) {
 Point CCircle::GetCirHighPoint() {
 	return R1;
 }
+
+
+void CCircle::ChangeCorners(Point P1, Point P2) {
+	radius = (sqrt(pow(R2.x - R1.x, 2) + pow(R2.y - R1.y, 2) * 1.0));
+	//Using the midpoint of a parallelogram joining the 4 points of old and new circle
+	R2.x = P1.x + R2.x - R1.x;
+	R2.y = P1.y + R2.y - R1.y;
+	R1 = P1;
+ }
+
 //////////////********** GILANY'S PART ************//////////////////

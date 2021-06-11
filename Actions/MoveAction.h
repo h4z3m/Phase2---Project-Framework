@@ -14,7 +14,7 @@ private:
 
 
 
-
+	bool SelectedFlag;
 
 
 	Point SecondNewPoint;

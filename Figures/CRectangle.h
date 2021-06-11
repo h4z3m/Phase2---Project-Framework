@@ -19,6 +19,8 @@ public:
 	//////////////********** GILANY'S PART ************//////////////////
 	void ChangeRecCorners(Point, Point);
 	Point GetRecHighPoint();
+	virtual void ChangeCorners(Point, Point);
+
 	//////////////********** GILANY'S PART ************//////////////////
 };
 

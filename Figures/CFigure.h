@@ -44,6 +44,9 @@ public:
 	virtual void Load(ifstream &Infile, Output* pOut,stringstream&) = 0;	//Load the figure parameters to the file
 	virtual string PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
 	virtual bool Fig(int, int) = 0;
+
+
+	virtual void ChangeCorners(Point, Point);
 };
 
 #endif

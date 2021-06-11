@@ -34,6 +34,8 @@ ApplicationManager::ApplicationManager()
 	//Create an array of figure pointers and set them to NULL		
 	for (int i = 0; i < MaxFigCount; i++)
 		FigList[i] = NULL;
+
+	MoveLoopCount = 0;
 }
 
 //==================================================================================//
@@ -321,8 +323,66 @@ Point ApplicationManager::MakeRefrencePoint() {
 //IF THE FIGURE IS RECTANGLE
 
 vector <CFigure*> ApplicationManager::GetFigVector() {
-	return FigVector;
+
+	if (FigVector.size() == 0)
+		pOut->PrintMessage("Select a figure first ya haywan");
+	else
+		return FigVector;
 }
+
+
+CFigure* ApplicationManager::MoveLoop() {
+	while ( MoveLoopCount < FigVector.size() ) {
+
+		//CHECK THE TYPE OF THE FIGURE 
+		CRectangle* rect = dynamic_cast<CRectangle*> (FigVector[MoveLoopCount]);
+		CLine* line = dynamic_cast<CLine*> (FigVector[MoveLoopCount]);
+		CTriangle* tri = dynamic_cast<CTriangle*> (FigVector[MoveLoopCount]);
+		CCircle* cir = dynamic_cast<CCircle*> (FigVector[MoveLoopCount]);
+
+		//IF THE FIGURE IS RECTANGLE
+		if (rect != NULL) {
+			MoveLoopCount++;
+
+			return rect;
+
+		}
+
+		//IF THE FIGURE IS TRIANGLE
+		if (tri != NULL) {
+			MoveLoopCount++;
+
+			return tri;
+
+		}
+
+		//IF THE FIGURE IS LINE
+		if (line != NULL) {
+			MoveLoopCount++;
+
+			return line;
+
+		}
+
+		if (cir != NULL) {
+			MoveLoopCount++;
+
+			return cir;
+
+		}
+
+	}
+}
+
+int ApplicationManager::GetVectorSize() {
+	return FigVector.size();
+}
+
+void ApplicationManager::ResetCount() {
+	MoveLoopCount = 0;
+}
+
+
 //////////////********** GILANY'S PART ************//////////////////
 
 

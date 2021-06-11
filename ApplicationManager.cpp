@@ -1,3 +1,6 @@
+//test kda allahomsaly3alanby
+
+
 #include "ApplicationManager.h"
 #include "Actions\AddRectAction.h"
 #include "Actions\AddLineAction.h"

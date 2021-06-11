@@ -9,8 +9,8 @@ Output::Output()
 
 	UI.width = 1390;
 	UI.height = 650;
-	UI.wx = 5;
-	UI.wy = 5;
+	UI.wx = 150;
+	UI.wy = 150;
 
 
 	UI.StatusBarHeight = 50;

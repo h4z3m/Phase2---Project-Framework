@@ -25,7 +25,6 @@ void CTriangle::Draw(Output* pOut) const
 		outfile << Point3.x << " ";
 		outfile << Point3.y << " ";
 
-		//TODO: figure out how to get figure draw and fill colors as strings
 		outfile << pOut->getColorName(FigGfxInfo.DrawClr) << " ";
 		if (FigGfxInfo.isFilled == true) {
 			outfile << pOut->getColorName(FigGfxInfo.FillClr);

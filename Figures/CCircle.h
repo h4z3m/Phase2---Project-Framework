@@ -19,7 +19,7 @@ public:
 
 
 	//////////////********** GILANY'S PART ************//////////////////
-	void ChangeCirPoints(Point, Point);
+	void ChangeCirPoints(Point);
 	Point GetCirHighPoint();
 	//////////////********** GILANY'S PART ************//////////////////
 };

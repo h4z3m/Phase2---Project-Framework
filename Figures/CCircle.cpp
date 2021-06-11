@@ -79,15 +79,21 @@ bool CCircle::Fig(int x, int y)  //Determine the position of the point
 {
 	radius = (sqrt(pow(R2.x - R1.x, 2) + pow(R2.y - R1.y, 2) * 1.0));
 	double Center2Click= (sqrt(pow(x - R1.x, 2) + pow(y - R1.y, 2) * 1.0));
-	if(Center2Click+0.08*radius>radius && Center2Click-0.08*radius<radius)
+	if (Center2Click <= radius) {
 		return true;
+	}
 	return false;
 }
 
 //////////////********** GILANY'S PART ************//////////////////
-void CCircle::ChangeCirPoints(Point P1, Point P2) {
+void CCircle::ChangeCirPoints(Point P1) {
+	radius = (sqrt(pow(R2.x - R1.x, 2) + pow(R2.y - R1.y, 2) * 1.0));
+	//Using the midpoint of a parallelogram joining the 4 points of old and new circle
+	R2.x = P1.x + R2.x - R1.x;
+	R2.y = P1.y + R2.y - R1.y;
 	R1 = P1;
-	R2 = P2;
+
+
 }
 
 Point CCircle::GetCirHighPoint() {

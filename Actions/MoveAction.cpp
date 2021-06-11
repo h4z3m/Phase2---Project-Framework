@@ -82,6 +82,11 @@ void MoveAction::Execute() {
 				line->ChangeLinPoints(newPoint, MainRefrence);
 				pOut->ClearStatusBar();
 			}
+			else if (cir != NULL) {
+
+				cir->ChangeCirPoints(newPoint);
+				pOut->ClearStatusBar();
+			}
 		}
 	}
 

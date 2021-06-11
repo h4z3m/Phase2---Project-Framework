@@ -178,9 +178,15 @@
     <ClCompile Include="Actions\Delete.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\MoveAction.cpp" />
-    <ClCompile Include="Actions\SwitchToDrawAction.cpp" />
-    <ClCompile Include="Actions\SwitchToPlayMode.cpp" />
+    <ClCompile Include="Actions\MoveAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\SwitchToDrawAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\SwitchToPlayMode.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -301,9 +307,15 @@
     <ClInclude Include="Actions\Delete.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\MoveAction.h" />
-    <ClInclude Include="Actions\SwitchToDrawAction.h" />
-    <ClInclude Include="Actions\SwitchToPlayMode.h" />
+    <ClInclude Include="Actions\MoveAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\SwitchToDrawAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\SwitchToPlayMode.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

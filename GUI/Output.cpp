@@ -7,22 +7,22 @@ Output::Output()
 	UI.InterfaceMode = MODE_DRAW;
 
 
-	UI.width = 1300;
-	UI.height = 700;
-	UI.wx = 100;
-	UI.wy = 100;
+	UI.width = 1390;
+	UI.height = 650;
+	UI.wx = 5;
+	UI.wy = 5;
 
 
 	UI.StatusBarHeight = 50;
-	UI.ToolBarHeight = 50;
-	UI.MenuItemWidth = 56;
+	UI.ToolBarHeight = 70;
+	UI.MenuItemWidth = 60;
 
-	UI.DrawColor = BLUE;	//Drawing color
+	UI.DrawColor = FinalStTX;	//Drawing color
 	UI.FillColor = GREEN;	//Filling color
-	UI.MsgColor = RED;		//Messages color
-	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
-	UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
-	UI.StatusBarColor = TURQUOISE;
+	UI.MsgColor = FinalStTX;		//Messages color
+	UI.BkGrndColor = FinalBG;	//Background color
+	UI.HighlightColor = FinalHGIH;	//This color should NOT be used to draw figures. use if for highlight only
+	UI.StatusBarColor = FinalStBG;
 	UI.PenWidth = 3;	//width of the figures frames
 
 
@@ -59,17 +59,25 @@ window* Output::CreateWind(int w, int h, int x, int y) const
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateStatusBar() const
 {
-	pWind->SetPen(UI.StatusBarColor, 1);
+	pWind->SetPen(UI.StatusBarColor, 0);
 	pWind->SetBrush(UI.StatusBarColor);
 	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
+
+	//Draw a line above the status bar
+	pWind->SetPen(FinalStBG, 6); //line under tool bar when creating draw tool bar
+	pWind->DrawLine(0, UI.height - UI.StatusBarHeight+1, UI.width, UI.height - UI.StatusBarHeight+1);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::ClearStatusBar() const
 {
 	//Clear Status bar by drawing a filled white rectangle
-	pWind->SetPen(UI.StatusBarColor, 1);
+	pWind->SetPen(UI.StatusBarColor, 0);
 	pWind->SetBrush(UI.StatusBarColor);
-	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
+	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight +2, UI.width, UI.height );
+
+	//Draw a line above the status bar
+	pWind->SetPen(FinalStBG, 6); //line under tool bar when creating draw tool bar
+	pWind->DrawLine(0, UI.height - UI.StatusBarHeight+1, UI.width, UI.height - UI.StatusBarHeight+1);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateDrawToolBar() const
@@ -111,17 +119,21 @@ void Output::CreateDrawToolBar() const
 	//TODO: Prepare images for each menu item and add it to the list
 
 	//Clear play toolbar
-	pWind->SetPen(UI.BkGrndColor, 1);
-	pWind->SetBrush(UI.BkGrndColor);
-	pWind->DrawRectangle(0, 0, 24 * UI.MenuItemWidth, 50, FILLED);
+	pWind->SetPen(WHITE, 1);
+	pWind->SetBrush(WHITE);
+	pWind->DrawRectangle(0, 0, 24 * UI.MenuItemWidth, 70, FILLED);
+
+	////////////////////////////************ NEW INTERFACE *************//////////////////////////////
 
 	//Draw menu item one image at a time
 	for (int i = 0; i < DRAW_ITM_COUNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
 	//Draw a line under the toolbar
-	pWind->SetPen(RED, 3);
+	pWind->SetPen(FinalStBG, 3); //line under tool bar when creating draw tool bar
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+
+	////////////////////////////************ NEW INTERFACE *************//////////////////////////////
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -139,28 +151,33 @@ void Output::CreatePlayToolBar() const
 	MenuItemImages[ITM_EXITP] = "images\\MenuItems\\Menu_Exit.jpg";
 
 	//Clear draw toolbar
-	pWind->SetPen(UI.BkGrndColor, 1);
-	pWind->SetBrush(UI.BkGrndColor);
-	pWind->DrawRectangle(0, 0, 24 * UI.MenuItemWidth, 50, FILLED);
+	pWind->SetPen(WHITE, 3);
+	pWind->SetBrush(WHITE);
+	pWind->DrawRectangle(0, 0, 24 * UI.MenuItemWidth, 72, FILLED);
 
 	//Draw play toolbar menu items
 	for (int i = 0; i < PLAY_ITM_COUNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
-	//Draw a line under toolbar
-	pWind->SetPen(RED, 3);
+
+	//Draw a line under the toolbar
+	pWind->SetPen(FinalStBG, 3); //line under tool bar when creating draw tool bar
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+
+
 	///TODO: write code to create Play mode menu
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void Output::ClearDrawArea() const
 {
-	pWind->SetPen(UI.BkGrndColor, 1);
+	pWind->SetPen(FinalBG, 3);
 	pWind->SetBrush(UI.BkGrndColor);
-	pWind->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
+	pWind->DrawRectangle(0, UI.ToolBarHeight +2 , UI.width, UI.height - UI.StatusBarHeight +2);
 
 }
+
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void Output::PrintMessage(string msg) const	//Prints a message on status bar

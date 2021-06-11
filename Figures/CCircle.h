@@ -16,6 +16,12 @@ public:
 	void Load(ifstream& Infile,Output* pOut,stringstream&);
 	virtual bool Fig(int, int);
 	virtual string PrintInfo(Output* pOut);
+
+
+	//////////////********** GILANY'S PART ************//////////////////
+	void ChangeCirPoints(Point, Point);
+	Point GetCirHighPoint();
+	//////////////********** GILANY'S PART ************//////////////////
 };
 
 #endif

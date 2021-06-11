@@ -5,6 +5,8 @@
 #include "Figures\CFigure.h"
 #include "GUI\input.h"
 #include "GUI\output.h"
+#include <vector>
+
 
 //Main class that manages everything in the application.
 class ApplicationManager
@@ -19,6 +21,10 @@ private:
 	Input *pIn;
 	Output *pOut;
 	GfxInfo SelectInfo;
+
+	//////////////********** GILANY'S PART ************//////////////////
+	vector <CFigure*> FigVector;
+	//////////////********** GILANY'S PART ************//////////////////
 
 
 public:	
@@ -43,6 +49,14 @@ public:
 	void Deleting();
 	void DeleteAllFigs();
 	int SelectedNumber();
+
+	//////////////********** GILANY'S PART ************//////////////////
+	void MakeItSelected(CFigure*);
+	void MakeItUnSelected(CFigure*);
+	Point MakeRefrencePoint();
+	vector <CFigure*> GetFigVector();
+	//////////////********** GILANY'S PART ************//////////////////
+
 };
 
 #endif

@@ -73,3 +73,48 @@ string CRectangle::PrintInfo(Output* pOut)
 
 	return ("Rectangle - ID:" + id + " Corner1: (" + x1 + ", " + y1 + ")" + " Corner2: (" + x2 + ", " + y2 + ")");
 }
+
+
+
+//////////////********** GILANY'S PART ************//////////////////
+void CRectangle::ChangeRecCorners(Point newPoint, Point MainRefrence) {
+	if (Corner1.x > MainRefrence.x)
+		Corner1.x = newPoint.x + abs(MainRefrence.x - Corner1.x);
+	else
+		Corner1.x = newPoint.x - abs(MainRefrence.x - Corner1.x);
+
+	if (Corner1.y > MainRefrence.y)
+		Corner1.y = newPoint.y + abs(MainRefrence.y - Corner1.y);
+	else
+		Corner1.y = newPoint.y - abs(MainRefrence.y - Corner1.y);
+
+
+	if (Corner2.x > MainRefrence.x)
+		Corner2.x = newPoint.x + abs(MainRefrence.x - Corner2.x);
+	else
+		Corner2.x = newPoint.x - abs(MainRefrence.x - Corner2.x);
+
+	if (Corner2.y > MainRefrence.y)
+		Corner2.y = newPoint.y + abs(MainRefrence.y - Corner2.y);
+	else
+		Corner2.y = newPoint.y - abs(MainRefrence.y - Corner2.y);
+}
+
+Point CRectangle::GetRecHighPoint() {
+
+	int highest = 1000;
+	Point highestPoint;
+
+	if (Corner1.y < highest) {
+		highestPoint = Corner1;
+		highest = Corner1.y;
+	}
+
+	if (Corner2.y < highest) {
+		highestPoint = Corner2;
+		highest = Corner2.y;
+	}
+
+	return highestPoint;
+}
+//////////////********** GILANY'S PART ************//////////////////

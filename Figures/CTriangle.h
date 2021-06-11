@@ -16,6 +16,11 @@ public:
 	void Load(ifstream& Infile, Output* pOut, stringstream&);
 	virtual bool Fig(int, int);
 	virtual string PrintInfo(Output* pOut);
+
+	//////////////********** GILANY'S PART ************//////////////////
+	void ChangeTriPoints(Point, Point);
+	Point GetTriHighPoint();
+	//////////////********** GILANY'S PART ************//////////////////
 };
 
 #endif

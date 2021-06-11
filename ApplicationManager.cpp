@@ -11,6 +11,16 @@
 #include "Actions\ChangeColorAction.h"
 #include "Actions\SelectAction.h"
 #include "Actions\Delete.h"
+#include "Actions\MoveAction.h"
+#include "Figures/CFigure.h"
+#include "Figures/CRectangle.h"
+#include "Figures/CCircle.h"
+#include "Figures/CTriangle.h"
+#include "Figures/CLine.h"
+#include "Actions/SwitchToPlayMode.h"
+#include "Actions/SwitchToDrawAction.h"
+
+
 bool Action::fillClrStatus = false;
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -81,6 +91,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case MOVE:
+		pAct = new MoveAction(this);
 		break;
 
 	case RESIZE:
@@ -150,9 +161,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case TO_DRAW:
+		pAct = new SwitchToDrawAction(this);
 		break;
 
 	case TO_PLAY:
+		pAct = new SwitchToPlayAction(this);
 		break;
 
 	case EXIT:
@@ -209,6 +222,64 @@ bool ApplicationManager::isGraphEmpty() {
 	}
 	return true;
 }
+
+
+//////////////********** GILANY'S PART ************//////////////////
+
+//ADD THE SELECTED FIGURE TO THE LIST OF SELECTED FIGURES 
+void ApplicationManager::MakeItSelected(CFigure* fig) {
+
+	FigVector.push_back(fig);
+}
+
+//DELETE THE SELECTED FIGURE FROM THE LIST OF SELECTED FIGURES 
+void ApplicationManager::MakeItUnSelected(CFigure* fig) {
+
+	auto it = find(FigVector.begin(), FigVector.end(), fig);
+	int index;
+	if (it != FigVector.end())
+	{
+
+		// calculating the index of fig
+		index = it - FigVector.begin();
+	}
+
+	FigVector.erase(FigVector.begin() + index);
+}
+
+//MAKE A REFRENCE POINT OF THE FIRST SELECTED FIGURE 
+//TO MOVE THE OTHER SELECTED FIGURES WITH RESPECT TO IT
+//IF YOU UNSELECT THE FIRST FIGURE, THE POINT OF THE OTHER FIGURE WILL BE TAKEN AS A REFRENCE 
+Point ApplicationManager::MakeRefrencePoint() {
+
+	CRectangle* rect = dynamic_cast<CRectangle*> (FigVector[0]);
+	CLine* line = dynamic_cast<CLine*> (FigVector[0]);
+	CTriangle* tri = dynamic_cast<CTriangle*> (FigVector[0]);
+	CCircle* cir = dynamic_cast<CCircle*> (FigVector[0]);
+
+	//IF THE FIGURE IS RECTANGLE
+	if (rect != NULL)
+		return rect->GetRecHighPoint();
+	//IF THE FIGURE IS RECTANGLE
+	else if (line != NULL)
+		return line->GetLinHighPoint();
+	//IF THE FIGURE IS TRIANGLE
+	else if (tri != NULL)
+		return tri->GetTriHighPoint();
+	//IF THE FIGURE IS CIRCLE
+	else
+		return cir->GetCirHighPoint();
+
+}
+
+//IF THE FIGURE IS RECTANGLE
+
+vector <CFigure*> ApplicationManager::GetFigVector() {
+	return FigVector;
+}
+//////////////********** GILANY'S PART ************//////////////////
+
+
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
@@ -219,6 +290,7 @@ void ApplicationManager::UpdateInterface() const
 	pOut->ClearDrawArea();
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input

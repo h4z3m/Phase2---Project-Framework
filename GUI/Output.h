@@ -18,6 +18,7 @@ public:
 	void ClearStatusBar() const;	//Clears the status bar
 	void ClearDrawArea() const;	//Clears the drawing area
 	
+
 	// -- Figures Drawing functions
 
 	// -- GILANY GILANY GILANY GILANY GILANY GILANY GILANY GILANY GILANY GILANY

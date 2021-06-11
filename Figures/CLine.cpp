@@ -65,3 +65,47 @@ string CLine::PrintInfo(Output* pOut)
 	return ("Line ID:" + id + " Point1: (" + x1 + ", " + y1 + ")" + " Point2: (" + x2 + ", " + y2 + ")");
 
 }
+
+
+//////////////********** GILANY'S PART ************//////////////////
+void CLine::ChangeLinPoints(Point newPoint, Point MainRefrence) {
+	if (Point1.x > MainRefrence.x)
+		Point1.x = newPoint.x + abs(MainRefrence.x - Point1.x);
+	else
+		Point1.x = newPoint.x - abs(MainRefrence.x - Point1.x);
+
+	if (Point1.y > MainRefrence.y)
+		Point1.y = newPoint.y + abs(MainRefrence.y - Point1.y);
+	else
+		Point1.y = newPoint.y - abs(MainRefrence.y - Point1.y);
+
+
+	if (Point2.x > MainRefrence.x)
+		Point2.x = newPoint.x + abs(MainRefrence.x - Point2.x);
+	else
+		Point2.x = newPoint.x - abs(MainRefrence.x - Point2.x);
+
+	if (Point2.y > MainRefrence.y)
+		Point2.y = newPoint.y + abs(MainRefrence.y - Point2.y);
+	else
+		Point2.y = newPoint.y - abs(MainRefrence.y - Point2.y);
+}
+
+Point CLine::GetLinHighPoint() {
+
+	int highest = 1000;
+	Point highestPoint;
+
+	if (Point1.y < highest) {
+		highestPoint = Point1;
+		highest = Point1.y;
+	}
+
+	if (Point2.y < highest) {
+		highestPoint = Point2;
+		highest = Point2.y;
+	}
+
+	return highestPoint;
+}
+//////////////********** GILANY'S PART ************//////////////////

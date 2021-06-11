@@ -47,6 +47,10 @@ void SelectAction::Execute()
 		if (fig->IsSelected())
 		{
 			fig->SetSelected(false);
+			//////////////********** GILANY'S PART ************//////////////////
+			pManager->MakeItUnSelected(fig);
+			//////////////********** GILANY'S PART ************//////////////////
+
 		}
 		else
 		{
@@ -57,11 +61,21 @@ void SelectAction::Execute()
 			if (Count <=1)
 			{
 				pOut->PrintMessage(x);
+				//////////////********** GILANY'S PART ************//////////////////
+				pManager->MakeItSelected(fig);
+				//////////////********** GILANY'S PART ************//////////////////
+
+
 			}
 			else
 			{
 				string s = to_string(Count);
 				pOut->PrintMessage("Number of Selected figures: " + s);
+				//////////////********** GILANY'S PART ************//////////////////
+				pManager->MakeItSelected(fig);
+				//////////////********** GILANY'S PART ************//////////////////
+
+
 			}
 			
 		}

@@ -178,6 +178,9 @@
     <ClCompile Include="Actions\Delete.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\MoveAction.cpp" />
+    <ClCompile Include="Actions\SwitchToDrawAction.cpp" />
+    <ClCompile Include="Actions\SwitchToPlayMode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -298,8 +301,50 @@
     <ClInclude Include="Actions\Delete.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
+    <ClInclude Include="Actions\MoveAction.h" />
+    <ClInclude Include="Actions\SwitchToDrawAction.h" />
+    <ClInclude Include="Actions\SwitchToPlayMode.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\MenuItems\bringfront.jpg" />
+    <Image Include="images\MenuItems\color.jpg" />
+    <Image Include="images\MenuItems\copy.jpg" />
+    <Image Include="images\MenuItems\cut.jpg" />
+    <Image Include="images\MenuItems\delete.jpg" />
+    <Image Include="images\MenuItems\design-process.png" />
+    <Image Include="images\MenuItems\drawing-tablet.png" />
+    <Image Include="images\MenuItems\drawmode.jpg" />
+    <Image Include="images\MenuItems\game_area.jpg" />
+    <Image Include="images\MenuItems\game_color.jpg" />
+    <Image Include="images\MenuItems\game_size.jpg" />
+    <Image Include="images\MenuItems\game_type.jpg" />
+    <Image Include="images\MenuItems\game_type_color.jpg" />
+    <Image Include="images\MenuItems\ITM_CIRC.jpg" />
+    <Image Include="images\MenuItems\ITM_LINE.jpg" />
+    <Image Include="images\MenuItems\ITM_RECT.jpg" />
+    <Image Include="images\MenuItems\ITM_TRIANGLE.jpg" />
+    <Image Include="images\MenuItems\load.jpg" />
+    <Image Include="images\MenuItems\Menu_Circ.jpg" />
+    <Image Include="images\MenuItems\Menu_Exit.jpg" />
+    <Image Include="images\MenuItems\Menu_Rect.JPG" />
+    <Image Include="images\MenuItems\move.jpg" />
+    <Image Include="images\MenuItems\paste.jpg" />
+    <Image Include="images\MenuItems\playmode.jpg" />
+    <Image Include="images\MenuItems\pyramid.png" />
+    <Image Include="images\MenuItems\redo.jpg" />
+    <Image Include="images\MenuItems\resize.jpg" />
+    <Image Include="images\MenuItems\rgb.png" />
+    <Image Include="images\MenuItems\rotate.jpg" />
+    <Image Include="images\MenuItems\save.jpg" />
+    <Image Include="images\MenuItems\select.jpg" />
+    <Image Include="images\MenuItems\sendback.jpg" />
+    <Image Include="images\MenuItems\shapes.png" />
+    <Image Include="images\MenuItems\undo.jpg" />
+    <Image Include="images\MenuItems\watercolors.png" />
+    <Image Include="images\MenuItems\zoomin.jpg" />
+    <Image Include="images\MenuItems\zoomout.jpg" />
   </ItemGroup>
 </Project>

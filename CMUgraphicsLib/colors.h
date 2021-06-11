@@ -182,6 +182,14 @@ const color DARKMAGENTA = color(139, 0, 139);
 const color DARKRED = color(139, 0, 0);
 const color LIGHTGREEN = color(144, 238, 144);
 
+////////////////////////////************ NEW INTERFACE *************//////////////////////////////
+
+const color FinalBG = color(238, 219, 255);
+const color FinalStBG = color(179, 94, 255);
+const color FinalStTX = color(50, 17, 79);
+const color FinalHGIH = color(255, 0, 200);
+
+////////////////////////////************ NEW INTERFACE *************//////////////////////////////
 
 #endif //COLOR_H
 inline bool operator   ==(color a, color b) {

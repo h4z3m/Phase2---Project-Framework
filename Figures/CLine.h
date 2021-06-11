@@ -15,6 +15,11 @@ public:
 	void Load(ifstream& Infile, Output* pOut, stringstream&);
 	virtual string PrintInfo(Output* pOut);
 	virtual bool Fig(int, int);
+
+	//////////////********** GILANY'S PART ************//////////////////
+	void ChangeLinPoints(Point, Point);
+	Point GetLinHighPoint();
+	//////////////********** GILANY'S PART ************//////////////////
 };
 
 #endif

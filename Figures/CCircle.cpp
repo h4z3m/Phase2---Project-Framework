@@ -83,3 +83,14 @@ bool CCircle::Fig(int x, int y)  //Determine the position of the point
 		return true;
 	return false;
 }
+
+//////////////********** GILANY'S PART ************//////////////////
+void CCircle::ChangeCirPoints(Point P1, Point P2) {
+	R1 = P1;
+	R2 = P2;
+}
+
+Point CCircle::GetCirHighPoint() {
+	return R1;
+}
+//////////////********** GILANY'S PART ************//////////////////

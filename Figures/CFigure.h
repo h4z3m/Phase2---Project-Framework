@@ -17,8 +17,8 @@ protected:
 	/// Add more parameters if needed.
 
 public:
-	int FigType;
-	CFigure(GfxInfo FigureGfxInfo);
+	const int FigType;
+	CFigure(GfxInfo FigureGfxInfo, int FigType);
 	void SetID(int rID);
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected

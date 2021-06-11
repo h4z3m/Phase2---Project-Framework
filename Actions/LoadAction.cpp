@@ -55,34 +55,34 @@ void LoadAction::Execute()
 	ReadActionParameters();
 	
 	Output* pOut = pManager->GetOutput();
-	string line;
+	string stline;
 	// Open file and search for figure strings then create a corresponding objects and load its data
 	// Data is passed as a stringstream to load virtual fn. (whole line is passed)
 	file.open(fileName);
 	if (file.is_open()) {
-		while (getline(file, line)) {
-			if (line.find("CIRCLE") != string::npos) {
-				stringstream ss(line);
+		while (getline(file, stline)) {
+			if (stline.find("CIRCLE") != string::npos) {
+				stringstream ss(stline);
 				int radius;
-				CCircle* C = new CCircle(defaultPoint, defaultPoint, defaultGfxInfo);
+				CCircle* C = new CCircle(defaultPoint, defaultPoint, defaultGfxInfo,circle);
 				C->Load(file, pOut, ss);
 				pManager->AddFigure(C);
 			}
-			else if (line.find("RECTANGLE") != string::npos) {
-				stringstream ss(line);
-				CRectangle* R = new CRectangle(defaultPoint, defaultPoint, defaultGfxInfo);
+			else if (stline.find("RECTANGLE") != string::npos) {
+				stringstream ss(stline);
+				CRectangle* R = new CRectangle(defaultPoint, defaultPoint, defaultGfxInfo,rectangle);
 				R->Load(file, pOut, ss);
 				pManager->AddFigure(R);
 			}
-			else if (line.find("LINE") != string::npos) {
-				stringstream ss(line);
-				CLine* L = new CLine(defaultPoint, defaultPoint, defaultGfxInfo);
+			else if (stline.find("LINE") != string::npos) {
+				stringstream ss(stline);
+				CLine* L = new CLine(defaultPoint, defaultPoint, defaultGfxInfo,line);
 				L->Load(file, pOut, ss);
 				pManager->AddFigure(L);
 			}
-			else if (line.find("TRIANGLE") != string::npos) {
-				stringstream ss(line);
-				CTriangle* T = new CTriangle(defaultPoint, defaultPoint, defaultPoint, defaultGfxInfo);
+			else if (stline.find("TRIANGLE") != string::npos) {
+				stringstream ss(stline);
+				CTriangle* T = new CTriangle(defaultPoint, defaultPoint, defaultPoint, defaultGfxInfo, triangle);
 				T->Load(file, pOut, ss);
 				pManager->AddFigure(T);
 			}
@@ -91,7 +91,7 @@ void LoadAction::Execute()
 				string DrawClr;
 				string FillClr;
 				string BkGClr;
-				stringstream ss(line);
+				stringstream ss(stline);
 				ss >> DrawClr >> FillClr >> BkGClr;
 				UI.DrawColor = pOut->getColorObj(DrawClr);
 				UI.FillColor = pOut->getColorObj(FillClr);

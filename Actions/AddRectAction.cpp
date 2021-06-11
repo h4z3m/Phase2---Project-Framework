@@ -49,9 +49,7 @@ void AddRectAction::Execute()
 	if (pIn->DrawArea_ValidClick(P1.x, P1.y, UI.height) && pIn->DrawArea_ValidClick(P2.x, P2.y, UI.height)) {
 
 		//Create a rectangle with the parameters read from the user
-		CRectangle* R = new CRectangle(P1, P2, RectGfxInfo);
-		R->FigType = rectangle;
-
+		CRectangle* R = new CRectangle(P1, P2, RectGfxInfo,rectangle);
 		//Add the rectangle to the list of figures
 		pManager->AddFigure(R);
 	}

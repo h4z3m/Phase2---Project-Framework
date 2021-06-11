@@ -61,7 +61,7 @@ void Play_FillColorAction::Execute()
 				TempFig->SetHidden(true);
 			}
 			pManager->UpdateInterface(); //Updated with hidden figures
-			pOut->PrintMessage("Correct picks: " + std::to_string(CorrectPicks) + " Wrong picks: " + std::to_string(WrongPicks) + " Total score: "+ std::to_string((((float)CorrectPicks - WrongPicks) / CorrectPicks * 100.0)));
+			pOut->PrintMessage("Correct picks: " + std::to_string(CorrectPicks) + " Wrong picks: " + std::to_string(WrongPicks));
 		}
 	} while ( !(CorrectPicks==(pManager->GetColorFillCount(RefColor)-1)) && !(pManager->GetFigCount()==(CorrectPicks+WrongPicks)));
 	//Printing final score

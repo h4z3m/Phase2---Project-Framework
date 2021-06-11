@@ -10,7 +10,7 @@ private:
 	Point R2;
 	double radius;
 public:
-	CCircle(Point, Point, GfxInfo FigureGfxInfo);
+	CCircle(Point, Point, GfxInfo FigureGfxInfo,int);
 	virtual void Draw(Output* pOut) const;
 	void Save(ofstream&, Output* pOut);
 	void Load(ifstream& Infile,Output* pOut,stringstream&);

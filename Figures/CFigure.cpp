@@ -1,5 +1,5 @@
 #include "CFigure.h"
-CFigure::CFigure(GfxInfo FigureGfxInfo)
+CFigure::CFigure(GfxInfo FigureGfxInfo,int figtype): FigType(figtype)
 {
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
 	FigGfxInfo.isHidden = false;

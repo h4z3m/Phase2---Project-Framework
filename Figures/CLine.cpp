@@ -1,6 +1,6 @@
 #include "CLine.h"
 
-CLine::CLine(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
+CLine::CLine(Point P1, Point P2, GfxInfo FigureGfxInfo,int figtype) :CFigure(FigureGfxInfo, figtype) {
 	Point1 = P1;
 	Point2 = P2;
 }

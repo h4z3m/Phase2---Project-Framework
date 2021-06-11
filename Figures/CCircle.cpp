@@ -1,5 +1,5 @@
 #include "CCircle.h"
-CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
+CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo,int figtype) :CFigure(FigureGfxInfo,figtype)
 {
 	R1 = P1;
 	R2 = P2;

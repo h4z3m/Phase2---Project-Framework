@@ -9,7 +9,7 @@ private:
 	Point Point1;
 	Point Point2;
 public:
-	CLine(Point, Point, GfxInfo FigureGfxInfo);
+	CLine(Point, Point, GfxInfo FigureGfxInfo,int);
 	virtual void Draw(Output* pOut) const;
 	virtual void Save(ofstream&, Output* pOut);
 	void Load(ifstream& Infile, Output* pOut, stringstream&);

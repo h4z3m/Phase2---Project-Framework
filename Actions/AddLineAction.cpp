@@ -46,8 +46,7 @@ void AddLineAction::Execute()
 	if (pIn->DrawArea_ValidClick(P1.x, P1.y, UI.height) && pIn->DrawArea_ValidClick(P2.x, P2.y, UI.height)) {
 
 		//Create a rectangle with the parameters read from the user
-		CLine* L = new CLine(P1, P2, LineGfxInfo);
-		L->FigType = line;
+		CLine* L = new CLine(P1, P2, LineGfxInfo,line);
 		//Add the rectangle to the list of figures
 		pManager->AddFigure(L);
 	}

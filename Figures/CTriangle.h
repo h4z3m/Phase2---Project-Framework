@@ -18,7 +18,7 @@ public:
 	virtual string PrintInfo(Output* pOut);
 
 	//////////////********** GILANY'S PART ************//////////////////
-	void ChangeTriPoints(Point, Point);
+	//void ChangeTriPoints(Point, Point);
 	Point GetTriHighPoint();
 	virtual void ChangeCorners(Point, Point);
 

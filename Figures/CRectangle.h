@@ -17,7 +17,7 @@ public:
 	virtual bool Fig(int, int);
 
 	//////////////********** GILANY'S PART ************//////////////////
-	void ChangeRecCorners(Point, Point);
+	//void ChangeRecCorners(Point, Point);
 	Point GetRecHighPoint();
 	virtual void ChangeCorners(Point, Point);
 

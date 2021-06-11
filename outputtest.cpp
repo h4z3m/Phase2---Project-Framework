@@ -1,28 +1,25 @@
-#include "Output.h"
-
 
 Output::Output()
 {
 	//Initialize user interface parameters
 	UI.InterfaceMode = MODE_DRAW;
 
-
-	UI.width = 1390;
-	UI.height = 650;
-	UI.wx = 150;
-	UI.wy = 150;
+	UI.width = 1300;
+	UI.height = 700;
+	UI.wx = 5;
+	UI.wy = 5;
 
 
 	UI.StatusBarHeight = 50;
-	UI.ToolBarHeight = 70;
-	UI.MenuItemWidth = 60;
+	UI.ToolBarHeight = 50;
+	UI.MenuItemWidth = 56;
 
-	UI.DrawColor = FinalStTX;	//Drawing color
+	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = GREEN;	//Filling color
-	UI.MsgColor = FinalStTX;		//Messages color
-	UI.BkGrndColor = FinalBG;	//Background color
-	UI.HighlightColor = FinalHGIH;	//This color should NOT be used to draw figures. use if for highlight only
-	UI.StatusBarColor = FinalStBG;
+	UI.MsgColor = RED;		//Messages color
+	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
+	UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
+	UI.StatusBarColor = TURQUOISE;
 	UI.PenWidth = 3;	//width of the figures frames
 
 
@@ -62,7 +59,6 @@ void Output::CreateStatusBar() const
 	pWind->SetPen(UI.StatusBarColor, 1);
 	pWind->SetBrush(UI.StatusBarColor);
 	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
-
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::ClearStatusBar() const
@@ -70,9 +66,7 @@ void Output::ClearStatusBar() const
 	//Clear Status bar by drawing a filled white rectangle
 	pWind->SetPen(UI.StatusBarColor, 1);
 	pWind->SetBrush(UI.StatusBarColor);
-	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height );
-
-	
+	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateDrawToolBar() const
@@ -114,21 +108,17 @@ void Output::CreateDrawToolBar() const
 	//TODO: Prepare images for each menu item and add it to the list
 
 	//Clear play toolbar
-	pWind->SetPen(WHITE, 1);
-	pWind->SetBrush(WHITE);
-	pWind->DrawRectangle(0, 0, 24 * UI.MenuItemWidth, 70, FILLED);
-
-	////////////////////////////************ NEW INTERFACE *************//////////////////////////////
+	pWind->SetPen(UI.BkGrndColor, 1);
+	pWind->SetBrush(UI.BkGrndColor);
+	pWind->DrawRectangle(0, 0, 24 * UI.MenuItemWidth, 50, FILLED);
 
 	//Draw menu item one image at a time
 	for (int i = 0; i < DRAW_ITM_COUNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
 	//Draw a line under the toolbar
-	pWind->SetPen(FinalStBG, 3); //line under tool bar when creating draw tool bar
+	pWind->SetPen(RED, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
-
-	////////////////////////////************ NEW INTERFACE *************//////////////////////////////
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -146,33 +136,28 @@ void Output::CreatePlayToolBar() const
 	MenuItemImages[ITM_EXITP] = "images\\MenuItems\\Menu_Exit.jpg";
 
 	//Clear draw toolbar
-	pWind->SetPen(WHITE, 1);
-	pWind->SetBrush(WHITE);
-	pWind->DrawRectangle(0, 0, 24 * UI.MenuItemWidth, 70, FILLED);
+	pWind->SetPen(UI.BkGrndColor, 1);
+	pWind->SetBrush(UI.BkGrndColor);
+	pWind->DrawRectangle(0, 0, 24 * UI.MenuItemWidth, 50, FILLED);
 
 	//Draw play toolbar menu items
 	for (int i = 0; i < PLAY_ITM_COUNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
-
-	//Draw a line under the toolbar
-	pWind->SetPen(FinalStBG, 3); //line under tool bar when creating draw tool bar
+	//Draw a line under toolbar
+	pWind->SetPen(RED, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
-
-
 	///TODO: write code to create Play mode menu
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void Output::ClearDrawArea() const
 {
-	pWind->SetPen(FinalBG, 1);
+	pWind->SetPen(UI.BkGrndColor, 1);
 	pWind->SetBrush(UI.BkGrndColor);
-	pWind->DrawRectangle(0, UI.ToolBarHeight  , UI.width, UI.height - UI.StatusBarHeight);
+	pWind->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
 
 }
-
-
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void Output::PrintMessage(string msg) const	//Prints a message on status bar
@@ -202,79 +187,6 @@ int Output::getCrntPenWidth() const		//get current pen width
 	return UI.PenWidth;
 }
 
-string Output::getColorName(color& CLR) {
-	if (CLR == BLACK) {
-		return "BLACK";
-	}
-	else if (CLR == WHITE) {
-		return "WHITE";
-
-	}
-	else if (CLR == RED) {
-		return "RED";
-
-	}
-	else if (CLR == GREEN) {
-		return "GREEN";
-
-	}
-	else if (CLR == BLUE) {
-		return "BLUE";
-
-	}
-	else if (CLR == YELLOW) {
-		return "YELLOW";
-
-	}
-	else if (CLR == AQUAMARINE) {
-		return "AQUAMARINE";
-
-	}
-	else if (CLR == LIGHTGOLDENRODYELLOW) {
-		return "LIGHTGOLDENRODYELLOW";
-	}
-	else if (CLR == FinalBG) {
-		return "FinalBG";
-	}
-	return "NO_FILL";
-}
-color Output::getColorObj(string str)
-{	
-	if (str == "BLACK") {
-		return BLACK;
-	}
-	else if (str== "WHITE") {
-		return WHITE;
-
-	}
-	else if (str == "RED") {
-		return RED;
-
-	}
-	else if (str == "GREEN") {
-		return GREEN;
-
-	}
-	else if (str == "BLUE") {
-		return BLUE;
-
-	}
-	else if (str == "YELLOW") {
-		return YELLOW;
-
-	}
-	else if (str == "AQUAMARINE") {
-		return AQUAMARINE;
-
-	}
-	else if (str == "LIGHTGOLDENRODYELLOW") {
-		return LIGHTGOLDENRODYELLOW;
-	}
-	else if (str == "FinalBG") {
-		return FinalBG;
-	}
-	return UI.FillColor;
-}
 //======================================================================================//
 //								Figures Drawing Functions								//
 //======================================================================================//
@@ -300,6 +212,9 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 		style = FRAME;
 
 	pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);
+
+	// Ensure that the draw toolbar is always on top of drawn figures
+	//CreateDrawToolBar();
 }
 
 void Output::DrawTri(Point P1, Point P2, Point P3, GfxInfo TriGfxInfo, bool selected) const {
@@ -322,6 +237,9 @@ void Output::DrawTri(Point P1, Point P2, Point P3, GfxInfo TriGfxInfo, bool sele
 		style = FRAME;
 
 	pWind->DrawTriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, style);
+
+	// Ensure that the draw toolbar is always on top of drawn figures
+	//CreateDrawToolBar();
 }
 void Output::DrawCir(Point P1, Point P2, GfxInfo CirGfxInfo, bool selected) const {
 
@@ -341,10 +259,13 @@ void Output::DrawCir(Point P1, Point P2, GfxInfo CirGfxInfo, bool selected) cons
 	}
 	else
 		style = FRAME;
-	
-	pWind->DrawCircle(P1.x, P1.y, sqrt(pow(P2.x - P1.x, 2) + pow(P2.y - P1.y, 2) * 1.0), style);
+
+	pWind->DrawCircle(P1.x, P1.y, sqrt(pow(P2.x - P1.x, 2) +
+		pow(P2.y - P1.y, 2) * 1.0), style);
 
 
+	// Ensure that the draw toolbar is always on top of drawn figures
+	//CreateDrawToolBar();
 }
 
 void Output::DrawLin(Point P1, Point P2, GfxInfo LineGfxInfo, bool selected) const {
@@ -368,7 +289,8 @@ void Output::DrawLin(Point P1, Point P2, GfxInfo LineGfxInfo, bool selected) con
 
 	pWind->DrawLine(P1.x, P1.y, P2.x, P2.y, style);
 
-	
+	// Ensure that the draw toolbar is always on top of drawn figures
+	//CreateDrawToolBar();
 }	// -- GILANY GILANY GILANY GILANY GILANY GILANY GILANY GILANY GILANY
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -376,4 +298,3 @@ Output::~Output()
 {
 	delete pWind;
 }
-

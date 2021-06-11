@@ -92,41 +92,41 @@ string CTriangle::PrintInfo(Output* pOut)
 
 
 //////////////********** GILANY'S PART ************//////////////////
-void CTriangle::ChangeTriPoints(Point newPoint, Point MainRefrence) {
-
-	if (Point1.x > MainRefrence.x)
-		Point1.x = newPoint.x + abs(MainRefrence.x - Point1.x);
-	else
-		Point1.x = newPoint.x - abs(MainRefrence.x - Point1.x);
-
-	if (Point1.y > MainRefrence.y)
-		Point1.y = newPoint.y + abs(MainRefrence.y - Point1.y);
-	else
-		Point1.y = newPoint.y - abs(MainRefrence.y - Point1.y);
-
-
-	if (Point2.x > MainRefrence.x)
-		Point2.x = newPoint.x + abs(MainRefrence.x - Point2.x);
-	else
-		Point2.x = newPoint.x - abs(MainRefrence.x - Point2.x);
-
-	if (Point2.y > MainRefrence.y)
-		Point2.y = newPoint.y + abs(MainRefrence.y - Point2.y);
-	else
-		Point2.y = newPoint.y - abs(MainRefrence.y - Point2.y);
-
-
-
-	if (Point3.x > MainRefrence.x)
-		Point3.x = newPoint.x + abs(MainRefrence.x - Point3.x);
-	else
-		Point3.x = newPoint.x - abs(MainRefrence.x - Point3.x);
-
-	if (Point3.y > MainRefrence.y)
-		Point3.y = newPoint.y + abs(MainRefrence.y - Point3.y);
-	else
-		Point3.y = newPoint.y - abs(MainRefrence.y - Point3.y);
-}
+//void CTriangle::ChangeTriPoints(Point newPoint, Point MainRefrence) {
+//
+//	if (Point1.x > MainRefrence.x)
+//		Point1.x = newPoint.x + abs(MainRefrence.x - Point1.x);
+//	else
+//		Point1.x = newPoint.x - abs(MainRefrence.x - Point1.x);
+//
+//	if (Point1.y > MainRefrence.y)
+//		Point1.y = newPoint.y + abs(MainRefrence.y - Point1.y);
+//	else
+//		Point1.y = newPoint.y - abs(MainRefrence.y - Point1.y);
+//
+//
+//	if (Point2.x > MainRefrence.x)
+//		Point2.x = newPoint.x + abs(MainRefrence.x - Point2.x);
+//	else
+//		Point2.x = newPoint.x - abs(MainRefrence.x - Point2.x);
+//
+//	if (Point2.y > MainRefrence.y)
+//		Point2.y = newPoint.y + abs(MainRefrence.y - Point2.y);
+//	else
+//		Point2.y = newPoint.y - abs(MainRefrence.y - Point2.y);
+//
+//
+//
+//	if (Point3.x > MainRefrence.x)
+//		Point3.x = newPoint.x + abs(MainRefrence.x - Point3.x);
+//	else
+//		Point3.x = newPoint.x - abs(MainRefrence.x - Point3.x);
+//
+//	if (Point3.y > MainRefrence.y)
+//		Point3.y = newPoint.y + abs(MainRefrence.y - Point3.y);
+//	else
+//		Point3.y = newPoint.y - abs(MainRefrence.y - Point3.y);
+//}
 
 Point CTriangle::GetTriHighPoint() {
 

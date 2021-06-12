@@ -37,15 +37,14 @@ public:
 	///Decide the parameters that you should pass to each function	
 
 
-	//virtual void Rotate() = 0;	//Rotate the figure
-	//virtual void Resize() = 0;	//Resize the figure
-	//virtual void Move() = 0;		//Move the figure
 
 	virtual void Save(ofstream& OutFile, Output* pOut) = 0;	//Save the figure parameters to the file
 	virtual void Load(ifstream& Infile, Output* pOut, stringstream&) = 0;	//Load the figure parameters to the file
 	virtual string PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
 	virtual bool Fig(int, int) = 0;
-
+	//////////////********** Ali'S PART ************//////////////////
+	virtual void resize(float) = 0;
+	//////////////********** Ali'S PART ************//////////////////
 
 	virtual void ChangeCorners(Point, Point) = 0;
 	virtual int GetArea() = 0;

@@ -15,7 +15,9 @@ public:
 	void Load(ifstream& Infile, Output* pOut, stringstream&);
 	virtual string PrintInfo(Output* pOut);
 	virtual bool Fig(int, int);
-
+	//////////////********** Ali'S PART ************//////////////////
+	virtual void resize(float);
+	//////////////********** Ali'S PART ************//////////////////
 	//////////////********** GILANY'S PART ************//////////////////
 	//void ChangeRecCorners(Point, Point);
 	Point GetRecHighPoint();

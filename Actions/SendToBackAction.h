@@ -1,13 +1,13 @@
-#ifndef MOVE_TO_BACK_ACTION
-#define MOVE_TO_BACK_ACTION
+#ifndef SEND_TO_BACK_ACTION_H
+#define SEND_TO_BACK_ACTION_H
 #include "Action.h"
 #include "..\Figures\CFigure.h"
-class MoveToBackAction:public Action
+class SendToBackAction:public Action
 {	private:
 	int sel = 0;
 	CFigure* newFigList[200];
 	public:
-	MoveToBackAction(ApplicationManager* pApp);
+	SendToBackAction(ApplicationManager* pApp);
 
 	virtual void ReadActionParameters();
 

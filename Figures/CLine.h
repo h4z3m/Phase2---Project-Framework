@@ -15,7 +15,10 @@ public:
 	void Load(ifstream& Infile, Output* pOut, stringstream&);
 	virtual string PrintInfo(Output* pOut);
 	virtual bool Fig(int, int);
-
+	//////////////********** Ali'S PART ************//////////////////
+	double Triangle_area(int, int, int, int, int, int);
+	virtual void resize(float);
+	//////////////********** Ali'S PART ************//////////////////
 	//////////////********** GILANY'S PART ************//////////////////
 	//void ChangeLinPoints(Point, Point);
 	Point GetLinHighPoint();

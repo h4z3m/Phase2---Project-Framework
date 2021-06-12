@@ -16,7 +16,9 @@ public:
 	void Load(ifstream& Infile, Output* pOut, stringstream&);
 	virtual bool Fig(int, int);
 	virtual string PrintInfo(Output* pOut);
-
+	//////////////********** Ali'S PART ************//////////////////
+	virtual void resize(float);
+	//////////////********** Ali'S PART ************//////////////////
 	//////////////********** GILANY'S PART ************//////////////////
 	//void ChangeTriPoints(Point, Point);
 	Point GetTriHighPoint();

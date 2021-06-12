@@ -25,7 +25,7 @@ private:
 	//////////////********** GILANY'S PART ************//////////////////
 	vector <CFigure*> FigVector;
 	CFigure* SmallestArea;
-	int MoveLoopCount;
+	int MoveLoopCount=0;
 
 	vector <int> RecAreas;
 	vector <int> CirAreas;
@@ -69,6 +69,9 @@ public:
 	int SelectedNumber();
 	int GetFigCount();
 	void UnhideAllFigs();
+	//////////////********** Ali'S PART ************//////////////////
+	void Changesize(float factor);
+	//////////////********** Ali'S PART ************//////////////////
 	//////////////********** GILANY'S PART ************//////////////////
 	void MakeItSelected(CFigure*);
 	void MakeItUnSelected(CFigure*);

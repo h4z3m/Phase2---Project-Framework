@@ -1,4 +1,5 @@
 #include "ApplicationManager.h"
+//Application main actions
 #include "Actions\AddRectAction.h"
 #include "Actions\AddLineAction.h"
 #include "Actions\AddCircleAction.h"
@@ -9,12 +10,18 @@
 #include "Actions\SelectAction.h"
 #include "Actions\Delete.h"
 #include "Actions\MoveAction.h"
-#include "Actions\MoveToBackAction.h"
+#include "Actions\Resize.h"
+#include "Actions\SendToBackAction.h"
+#include "Actions\BringToFrontAction.h"
 #include "Actions\SwitchToPlayMode.h"
 #include "Actions\SwitchToDrawAction.h"
+#include "Actions\Exit.h"
+//Play modes
+#include "Actions\Play_Figure_Type.h"
 #include "Actions\Play_Area.h"
 #include "Actions\Play_FillColor.h"
 #include "Actions\Play_Fill_and_Type.h"
+//Figure classes
 #include "Figures\CFigure.h"
 #include "Figures\CRectangle.h"
 #include "Figures\CCircle.h"
@@ -96,16 +103,18 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case RESIZE:
+		pAct = new Resize(this);
 		break;
 
 	case ROTATE:
 		break;
 
 	case SEND_BACK:
-		pAct = new MoveToBackAction(this);
+		pAct = new SendToBackAction(this);
 		break;
 
 	case BRNG_FRNT:
+		pAct = new BringToFrontAction(this);
 		break;
 
 	case SAVE:
@@ -142,6 +151,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case Figure_Type:
+		pAct = new Play_Figure_Type(this);
 		break;
 
 	case Figure_Fill_Color:
@@ -174,7 +184,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case EXIT:
-		///create ExitAction here
+		pAct = new Exit(this);
 		break;
 
 	case STATUS:	//a click on the status bar ==> no action
@@ -295,7 +305,7 @@ int ApplicationManager::GetRectCountWColor(color clr)
 //Get count of figures given a color, if clr==NULL, get count of ALL filled figures
 int ApplicationManager::GetColorFillCount(color clr)
 {
-	if (!(clr ==NULL)) {
+	if (!(clr == NULL)) {
 		int count = 0;
 		for (int i = 0; i < FigCount; i++) {
 			if (clr == FigList[i]->GetFillColorObj())
@@ -605,7 +615,7 @@ void ApplicationManager::ResetFigAreas() {
 
 
 //////////////********** GILANY'S PART ************//////////////////
-
+//Given an arry of figures, shift to start from (0=back,else=front) and the selected array item count
 void ApplicationManager::ReorderFigList(CFigure* figs[], int posShift, int sel)
 {
 	/*CFigure* tempFig=NULL;
@@ -621,12 +631,22 @@ void ApplicationManager::ReorderFigList(CFigure* figs[], int posShift, int sel)
 	for (int i = 0; i < sel-1; i++) {
 		FigList[i] = figs[i];
 	}*/
-
-	for (int i = 0; i < sel - 1; i++) {
-		auto arrayEnd = std::remove(begin(FigList), end(FigList), figs[i]);
+	//Put elements starting from zero index (send to back)
+	if (posShift == 0) {
+		for (int i = 0; i < sel - 1; i++) {
+			auto arrayEnd = std::remove(begin(FigList), end(FigList), figs[i]);
+		}
+		memcpy(FigList + (sel - 1), FigList, 8 * sizeof(CFigure*));
+		copy(figs, figs + sel - 1, FigList);
 	}
-	memcpy(FigList + (FigCount + sel - 1), FigList, 8 * sizeof(CFigure*));
-	copy(figs, figs + sel - 1, FigList);
+	//Put elements starting from (FigCount-1) index (bring to front)
+	else {
+		for (int i = 0; i < sel - 1; i++) {
+			auto arrayEnd = std::remove(begin(FigList), end(FigList), figs[i]);
+		}
+		//memcpy(FigList + (sel - 1), FigList, 8 * sizeof(CFigure*));
+		copy(figs, figs + sel - 1, &FigList[FigCount-sel+1]);
+	}
 }
 //==================================================================================//
 //							Interface Management Functions							//
@@ -699,6 +719,22 @@ void ApplicationManager::Deleting() {
 	pOut->ClearDrawArea();
 	pOut->PrintMessage("Remaining figures: " + to_string(FigCount));
 
+}
+void ApplicationManager::Changesize(float factor) {
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+
+			FigList[i]->resize(factor);
+			string s = FigList[i]->PrintInfo(pOut);
+			pOut->PrintMessage(s);
+
+
+
+		}
+	}
+	pOut->ClearDrawArea();
 }
 
 void ApplicationManager::DeleteAllFigs()

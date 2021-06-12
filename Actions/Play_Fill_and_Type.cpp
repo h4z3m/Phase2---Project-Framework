@@ -101,7 +101,8 @@ void Play_Fill_and_Type::Execute()
 		}
 		else {
 			//+1 to include the Reference figure click
-			pOut->PrintMessage("Final score: " + std::to_string((((float)CorrectPicks + 1 - WrongPicks) / CorrectFigsToSelect * 100.0)) + " %");
+			pOut->PrintMessage("You scored: " + std::to_string(CorrectPicks) + "/" + std::to_string(WrongPicks + CorrectPicks));
 		}
 	}
+	pManager->UnhideAllFigs();
 }

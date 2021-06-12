@@ -187,9 +187,6 @@
     <ClCompile Include="Actions\SwitchToPlayMode.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\MoveToBackAction.cpp">
-      <Filter>Action Classes</Filter>
-    </ClCompile>
     <ClCompile Include="Actions\Play_Area.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
@@ -197,6 +194,21 @@
       <Filter>Action Classes</Filter>
     </ClCompile>
     <ClCompile Include="Actions\Play_FillColor.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\Resize.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\SendToBackAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\BringToFrontAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\Play_Figure_Type.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\Exit.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -328,9 +340,6 @@
     <ClInclude Include="Actions\SwitchToPlayMode.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\MoveToBackAction.h">
-      <Filter>Action Classes</Filter>
-    </ClInclude>
     <ClInclude Include="Actions\Play_Area.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
@@ -338,6 +347,21 @@
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\Play_FillColor.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\Resize.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\SendToBackAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\BringToFrontAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\Play_Figure_Type.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\Exit.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>

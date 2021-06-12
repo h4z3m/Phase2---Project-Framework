@@ -133,3 +133,13 @@ int CCircle::GetArea() {
 }
 
 //////////////********** GILANY'S PART ************//////////////////
+void CCircle::resize(float factor)
+{
+	float move_in_x = R2.x - R1.x;
+	float move_in_y = R2.y - R1.y;
+	float radius = sqrt(pow(move_in_x, 2) + pow(move_in_y, 2));
+	radius = radius * factor;
+	float angle = atan(move_in_y / move_in_x);
+	R2.x = R1.x + cos(angle) * radius;
+	R2.y = R1.y + sin(angle) * radius;
+}

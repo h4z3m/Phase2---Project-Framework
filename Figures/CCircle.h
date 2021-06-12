@@ -17,7 +17,9 @@ public:
 	virtual bool Fig(int, int);
 	virtual string PrintInfo(Output* pOut);
 
-
+	//////////////********** Ali'S PART ************//////////////////
+	virtual void resize(float);
+	//////////////********** Ali'S PART ************//////////////////
 	//////////////********** GILANY'S PART ************//////////////////
 		//void ChangeCirPoints(Point);
 	Point GetCirHighPoint();

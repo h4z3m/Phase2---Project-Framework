@@ -148,3 +148,14 @@ int CRectangle::GetArea() {
 }
 
 //////////////********** GILANY'S PART ************//////////////////
+//////////////********** Ali'S PART ************//////////////////
+void CRectangle::resize(float factor)
+{
+	int side_x = Corner2.x - Corner1.x;
+	int side_y = Corner2.y - Corner1.y;
+	Corner2.x = Corner1.x + (side_x * factor);
+	Corner2.y = Corner1.y + (side_y * factor);
+
+
+}
+//////////////********** Ali'S PART ************//////////////////

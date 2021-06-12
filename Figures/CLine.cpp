@@ -1,6 +1,6 @@
 #include "CLine.h"
 
-CLine::CLine(Point P1, Point P2, GfxInfo FigureGfxInfo,int figtype) :CFigure(FigureGfxInfo, figtype) {
+CLine::CLine(Point P1, Point P2, GfxInfo FigureGfxInfo, int figtype) :CFigure(FigureGfxInfo, figtype) {
 	Point1 = P1;
 	Point2 = P2;
 }
@@ -34,24 +34,14 @@ void CLine::Load(ifstream& Infile, Output* pOut, stringstream& line)
 		string DrawClr;
 		string FillClr;
 
-		while (line >> FIG >> ID >> Point1.x >> Point1.y >>Point2.x>>Point2.y>>DrawClr) {
+		while (line >> FIG >> ID >> Point1.x >> Point1.y >> Point2.x >> Point2.y >> DrawClr) {
 			if (FIG == "LINE") {
-				FigGfxInfo.DrawClr = pOut->getColorObj(DrawClr);				
+				FigGfxInfo.DrawClr = pOut->getColorObj(DrawClr);
 			}
 
 		}
 	}
 }
-bool CLine::Fig(int x, int y)
-{
-
-	if ((x >= min(Point1.x, Point2.x) && x <= max(Point1.x, Point2.x) && y >= min(Point1.y, Point2.y) && y <= max(Point1.y, Point2.y)))
-	{
-		return true;
-	}
-	return false;
-}
-
 
 string CLine::PrintInfo(Output* pOut)
 {
@@ -136,3 +126,33 @@ int CLine::GetArea() {
 }
 
 //////////////********** GILANY'S PART ************//////////////////
+//////////////********** Ali'S PART ************//////////////////
+double CLine::Triangle_area(int x1, int y1, int x2, int y2, int x3, int y3)
+{
+	return abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0);
+}
+
+
+bool CLine::Fig(int x, int y)
+{
+
+	double area = Triangle_area(x, y, Point1.x, Point1.y, Point2.x, Point2.y);
+	if (area >= 0 && area <= 400 && (x >= min(Point1.x, Point2.x) && x <= max(Point1.x, Point2.x) && y >= min(Point1.y, Point2.y) && y <= max(Point1.y, Point2.y)))
+	{
+		return true;
+	}
+	return false;
+}
+
+void CLine::resize(float factor)
+{
+	float sidex = Point2.x - Point1.x;
+	float sidey = Point2.y - Point1.y;
+	float length = sqrt(pow(sidex, 2) + pow(sidey, 2));
+	length = length * factor;
+	float angle = atan(sidey / sidex);
+	Point2.x = Point1.x + cos(angle) * length;
+	Point2.y = Point1.y + sin(angle) * length;
+
+}
+//////////////********** Ali'S PART ************//////////////////

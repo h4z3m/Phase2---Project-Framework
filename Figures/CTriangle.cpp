@@ -189,3 +189,29 @@ int CTriangle::GetArea() {
 	return (12 * abs(Point1.x * (Point2.y - Point3.y) + Point2.x * (Point3.y - Point1.y) + Point3.x * (Point1.y - Point2.y)));
 }
 //////////////********** GILANY'S PART ************//////////////////
+//////////////********** Ali'S PART ************//////////////////
+void CTriangle::resize(float factor)
+{
+	float side1_x = Point2.x - Point1.x;
+	float side1_y = Point2.y - Point1.y;
+	float length1 = sqrt(pow(side1_x, 2) + pow(side1_y, 2));
+
+	float side2_x = Point3.x - Point1.x;
+	float side2_y = Point3.y - Point1.y;
+	float length2 = sqrt(pow(side2_x, 2) + pow(side2_y, 2));
+
+	length1 = length1 * factor;
+	length2 = length2 * factor;
+
+	float angle1 = atan(side1_y / side1_x);
+	Point2.x = Point1.x + cos(angle1) * length1;
+	Point2.y = Point1.y + sin(angle1) * length1;
+
+	float angle2 = atan(side2_y / side2_x);
+	Point3.x = Point1.x + cos(angle2) * length2;
+	Point3.y = Point1.y + sin(angle2) * length2;
+
+
+
+}
+//////////////********** Ali'S PART ************//////////////////

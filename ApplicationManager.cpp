@@ -390,49 +390,6 @@ void ApplicationManager::ResetCount() {
 }
 
 
-//void ApplicationManager::AreaLoop() {
-//	while (AreaLoopCount < FigVector.size()) {
-//
-//		//CHECK THE TYPE OF THE FIGURE 
-//		CRectangle* rect = dynamic_cast<CRectangle*> (FigVector[MoveLoopCount]);
-//		CLine* line = dynamic_cast<CLine*> (FigVector[MoveLoopCount]);
-//		CTriangle* tri = dynamic_cast<CTriangle*> (FigVector[MoveLoopCount]);
-//		CCircle* cir = dynamic_cast<CCircle*> (FigVector[MoveLoopCount]);
-//
-//		//IF THE FIGURE IS RECTANGLE
-//		if (rect != NULL) {
-//			AreaLoopCount++;
-//			RecAreas.push_back(FigVector[AreaLoopCount]);
-//
-//
-//		}
-//
-//		//IF THE FIGURE IS TRIANGLE
-//		else if (tri != NULL) {
-//			AreaLoopCount++;
-//			TriAreas.push_back(FigVector[AreaLoopCount]);
-//
-//
-//
-//		}
-//
-//		//IF THE FIGURE IS LINE
-//		else if (line != NULL) {
-//			AreaLoopCount++;
-//
-//			LinAreas.push_back(FigVector[AreaLoopCount]);
-//
-//		}
-//
-//		else if (cir != NULL) {
-//			AreaLoopCount++;
-//
-//			CirAreas.push_back(FigVector[AreaLoopCount]);
-//
-//		}
-//
-//	}
-//}
 
 
 bool ApplicationManager::CheckSmallest(CFigure* fig) {

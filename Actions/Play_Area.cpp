@@ -140,16 +140,23 @@ void Play_Area::ReadActionParameters()
 void Play_Area::Execute()
 {
 
+
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
+
+	Point P2;
+
+	pOut->PrintMessage("You should select the smallest figure to hide it, then select the next one. Click anywhere to continue");
+	pIn->GetPointClicked(P2.x, P2.y); // get the new Point
+
+
 
 	ReadActionParameters();
 
 	StartFig->SetHidden(true);
 	pManager->UpdateInterface();
 
-	Point P2;
 
 	//IF THE FIRST FIGURE IS RECTANGLE
 	if (DoDynamicCheck(StartFig) == 0) {

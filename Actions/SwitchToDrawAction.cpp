@@ -19,7 +19,7 @@ void SwitchToDrawAction::Execute() {
 
 
 
-	pOut->ClearStatusBar();
+	pOut->PrintMessage("You are now on Draw Mode.");
 	pOut->CreateDrawToolBar();
 
 

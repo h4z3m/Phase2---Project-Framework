@@ -21,7 +21,6 @@ void BringToFrontAction::ReadActionParameters()
 void BringToFrontAction::Execute()
 {
 	ReadActionParameters();
-	pManager->ReorderFigList(newFigList, 1, pManager->SelectedNumber());
 	vector<CFigure*> selectedFigs = pManager->GetFigVector();
 
 	//Put selected figures in new figlist

@@ -132,6 +132,10 @@ int CCircle::GetArea() {
 	return (3.141592654 * pow(radius, 2));
 }
 
+void CCircle::Rotate(int)
+{
+}
+
 //////////////********** GILANY'S PART ************//////////////////
 void CCircle::resize(float factor)
 {
@@ -142,4 +146,53 @@ void CCircle::resize(float factor)
 	float angle = atan(move_in_y / move_in_x);
 	R2.x = R1.x + cos(angle) * radius;
 	R2.y = R1.y + sin(angle) * radius;
+}
+void CCircle::zooming(float factor)
+{
+	int centerx = UI.width / 2;
+	int centery = UI.height / 2;
+
+	float point1x = R1.x - centerx;
+	float point1y = R1.y - centery;
+	float length1 = sqrt(pow(point1x, 2) + pow(point1y, 2));
+
+	float point2x = R2.x - centerx;
+	float point2y = R2.y - centery;
+	float length2 = sqrt(pow(point2x, 2) + pow(point2y, 2));
+
+	length1 = length1 * factor;
+	length2 = length2 * factor;
+
+	float anglepoint1 = atan(abs(point1y) / abs(point1x));
+	float anglepoint2 = atan(abs(point2y) / abs(point2x));
+
+	if (point1x > 0) {
+		R1.x = centerx + cos(anglepoint1) * length1;
+	}
+	else {
+		R1.x = centerx - cos(anglepoint1) * length1;
+	}
+
+	if (point1y > 0) {
+		R1.y = centery + sin(anglepoint1) * length1;
+	}
+	else {
+		R1.y = centery - sin(anglepoint1) * length1;
+	}
+
+	if (point2x > 0) {
+		R2.x = centerx + cos(anglepoint2) * length2;
+	}
+	else {
+		R2.x = centerx - cos(anglepoint2) * length2;
+	}
+
+	if (point2y > 0) {
+		R2.y = centery + sin(anglepoint2) * length2;
+	}
+	else {
+		R2.y = centery - sin(anglepoint2) * length2;
+	}
+
+
 }

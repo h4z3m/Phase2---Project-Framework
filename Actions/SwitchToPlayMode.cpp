@@ -21,8 +21,14 @@ void SwitchToPlayAction::Execute() {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
-	pOut->ClearStatusBar();
-	pOut->CreatePlayToolBar();
+	if (pManager->isGraphEmpty()) {
+		pOut->PrintMessage("Create figures first to play");
+
+	}
+	else {
+		pOut->PrintMessage("You are now on Play Mode. Please, select a game from the tool bar");
+		pOut->CreatePlayToolBar();
+	}
 
 
 

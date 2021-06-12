@@ -215,3 +215,86 @@ void CTriangle::resize(float factor)
 
 }
 //////////////********** Ali'S PART ************//////////////////
+void CTriangle::Rotate(int rotation) {
+	//Temp pts
+	Point P1 = Point1;
+	Point P2 = Point2;
+	Point P3 = Point3;
+	//Rotate 90 degrees counter clockwise
+	Point1.x = P1.y;
+	Point1.y = -P1.x;
+	Point2.x = P2.y;
+	Point2.y = -P2.x;
+	Point3.x = P3.y;
+	Point3.y = -P3.x;
+}
+void CTriangle::zooming(float factor)
+{
+	int centerx = UI.width/2;
+	int centery = UI.height/2;
+
+	float point1x = Point1.x - centerx;
+	float point1y = Point1.y - centery;
+	float length1 = sqrt(pow(point1x, 2) + pow(point1y, 2));
+
+	float point2x = Point2.x - centerx;
+	float point2y = Point2.y - centery;
+	float length2 = sqrt(pow(point2x, 2) + pow(point2y, 2));
+
+	float point3x = Point3.x - centerx;
+	float point3y = Point3.y - centery;
+	float length3 = sqrt(pow(point3x, 2) + pow(point3y, 2));
+
+	length1 = length1 * factor;
+	length2 = length2 * factor;
+	length3 = length3 * factor;
+
+	float anglepoint1 = atan(abs(point1y) / abs(point1x));
+	float anglepoint2 = atan(abs(point2y) / abs(point2x));
+	float anglepoint3 = atan(abs(point3y) / abs(point3x));
+
+
+	if (point1x > 0) {
+		Point1.x = centerx + cos(anglepoint1) * length1;
+	}
+	else {
+		Point1.x = centerx - cos(anglepoint1) * length1;
+	}
+
+	if (point1y > 0) {
+		Point1.y = centery + sin(anglepoint1) * length1;
+	}
+	else {
+		Point1.y = centery - sin(anglepoint1) * length1;
+	}
+
+	if (point2x > 0) {
+		Point2.x = centerx + cos(anglepoint2) * length2;
+	}
+	else {
+		Point2.x = centerx - cos(anglepoint2) * length2;
+	}
+
+	if (point2y > 0) {
+		Point2.y = centery + sin(anglepoint2) * length2;
+	}
+	else {
+		Point2.y = centery - sin(anglepoint2) * length2;
+	}
+
+	if (point3x > 0) {
+		Point3.x = centerx + cos(anglepoint3) * length3;
+	}
+	else {
+		Point3.x = centerx - cos(anglepoint3) * length3;
+	}
+
+	if (point3y > 0) {
+		Point3.y = centery + sin(anglepoint3) * length3;
+	}
+	else {
+		Point3.y = centery - sin(anglepoint3) * length3;
+	}
+
+
+}

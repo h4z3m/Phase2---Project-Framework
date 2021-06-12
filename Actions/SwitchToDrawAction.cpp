@@ -17,7 +17,9 @@ void SwitchToDrawAction::Execute() {
 	//Unhide all figures before going back to Draw mode
 	pManager->UnhideAllFigs();
 
-	pOut->ClearStatusBar();
+
+
+	pOut->PrintMessage("You are now on Draw Mode.");
 	pOut->CreateDrawToolBar();
 
 

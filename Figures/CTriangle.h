@@ -18,12 +18,15 @@ public:
 	virtual string PrintInfo(Output* pOut);
 	//////////////********** Ali'S PART ************//////////////////
 	virtual void resize(float);
+	virtual void zooming(float);
 	//////////////********** Ali'S PART ************//////////////////
 	//////////////********** GILANY'S PART ************//////////////////
 	//void ChangeTriPoints(Point, Point);
 	Point GetTriHighPoint();
 	virtual void ChangeCorners(Point, Point);
 	virtual int GetArea();
+
+	void Rotate(int rotation);
 
 	//////////////********** GILANY'S PART ************//////////////////
 };

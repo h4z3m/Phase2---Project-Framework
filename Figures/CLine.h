@@ -18,6 +18,8 @@ public:
 	//////////////********** Ali'S PART ************//////////////////
 	double Triangle_area(int, int, int, int, int, int);
 	virtual void resize(float);
+	void Rotate(int rotation);
+	virtual void zooming(float);
 	//////////////********** Ali'S PART ************//////////////////
 	//////////////********** GILANY'S PART ************//////////////////
 	//void ChangeLinPoints(Point, Point);

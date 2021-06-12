@@ -19,13 +19,14 @@ public:
 
 	//////////////********** Ali'S PART ************//////////////////
 	virtual void resize(float);
+	virtual void zooming(float);
 	//////////////********** Ali'S PART ************//////////////////
 	//////////////********** GILANY'S PART ************//////////////////
 		//void ChangeCirPoints(Point);
 	Point GetCirHighPoint();
 	virtual void ChangeCorners(Point, Point);
 	virtual int GetArea();
-
+	virtual void Rotate(int);
 	//////////////********** GILANY'S PART ************//////////////////
 };
 

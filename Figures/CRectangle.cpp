@@ -156,6 +156,68 @@ void CRectangle::resize(float factor)
 	Corner2.x = Corner1.x + (side_x * factor);
 	Corner2.y = Corner1.y + (side_y * factor);
 
-
 }
 //////////////********** Ali'S PART ************//////////////////
+void CRectangle::Rotate(int rotation) {
+	//Temp pts
+	Point P1 = Corner1;
+	Point P2 = Corner2;
+	int side_x = Corner2.x - Corner1.x;
+	int side_y = Corner2.y - Corner1.y;
+	//Rotate 180 degrees counter clockwise
+//	Corner2.x = Corner1.x + (side_x  );
+	//Corner2.y = Corner1.y - (side_y );
+	//Rotate 90 degrees counter clockwise
+	Corner2.x = abs(P2.x - P1.x);
+	Corner2.y = abs(P1.y-side_y);
+}
+
+void CRectangle::zooming(float factor)
+{
+	int centerx = UI.width / 2;
+	int centery = UI.height / 2;
+
+	float point1x = Corner1.x - centerx;
+	float point1y = Corner1.y - centery;
+	float length1 = sqrt(pow(point1x, 2) + pow(point1y, 2));
+
+	float point2x = Corner2.x - centerx;
+	float point2y = Corner2.y - centery;
+	float length2 = sqrt(pow(point2x, 2) + pow(point2y, 2));
+
+	length1 = length1 * factor;
+	length2 = length2 * factor;
+
+	float anglepoint1 = atan(abs(point1y) / abs(point1x));
+	float anglepoint2 = atan(abs(point2y) / abs(point2x));
+
+	if (point1x > 0) {
+		Corner1.x = centerx + cos(anglepoint1) * length1;
+	}
+	else {
+		Corner1.x = centerx - cos(anglepoint1) * length1;
+	}
+
+	if (point1y > 0) {
+		Corner1.y = centery + sin(anglepoint1) * length1;
+	}
+	else {
+		Corner1.y = centery - sin(anglepoint1) * length1;
+	}
+
+	if (point2x > 0) {
+		Corner2.x = centerx + cos(anglepoint2) * length2;
+	}
+	else {
+		Corner2.x = centerx - cos(anglepoint2) * length2;
+	}
+
+	if (point2y > 0) {
+		Corner2.y = centery + sin(anglepoint2) * length2;
+	}
+	else {
+		Corner2.y = centery - sin(anglepoint2) * length2;
+	}
+
+
+}

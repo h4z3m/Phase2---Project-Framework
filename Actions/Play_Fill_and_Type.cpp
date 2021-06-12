@@ -37,7 +37,8 @@ void Play_Fill_and_Type::ReadActionParameters()
 	PlayFigType = RefFig->FigType;
 	switch (PlayFigType) {
 	case line:
-		CorrectFigsToSelect = pManager->GetLineCountWColor(RefColor);
+		//For lines, no fill color,only draw color
+		CorrectFigsToSelect = pManager->GetLineCountWColor(RefFig->GetDrawColorObj());
 		break;
 	case rectangle:
 		CorrectFigsToSelect = pManager->GetRectCountWColor(RefColor);

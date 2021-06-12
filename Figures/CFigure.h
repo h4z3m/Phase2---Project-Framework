@@ -26,6 +26,7 @@ public:
 	bool IsHidden() const;
 	string GetFigName();
 	color GetFillColorObj() const;	//gets color of a figure
+	color GetDrawColorObj() const;
 	virtual void Draw(Output* pOut) const = 0;		//Draw the figure
 	
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
@@ -44,10 +45,12 @@ public:
 	virtual bool Fig(int, int) = 0;
 	//////////////********** Ali'S PART ************//////////////////
 	virtual void resize(float) = 0;
+	virtual void zooming(float) = 0;
 	//////////////********** Ali'S PART ************//////////////////
 
 	virtual void ChangeCorners(Point, Point) = 0;
 	virtual int GetArea() = 0;
+	virtual void Rotate(int) = 0;
 
 };
 

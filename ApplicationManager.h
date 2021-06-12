@@ -71,6 +71,7 @@ public:
 	void UnhideAllFigs();
 	//////////////********** Ali'S PART ************//////////////////
 	void Changesize(float factor);
+	void zooming(float in);
 	//////////////********** Ali'S PART ************//////////////////
 	//////////////********** GILANY'S PART ************//////////////////
 	void MakeItSelected(CFigure*);

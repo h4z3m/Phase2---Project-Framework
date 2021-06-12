@@ -139,6 +139,7 @@
     <ClCompile Include="Actions\LoadAction.cpp" />
     <ClCompile Include="Actions\MoveAction.cpp" />
     <ClCompile Include="Actions\Play_Figure_Type.cpp" />
+    <ClCompile Include="Actions\RotateAction.cpp" />
     <ClCompile Include="Actions\SendToBackAction.cpp" />
     <ClCompile Include="Actions\Play_Area.cpp" />
     <ClCompile Include="Actions\Play_FillColor.cpp" />
@@ -148,6 +149,7 @@
     <ClCompile Include="Actions\SelectAction.cpp" />
     <ClCompile Include="Actions\SwitchToDrawAction.cpp" />
     <ClCompile Include="Actions\SwitchToPlayMode.cpp" />
+    <ClCompile Include="Actions\zoom.cpp" />
     <ClCompile Include="Figures\CTriangle.cpp" />
     <ClCompile Include="Figures\CCircle.cpp" />
     <ClCompile Include="Figures\CLine.cpp" />
@@ -205,6 +207,7 @@
     <ClInclude Include="Actions\LoadAction.h" />
     <ClInclude Include="Actions\MoveAction.h" />
     <ClInclude Include="Actions\Play_Figure_Type.h" />
+    <ClInclude Include="Actions\RotateAction.h" />
     <ClInclude Include="Actions\SendToBackAction.h" />
     <ClInclude Include="Actions\Play_Area.h" />
     <ClInclude Include="Actions\Play_FillColor.h" />
@@ -214,6 +217,7 @@
     <ClInclude Include="Actions\SelectAction.h" />
     <ClInclude Include="Actions\SwitchToDrawAction.h" />
     <ClInclude Include="Actions\SwitchToPlayMode.h" />
+    <ClInclude Include="Actions\zoom.h" />
     <ClInclude Include="Figures\CTriangle.h" />
     <ClInclude Include="Figures\CCircle.h" />
     <ClInclude Include="Figures\CLine.h" />

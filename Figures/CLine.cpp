@@ -1,4 +1,5 @@
 #include "CLine.h"
+#include "CTriangle.h"
 
 CLine::CLine(Point P1, Point P2, GfxInfo FigureGfxInfo, int figtype) :CFigure(FigureGfxInfo, figtype) {
 	Point1 = P1;
@@ -156,3 +157,69 @@ void CLine::resize(float factor)
 
 }
 //////////////********** Ali'S PART ************//////////////////
+void CLine::Rotate(int rotation) {
+	//Temp pts
+	Point P1 = Point1;
+	Point P2 = Point2;
+
+	float sidex = Point2.x - Point1.x;
+	float sidey = Point2.y - Point1.y;
+	float length = sqrt(pow(sidex, 2) + pow(sidey, 2));
+	//length = length * factor;
+	float angle = atan(sidey / sidex);
+	float angle2 = angle + 90;
+	Point2.x = Point1.x + cos(angle2) * length;
+	Point2.y = Point1.y + sin(angle2) * length;
+
+}
+void CLine::zooming(float factor)
+{
+	int centerx = UI.width / 2;
+	int centery = UI.height / 2;
+
+	float point1x = Point1.x - centerx;
+	float point1y = Point1.y - centery;
+	float length1 = sqrt(pow(point1x, 2) + pow(point1y, 2));
+
+	float point2x = Point2.x - centerx;
+	float point2y = Point2.y - centery;
+	float length2 = sqrt(pow(point2x, 2) + pow(point2y, 2));
+
+	length1 = length1 * factor;
+	length2 = length2 * factor;
+
+	float anglepoint1 = atan(abs(point1y) / abs(point1x));
+	float anglepoint2 = atan(abs(point2y) / abs(point2x));
+
+	if (point1x > 0) {
+		Point1.x = centerx + cos(anglepoint1) * length1;
+	}
+	else {
+		Point1.x = centerx - cos(anglepoint1) * length1;
+	}
+
+	if (point1y > 0) {
+		Point1.y = centery + sin(anglepoint1) * length1;
+	}
+	else {
+		Point1.y = centery - sin(anglepoint1) * length1;
+	}
+
+	if (point2x > 0) {
+		Point2.x = centerx + cos(anglepoint2) * length2;
+	}
+	else {
+		Point2.x = centerx - cos(anglepoint2) * length2;
+	}
+
+	if (point2y > 0) {
+		Point2.y = centery + sin(anglepoint2) * length2;
+	}
+	else {
+		Point2.y = centery - sin(anglepoint2) * length2;
+	}
+
+
+
+
+}

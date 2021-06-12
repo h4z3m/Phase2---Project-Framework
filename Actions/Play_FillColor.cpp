@@ -29,7 +29,12 @@ void Play_FillColorAction::ReadActionParameters()
 	}
 	//Get reference fill color
 	RefFig = pManager->GetFigure(x, y);
-	RefColor = RefFig->GetFillColorObj();
+	if (RefFig->FigType == line) {
+		RefColor = RefFig->GetDrawColorObj();
+	}
+	else {
+		RefColor = RefFig->GetFillColorObj();
+	}
 	RefFig->SetHidden(true); //Hide reference figure
 	pManager->UpdateInterface(); //Updated with hidden figure
 	pOut->PrintMessage("Select all figures with the color " + pOut->getColorName(RefColor));

@@ -11,6 +11,8 @@
 #include "Actions\Delete.h"
 #include "Actions\MoveAction.h"
 #include "Actions\Resize.h"
+#include "Actions\zoom.h"
+#include "Actions\RotateAction.h"
 #include "Actions\SendToBackAction.h"
 #include "Actions\BringToFrontAction.h"
 #include "Actions\SwitchToPlayMode.h"
@@ -107,6 +109,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case ROTATE:
+		pAct = new RotateAction(this);
 		break;
 
 	case SEND_BACK:
@@ -136,9 +139,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case ZOOM_IN:
+		pAct = new zoom(this, 1);
 		break;
 
 	case ZOOM_OUT:
+		pAct = new zoom(this, 2);
 		break;
 
 	case COPY:
@@ -633,18 +638,24 @@ void ApplicationManager::ReorderFigList(CFigure* figs[], int posShift, int sel)
 	}*/
 	//Put elements starting from zero index (send to back)
 	if (posShift == 0) {
+		//Remove selected elements from FigList array (only removes pointers not the figure itself)
 		for (int i = 0; i < sel - 1; i++) {
 			auto arrayEnd = std::remove(begin(FigList), end(FigList), figs[i]);
 		}
+		//Copy unselected contents into shifted position
 		memcpy(FigList + (sel - 1), FigList, 8 * sizeof(CFigure*));
+		//Copy selected contents at the start of fig list, FigList or &FigList[i] is the pointer to the zero index to start copying to
 		copy(figs, figs + sel - 1, FigList);
 	}
 	//Put elements starting from (FigCount-1) index (bring to front)
 	else {
+		//Remove selected elements from FigList array (only removes pointers not the figure itself)
 		for (int i = 0; i < sel - 1; i++) {
 			auto arrayEnd = std::remove(begin(FigList), end(FigList), figs[i]);
 		}
+		//No need to copy, std::remove already orders the elements at the start of the array
 		//memcpy(FigList + (sel - 1), FigList, 8 * sizeof(CFigure*));
+		//Copy selected contents starting at total num of figures-selected figures
 		copy(figs, figs + sel - 1, &FigList[FigCount-sel+1]);
 	}
 }
@@ -733,6 +744,16 @@ void ApplicationManager::Changesize(float factor) {
 
 
 		}
+	}
+	pOut->ClearDrawArea();
+}
+
+void ApplicationManager::zooming(float in) {
+	for (int i = 0; i < FigCount; i++)
+	{
+
+		FigList[i]->zooming(in);
+
 	}
 	pOut->ClearDrawArea();
 }

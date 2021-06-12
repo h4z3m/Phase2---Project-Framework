@@ -41,8 +41,8 @@ void CheckValidationPoint(Point& P2, Output* pOut, Input* pIn) {
 	}
 }
 
-void CorrectSelection(int& WorongCount, bool& PastWrongSlection, int& CorrectSelections,
-	CFigure* NextFig, ApplicationManager* pManager, int& GoNext, Output* pOut, int& WrongSelections) {
+void CorrectSelection(int &WorongCount, bool &PastWrongSlection, int &CorrectSelections,
+	CFigure* NextFig, ApplicationManager* pManager, int &GoNext, Output* pOut, int &WrongSelections) {
 	for (int j = 0; j < WorongCount; j++)
 		if (PastWrongSlection == true)
 			GoNext++;
@@ -60,8 +60,8 @@ void CorrectSelection(int& WorongCount, bool& PastWrongSlection, int& CorrectSel
 	pOut->PrintMessage("Correct Selections: " + std::to_string(CorrectSelections) + " - Wrong Selections: " + std::to_string(WrongSelections));
 }
 
-void WrongSelection(bool& PastWrongSlection, int& GoNext, int& WrongSelections, CFigure* NextFig, Output* pOut,
-	ApplicationManager* pManager, int& CorrectSelections, int& WorongCount) {
+void WrongSelection(bool &PastWrongSlection, int &GoNext, int &WrongSelections, CFigure* NextFig, Output* pOut,
+	ApplicationManager* pManager, int &CorrectSelections, int &WorongCount) {
 	if (PastWrongSlection == true)
 		GoNext = GoNext;
 
@@ -74,7 +74,7 @@ void WrongSelection(bool& PastWrongSlection, int& GoNext, int& WrongSelections, 
 	WorongCount++;
 }
 
-Play_Area::Play_Area(ApplicationManager* pApp) : Action(pApp) {
+Play_Area::Play_Area(ApplicationManager* pApp) : Action (pApp){
 	CorrectSelections = 1;
 	WrongSelections = 0;
 	GoNext = 0;
@@ -96,7 +96,7 @@ void Play_Area::ReadActionParameters()
 
 	CheckValidationPoint(P1, pOut, pIn);
 
-	StartFig = pManager->GetFigure(P1.x, P1.y);
+	 StartFig = pManager->GetFigure(P1.x, P1.y);
 
 	if (StartFig == NULL) {
 
@@ -140,16 +140,23 @@ void Play_Area::ReadActionParameters()
 void Play_Area::Execute()
 {
 
+
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
+
+	Point P2;
+
+	pOut->PrintMessage("You should select the smallest figure to hide it, then select the next one. Click anywhere to continue");
+	pIn->GetPointClicked(P2.x, P2.y); // get the new Point
+
+
 
 	ReadActionParameters();
 
 	StartFig->SetHidden(true);
 	pManager->UpdateInterface();
 
-	Point P2;
 
 	//IF THE FIRST FIGURE IS RECTANGLE
 	if (DoDynamicCheck(StartFig) == 0) {
@@ -165,9 +172,9 @@ void Play_Area::Execute()
 
 			CFigure* NextFig = pManager->GetFigure(P2.x, P2.y);
 
-			if (DoDynamicCheck(NextFig) == 0) { 		//IF THE NEXT SELECTED FIGURE IS RECTANGLE
-
-				if (!(NextFig->IsHidden())) { 		//IF THE NEXT SELECTED FIGURE IS NOT HIDDEN
+			if (DoDynamicCheck(NextFig) == 0){ 		//IF THE NEXT SELECTED FIGURE IS RECTANGLE
+		
+				if ( !(NextFig->IsHidden())) { 		//IF THE NEXT SELECTED FIGURE IS NOT HIDDEN
 
 					if (NextFig->GetArea() == pManager->GetNextRecArea(GoNext + 1)) { 	 //IF THE AREA OF THE NEXT SELECTED FIGURE IS NEXT RIGHT SELECTION
 
@@ -191,9 +198,7 @@ void Play_Area::Execute()
 			}
 		}
 
-		//		pOut->PrintMessage("Final Score: " + std::to_string( (CorrectSelections*1.0 / pManager->GetRectCountWColor(NULL))*100 ) + "%" );
-		pOut->PrintMessage("You scored: " + std::to_string(CorrectSelections) + "/" + std::to_string(CorrectSelections + WrongSelections));
-
+		pOut->PrintMessage("Final Score: " + std::to_string( (CorrectSelections*1.0 / pManager->GetRectCountWColor(NULL))*100 ) + "%" );
 	}
 
 
@@ -235,9 +240,7 @@ void Play_Area::Execute()
 			}
 		}
 
-		//pOut->PrintMessage("Final Score: " + std::to_string((CorrectSelections * 1.0 / pManager->GetTriCountWColor(NULL)) * 100) + "%");
-		pOut->PrintMessage("You scored: " + std::to_string(CorrectSelections) + "/" + std::to_string(CorrectSelections + WrongSelections));
-
+		pOut->PrintMessage("Final Score: " + std::to_string((CorrectSelections * 1.0 / pManager->GetTriCountWColor(NULL)) * 100) + "%");
 	}
 
 	//IF THE FIRST FIGURE IS CIRCLE
@@ -278,9 +281,7 @@ void Play_Area::Execute()
 			}
 		}
 
-		//		pOut->PrintMessage("Final Score: " + std::to_string((CorrectSelections * 1.0 / pManager->GetCirCountWColor(NULL)) * 100) + "%");
-		pOut->PrintMessage("You scored: " + std::to_string(CorrectSelections) + "/" + std::to_string(CorrectSelections + WrongSelections));
-
+		pOut->PrintMessage("Final Score: " + std::to_string((CorrectSelections * 1.0 / pManager->GetCirCountWColor(NULL)) * 100) + "%");
 	}
 
 	//IF THE FIRST FIGURE IS LINE
@@ -321,13 +322,11 @@ void Play_Area::Execute()
 			}
 		}
 
-		//pOut->PrintMessage("Final Score: " + std::to_string((CorrectSelections * 1.0 / pManager->GetLineCountWColor(NULL)) * 100) + "%");
-		pOut->PrintMessage("You scored: " + std::to_string(CorrectSelections) + "/" + std::to_string(CorrectSelections + WrongSelections));
-
+		pOut->PrintMessage("Final Score: " + std::to_string((CorrectSelections * 1.0 / pManager->GetLineCountWColor(NULL)) * 100) + "%");
 	}
-
+	
 	pManager->ResetFigAreas();
 	pManager->UnhideAllFigs();
-
+	
 }
 

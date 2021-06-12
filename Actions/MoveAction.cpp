@@ -46,7 +46,7 @@ void MoveAction::ReadActionParameters() {
 
 		}
 	}
-
+	
 }
 
 //Execute the action
@@ -82,5 +82,5 @@ void MoveAction::Execute() {
 	else
 		pOut->PrintMessage("Select a figure first ya behema");
 
-}
+	}
 

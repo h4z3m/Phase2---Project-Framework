@@ -17,6 +17,8 @@ public:
 	virtual bool Fig(int, int);
 	//////////////********** Ali'S PART ************//////////////////
 	virtual void resize(float);
+	void Rotate(int rotation);
+	virtual void zooming(float);
 	//////////////********** Ali'S PART ************//////////////////
 	//////////////********** GILANY'S PART ************//////////////////
 	//void ChangeRecCorners(Point, Point);

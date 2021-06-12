@@ -61,6 +61,11 @@ color CFigure::GetFillColorObj() const
 	return FigGfxInfo.FillClr;
 }
 
+color CFigure::GetDrawColorObj() const
+{
+	return FigGfxInfo.DrawClr;
+}
+
 void CFigure::ChngDrawClr(color Dclr)
 {
 	FigGfxInfo.DrawClr = Dclr;

@@ -17,8 +17,11 @@ public:
 	virtual bool Fig(int, int);
 
 	//////////////********** GILANY'S PART ************//////////////////
-	void ChangeLinPoints(Point, Point);
+	//void ChangeLinPoints(Point, Point);
 	Point GetLinHighPoint();
+	virtual void ChangeCorners(Point, Point);
+	virtual int GetArea();
+
 	//////////////********** GILANY'S PART ************//////////////////
 };
 

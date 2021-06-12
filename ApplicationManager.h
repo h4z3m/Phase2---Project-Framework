@@ -24,6 +24,18 @@ private:
 
 	//////////////********** GILANY'S PART ************//////////////////
 	vector <CFigure*> FigVector;
+	CFigure* SmallestArea;
+	int MoveLoopCount;
+
+	vector <int> RecAreas;
+	vector <int> CirAreas;
+	vector <int> TriAreas;
+	vector <int> LinAreas;
+
+	int RecAreaCount;
+	int TriAreaCount;
+	int LinAreaCount;
+	int CirAreaCount;
 	//////////////********** GILANY'S PART ************//////////////////
 
 
@@ -42,10 +54,10 @@ public:
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig); //Adds a new figure to the FigList
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
-	int GetLineCount();
-	int GetCirCount();
-	int GetTriCount();
-	int GetRectCount();
+	int GetLineCountWColor(color);
+	int GetCirCountWColor(color);
+	int GetTriCountWColor(color);
+	int GetRectCountWColor(color);
 	int GetColorFillCount(color);
 
 	// -- Interface Management Functions
@@ -62,8 +74,32 @@ public:
 	void MakeItUnSelected(CFigure*);
 	Point MakeRefrencePoint();
 	vector <CFigure*> GetFigVector();
-	//////////////********** GILANY'S PART ************//////////////////
+	CFigure* MoveLoop();
+	void AreaLoop();
 
+	int GetVectorSize();
+	void ResetCount();
+
+	bool CheckSmallest(CFigure*);
+
+	void CreateAreasVector();
+	void CreateRecAreasVector();
+	void CreateTriAreasVector();
+	void CreateCirAreasVector();
+	void CreateLinAreasVector();
+
+
+	int GetNextRecArea(int p);
+	int GetNextCirArea(int p);
+	int GetNextLinArea(int p);
+	int GetNextTriArea(int p);
+
+	friend bool CheckValidationPoint(Point P2);
+
+	void ResetFigAreas();
+	//////////////********** GILANY'S PART ************//////////////////
+	void ReorderFigList(CFigure*[], int, int);
+	
 };
 
 #endif

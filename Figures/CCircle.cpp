@@ -86,17 +86,50 @@ bool CCircle::Fig(int x, int y)  //Determine the position of the point
 }
 
 //////////////********** GILANY'S PART ************//////////////////
-void CCircle::ChangeCirPoints(Point P1) {
-	radius = (sqrt(pow(R2.x - R1.x, 2) + pow(R2.y - R1.y, 2) * 1.0));
-	//Using the midpoint of a parallelogram joining the 4 points of old and new circle
-	R2.x = P1.x + R2.x - R1.x;
-	R2.y = P1.y + R2.y - R1.y;
-	R1 = P1;
-
-
-}
+//void CCircle::ChangeCirPoints(Point P1) {
+//	radius = (sqrt(pow(R2.x - R1.x, 2) + pow(R2.y - R1.y, 2) * 1.0));
+//	//Using the midpoint of a parallelogram joining the 4 points of old and new circle
+//	R2.x = P1.x + R2.x - R1.x;
+//	R2.y = P1.y + R2.y - R1.y;
+//	R1 = P1;
+//
+//
+//}
 
 Point CCircle::GetCirHighPoint() {
 	return R1;
 }
+
+
+void CCircle::ChangeCorners(Point newPoint, Point MainRefrence) {
+
+	if (R1.x > MainRefrence.x)
+		R1.x = newPoint.x + abs(MainRefrence.x - R1.x);
+	else
+		R1.x = newPoint.x - abs(MainRefrence.x - R1.x);
+
+	if (R1.y > MainRefrence.y)
+		R1.y = newPoint.y + abs(MainRefrence.y - R1.y);
+	else
+		R1.y = newPoint.y - abs(MainRefrence.y - R1.y);
+
+
+	if (R2.x > MainRefrence.x)
+		R2.x = newPoint.x + abs(MainRefrence.x - R2.x);
+	else
+		R2.x = newPoint.x - abs(MainRefrence.x - R2.x);
+
+	if (R2.y > MainRefrence.y)
+		R2.y = newPoint.y + abs(MainRefrence.y - R2.y);
+	else
+		R2.y = newPoint.y - abs(MainRefrence.y - R2.y);
+
+
+}
+
+int CCircle::GetArea() {
+	radius = (sqrt(pow(R2.x - R1.x, 2) + pow(R2.y - R1.y, 2) * 1.0));
+	return (3.141592654 * pow(radius, 2));
+}
+
 //////////////********** GILANY'S PART ************//////////////////

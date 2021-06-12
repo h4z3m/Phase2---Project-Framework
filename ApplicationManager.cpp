@@ -9,14 +9,18 @@
 #include "Actions\SelectAction.h"
 #include "Actions\Delete.h"
 #include "Actions\MoveAction.h"
+#include "Actions\MoveToBackAction.h"
 #include "Actions\SwitchToPlayMode.h"
 #include "Actions\SwitchToDrawAction.h"
+#include "Actions\Play_Area.h"
 #include "Actions\Play_FillColorAction.h"
+#include "Actions\Play_Fill_and_Type.h"
 #include "Figures\CFigure.h"
 #include "Figures\CRectangle.h"
 #include "Figures\CCircle.h"
 #include "Figures\CTriangle.h"
 #include "Figures\CLine.h"
+#include <algorithm>
 
 bool Action::fillClrStatus = false;
 //Constructor
@@ -98,6 +102,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case SEND_BACK:
+		pAct = new MoveToBackAction(this);
 		break;
 
 	case BRNG_FRNT:
@@ -144,9 +149,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case Figure_Fill_Type:
+		pAct = new Play_Fill_and_Type(this);
 		break;
 
 	case Figure_Area:
+		pAct = new Play_Area(this);
 		break;
 
 	case DRAWING_AREA:
@@ -208,42 +215,82 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 	/////////////Ali////////////////////////////////
 	return NULL;
 }
-//Get object count
-int ApplicationManager::GetLineCount()
+//Get object count given a color(optional)
+int ApplicationManager::GetLineCountWColor(color clr)
 {
-	int count = 0;
-	for (int i = 0; i < FigCount; i++) {
-		if (FigList[i]->FigType == line)
-			count++;
+	if (clr == NULL) {
+		int count = 0;
+		for (int i = 0; i < FigCount; i++) {
+			if (FigList[i]->FigType == line)
+				count++;
+		}
+		return count;
 	}
-	return count;
+	else {
+		int count = 0;
+		for (int i = 0; i < FigCount; i++) {
+			if (FigList[i]->FigType == line && FigList[i]->GetFillColorObj() == clr)
+				count++;
+		}
+		return count;
+	}
 }
-int ApplicationManager::GetCirCount()
+int ApplicationManager::GetCirCountWColor(color clr)
 {
-	int count = 0;
-	for (int i = 0; i < FigCount; i++) {
-		if (FigList[i]->FigType == circle)
-			count++;
+	if (clr == NULL) {
+		int count = 0;
+		for (int i = 0; i < FigCount; i++) {
+			if (FigList[i]->FigType == circle)
+				count++;
+		}
+		return count;
 	}
-	return count;
+	else {
+		int count = 0;
+		for (int i = 0; i < FigCount; i++) {
+			if (FigList[i]->FigType == circle && FigList[i]->GetFillColorObj() == clr)
+				count++;
+		}
+		return count;
+	}
 }
-int ApplicationManager::GetTriCount()
+int ApplicationManager::GetTriCountWColor(color clr)
 {
-	int count = 0;
-	for (int i = 0; i < FigCount; i++) {
-		if (FigList[i]->FigType == triangle)
-			count++;
+	if (clr == NULL) {
+		int count = 0;
+		for (int i = 0; i < FigCount; i++) {
+			if (FigList[i]->FigType == triangle)
+				count++;
+		}
+		return count;
 	}
-	return count;
+	else {
+		int count = 0;
+		for (int i = 0; i < FigCount; i++) {
+			if (FigList[i]->FigType == triangle && FigList[i]->GetFillColorObj() == clr)
+				count++;
+		}
+		return count;
+	}
 }
-int ApplicationManager::GetRectCount()
+int ApplicationManager::GetRectCountWColor(color clr)
 {
-	int count = 0;
-	for (int i = 0; i < FigCount; i++) {
-		if (FigList[i]->FigType == rectangle)
-			count++;
+	if (clr == NULL) {
+		int count = 0;
+		for (int i = 0; i < FigCount; i++) {
+			if (FigList[i]->FigType == rectangle)
+				count++;
+		}
+		return count;
 	}
-	return count;
+	else {
+		int count = 0;
+		for (int i = 0; i < FigCount; i++) {
+			if (FigList[i]->FigType == rectangle && FigList[i]->GetFillColorObj() == clr)
+				count++;
+		}
+		return count;
+	}
 }
 //Get count of figures given a color
 int ApplicationManager::GetColorFillCount(color clr)
@@ -322,11 +369,255 @@ Point ApplicationManager::MakeRefrencePoint() {
 //IF THE FIGURE IS RECTANGLE
 
 vector <CFigure*> ApplicationManager::GetFigVector() {
-	return FigVector;
+
+	if (FigVector.size() == 0)
+		pOut->PrintMessage("Select a figure first ya haywan");
+	else
+		return FigVector;
 }
+
+
+CFigure* ApplicationManager::MoveLoop() {
+	while (MoveLoopCount < FigVector.size()) {
+
+		//CHECK THE TYPE OF THE FIGURE 
+		CRectangle* rect = dynamic_cast<CRectangle*> (FigVector[MoveLoopCount]);
+		CLine* line = dynamic_cast<CLine*> (FigVector[MoveLoopCount]);
+		CTriangle* tri = dynamic_cast<CTriangle*> (FigVector[MoveLoopCount]);
+		CCircle* cir = dynamic_cast<CCircle*> (FigVector[MoveLoopCount]);
+
+		//IF THE FIGURE IS RECTANGLE
+		if (rect != NULL) {
+			MoveLoopCount++;
+
+			return rect;
+
+		}
+
+		//IF THE FIGURE IS TRIANGLE
+		if (tri != NULL) {
+			MoveLoopCount++;
+
+			return tri;
+
+		}
+
+		//IF THE FIGURE IS LINE
+		if (line != NULL) {
+			MoveLoopCount++;
+
+			return line;
+
+		}
+
+		if (cir != NULL) {
+			MoveLoopCount++;
+
+			return cir;
+
+		}
+
+	}
+}
+
+int ApplicationManager::GetVectorSize() {
+	return FigVector.size();
+}
+
+void ApplicationManager::ResetCount() {
+	MoveLoopCount = 0;
+}
+
+
+//void ApplicationManager::AreaLoop() {
+//	while (AreaLoopCount < FigVector.size()) {
+//
+//		//CHECK THE TYPE OF THE FIGURE 
+//		CRectangle* rect = dynamic_cast<CRectangle*> (FigVector[MoveLoopCount]);
+//		CLine* line = dynamic_cast<CLine*> (FigVector[MoveLoopCount]);
+//		CTriangle* tri = dynamic_cast<CTriangle*> (FigVector[MoveLoopCount]);
+//		CCircle* cir = dynamic_cast<CCircle*> (FigVector[MoveLoopCount]);
+//
+//		//IF THE FIGURE IS RECTANGLE
+//		if (rect != NULL) {
+//			AreaLoopCount++;
+//			RecAreas.push_back(FigVector[AreaLoopCount]);
+//
+//
+//		}
+//
+//		//IF THE FIGURE IS TRIANGLE
+//		else if (tri != NULL) {
+//			AreaLoopCount++;
+//			TriAreas.push_back(FigVector[AreaLoopCount]);
+//
+//
+//
+//		}
+//
+//		//IF THE FIGURE IS LINE
+//		else if (line != NULL) {
+//			AreaLoopCount++;
+//
+//			LinAreas.push_back(FigVector[AreaLoopCount]);
+//
+//		}
+//
+//		else if (cir != NULL) {
+//			AreaLoopCount++;
+//
+//			CirAreas.push_back(FigVector[AreaLoopCount]);
+//
+//		}
+//
+//	}
+//}
+
+
+bool ApplicationManager::CheckSmallest(CFigure* fig) {
+	CRectangle* rect = dynamic_cast<CRectangle*> (fig);
+	CLine* line = dynamic_cast<CLine*> (fig);
+	CTriangle* tri = dynamic_cast<CTriangle*> (fig);
+	CCircle* cir = dynamic_cast<CCircle*> (fig);
+
+
+
+	//IF THE FIGURE IS RECTANGLE
+	if (rect != NULL) {
+		if (fig->GetArea() == RecAreas[0])
+			return true;
+		else
+			return false;
+	}
+
+	//IF THE FIGURE IS TRIANGLE
+	else if (tri != NULL) {
+		if (fig->GetArea() == TriAreas[0])
+			return true;
+		else
+			return false;
+	}
+
+	//IF THE FIGURE IS LINE
+	else if (line != NULL) {
+		if (fig->GetArea() == LinAreas[0])
+			return true;
+		else
+			return false;
+
+	}
+
+	else if (cir != NULL) {
+		if (fig->GetArea() == CirAreas[0])
+			return true;
+		else
+			return false;
+	}
+
+
+}
+
+
+
+void ApplicationManager::CreateRecAreasVector() {
+
+	for (int i = 0; i < FigCount; i++) {
+		CRectangle* P = dynamic_cast<CRectangle*> (FigList[i]);
+		if (P != NULL)
+			RecAreas.push_back(FigList[i]->GetArea());
+	}
+
+	sort(RecAreas.begin(), RecAreas.end());
+
+}
+
+void ApplicationManager::CreateTriAreasVector() {
+
+	for (int i = 0; i < FigCount; i++) {
+		CTriangle* P = dynamic_cast<CTriangle*> (FigList[i]);
+		if (P != NULL)
+			TriAreas.push_back(FigList[i]->GetArea());
+	}
+
+	sort(TriAreas.begin(), TriAreas.end());
+
+}
+
+void ApplicationManager::CreateCirAreasVector() {
+
+	for (int i = 0; i < FigCount; i++) {
+		CCircle* P = dynamic_cast<CCircle*> (FigList[i]);
+		if (P != NULL)
+			CirAreas.push_back(FigList[i]->GetArea());
+	}
+
+	sort(CirAreas.begin(), CirAreas.end());
+
+}
+
+void ApplicationManager::CreateLinAreasVector() {
+
+	for (int i = 0; i < FigCount; i++) {
+		CLine* P = dynamic_cast<CLine*> (FigList[i]);
+		if (P != NULL)
+			LinAreas.push_back(FigList[i]->GetArea());
+	}
+
+	sort(LinAreas.begin(), LinAreas.end());
+
+}
+
+int ApplicationManager::GetNextRecArea(int p) {
+	return RecAreas[p];
+}
+
+int ApplicationManager::GetNextCirArea(int p) {
+	return CirAreas[p];
+}
+
+int ApplicationManager::GetNextTriArea(int p) {
+	return TriAreas[p];
+}
+
+int ApplicationManager::GetNextLinArea(int p) {
+	return LinAreas[p];
+}
+
+
+void ApplicationManager::ResetFigAreas() {
+	RecAreas.clear();
+	CirAreas.clear();
+	TriAreas.clear();
+	LinAreas.clear();
+
+}
+
+
+
 //////////////********** GILANY'S PART ************//////////////////
 
+void ApplicationManager::ReorderFigList(CFigure* figs[], int posShift, int sel)
+{
+	/*CFigure* tempFig=NULL;
+	for (int i = 0; i < sel - 1; i++) {
+		for (int j = 0; j < FigCount - 1; j++) {
 
+			tempFig = FigList[j+1];
+			FigList[j + 1] = FigList[j];
+			FigList[j] = NULL;
+			FigList[j + 2] = tempFig;
+		}
+	}
+	for (int i = 0; i < sel-1; i++) {
+		FigList[i] = figs[i];
+	}*/
+
+	for (int i = 0; i < sel - 1; i++) {
+		auto arrayEnd = std::remove(begin(FigList), end(FigList), figs[i]);
+	}
+	memcpy(FigList + (FigCount + sel - 1), FigList, 8 * sizeof(CFigure*));
+	copy(figs, figs + sel - 1, FigList);
+}
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
@@ -413,7 +704,6 @@ int ApplicationManager::SelectedNumber() {
 	{
 		if (FigList[i]->IsSelected())
 		{
-
 			c = c + 1;
 		}
 	}

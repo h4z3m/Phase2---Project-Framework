@@ -17,23 +17,36 @@ void MoveAction::ReadActionParameters() {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
-	pOut->PrintMessage("Choose a Point to move to it");
+	int VectorSize = pManager->GetVectorSize();
 
-	pIn->GetPointClicked(newPoint.x, newPoint.y); // get the new Point
+	if (VectorSize == 0) {
+		SelectedFlag = false;
+	}
+	else {
 
-	//check validation of point
-	if (newPoint.y < UI.StatusBarHeight || newPoint.y > UI.height - UI.ToolBarHeight) {
-		pOut->PrintMessage("Not a valid point");
 
-		bool NotInValidPoint = true;
-		while (NotInValidPoint) {
-			pIn->GetPointClicked(newPoint.x, newPoint.y); // get the new Point
-			if (!(newPoint.y < UI.StatusBarHeight || newPoint.y > UI.height - UI.ToolBarHeight)) {
-				NotInValidPoint = false;
-				pOut->ClearStatusBar();
+
+		SelectedFlag = true;
+		pOut->PrintMessage("Choose a Point to move to it");
+
+		pIn->GetPointClicked(newPoint.x, newPoint.y); // get the new Point
+
+		//check validation of point
+		if (newPoint.y < UI.StatusBarHeight || newPoint.y > UI.height - UI.ToolBarHeight) {
+			pOut->PrintMessage("Not a valid point ya haywan");
+
+			bool NotInValidPoint = true;
+			while (NotInValidPoint) {
+				pIn->GetPointClicked(newPoint.x, newPoint.y); // get the new Point
+				if (!(newPoint.y < UI.StatusBarHeight || newPoint.y > UI.height - UI.ToolBarHeight)) {
+					NotInValidPoint = false;
+					pOut->ClearStatusBar();
+				}
 			}
+
 		}
 	}
+
 }
 
 //Execute the action
@@ -44,46 +57,30 @@ void MoveAction::Execute() {
 
 	ReadActionParameters();
 
-	MovedFigVector = pManager->GetFigVector(); //UPDATE THE LIST OF SELECTED FIGURES 
+	if (SelectedFlag == true) {
+		MainRefrence = pManager->MakeRefrencePoint(); //GET A REFRENCE POINT TO MOVE THE FIGURES WITH RESPECT TO IT  
 
-	MainRefrence = pManager->MakeRefrencePoint(); //GET A REFRENCE POINT TO MOVE THE FIGURES WITH RESPECT TO IT  
+		int VectorSize = pManager->GetVectorSize();
 
-	CRectangle* recPtr[10];
-	CCircle* cirPtr[10];
-	CLine* linPtr[10];
-	CTriangle* triPtr[10];
+		CFigure* FigPtr;
 
-	// LOOP TO CHECK EACH FIGURE OF THE SELECTED FIGURES WITH ITS OWN
-	for (int i = 0; i < MovedFigVector.size(); i++) {
 
-		//CHECK THE TYPE OF THE FIGURE 
-		CRectangle* rect = dynamic_cast<CRectangle*> (MovedFigVector[i]);
-		CLine* line = dynamic_cast<CLine*> (MovedFigVector[i]);
-		CTriangle* tri = dynamic_cast<CTriangle*> (MovedFigVector[i]);
-		CCircle* cir = dynamic_cast<CCircle*> (MovedFigVector[i]);
+		// LOOP TO CHECK EACH FIGURE OF THE SELECTED FIGURES WITH ITS OWN
+		for (int i = 0; i < VectorSize; i++) {
 
-		//IF THE FIGURE IS RECTANGLE
-		if (rect != NULL) {
-			rect->ChangeRecCorners(newPoint, MainRefrence);
+
+			FigPtr = pManager->MoveLoop();
+
+			FigPtr->ChangeCorners(newPoint, MainRefrence);
 			pOut->ClearStatusBar();
+
 		}
 
-		//IF THE FIGURE IS TRIANGLE
-		if (tri != NULL) {
-			tri->ChangeTriPoints(newPoint, MainRefrence);
-			pOut->ClearStatusBar();
-		}
-
-		//IF THE FIGURE IS LINE
-		if (line != NULL) {
-			line->ChangeLinPoints(newPoint, MainRefrence);
-			pOut->ClearStatusBar();
-		}
-		else if (cir != NULL) {
-
-			cir->ChangeCirPoints(newPoint);
-			pOut->ClearStatusBar();
-		}
+		pManager->ResetCount();
 	}
+
+	else
+		pOut->PrintMessage("Select a figure first ya behema");
+
 }
 

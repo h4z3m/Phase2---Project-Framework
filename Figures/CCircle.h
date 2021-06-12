@@ -19,8 +19,11 @@ public:
 
 
 	//////////////********** GILANY'S PART ************//////////////////
-	void ChangeCirPoints(Point);
+		//void ChangeCirPoints(Point);
 	Point GetCirHighPoint();
+	virtual void ChangeCorners(Point, Point);
+	virtual int GetArea();
+
 	//////////////********** GILANY'S PART ************//////////////////
 };
 

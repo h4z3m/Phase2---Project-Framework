@@ -190,6 +190,15 @@
     <ClCompile Include="Actions\Play_FillColorAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\MoveToBackAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\Play_Area.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\Play_Fill_and_Type.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -320,6 +329,15 @@
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\Play_FillColorAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\MoveToBackAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\Play_Area.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\Play_Fill_and_Type.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>

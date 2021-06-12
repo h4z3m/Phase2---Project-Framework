@@ -11,7 +11,7 @@
 class CFigure
 {
 protected:
-	int ID=rand();		//Each figure has an ID
+	int ID = rand();		//Each figure has an ID
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
 	/// Add more parameters if needed.
@@ -24,8 +24,9 @@ public:
 	bool IsSelected() const;	//check whether fig is selected
 	bool IsFilled() const;		//check if figure is filled
 	bool IsHidden() const;
+	string GetFigName();
 	color GetFillColorObj() const;	//gets color of a figure
-	virtual void Draw(Output* pOut) const  = 0 ;		//Draw the figure
+	virtual void Draw(Output* pOut) const = 0;		//Draw the figure
 	
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
@@ -40,10 +41,15 @@ public:
 	//virtual void Resize() = 0;	//Resize the figure
 	//virtual void Move() = 0;		//Move the figure
 
-	virtual void Save(ofstream &OutFile, Output* pOut) = 0;	//Save the figure parameters to the file
-	virtual void Load(ifstream &Infile, Output* pOut,stringstream&) = 0;	//Load the figure parameters to the file
+	virtual void Save(ofstream& OutFile, Output* pOut) = 0;	//Save the figure parameters to the file
+	virtual void Load(ifstream& Infile, Output* pOut, stringstream&) = 0;	//Load the figure parameters to the file
 	virtual string PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
 	virtual bool Fig(int, int) = 0;
+
+
+	virtual void ChangeCorners(Point, Point) = 0;
+	virtual int GetArea() = 0;
+
 };
 
 #endif

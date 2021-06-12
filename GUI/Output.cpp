@@ -59,25 +59,20 @@ window* Output::CreateWind(int w, int h, int x, int y) const
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateStatusBar() const
 {
-	pWind->SetPen(UI.StatusBarColor, 0);
+	pWind->SetPen(UI.StatusBarColor, 1);
 	pWind->SetBrush(UI.StatusBarColor);
 	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
 
-	//Draw a line above the status bar
-	pWind->SetPen(FinalStBG, 6); //line under tool bar when creating draw tool bar
-	pWind->DrawLine(0, UI.height - UI.StatusBarHeight+1, UI.width, UI.height - UI.StatusBarHeight+1);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::ClearStatusBar() const
 {
 	//Clear Status bar by drawing a filled white rectangle
-	pWind->SetPen(UI.StatusBarColor, 0);
+	pWind->SetPen(UI.StatusBarColor, 1);
 	pWind->SetBrush(UI.StatusBarColor);
-	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight +2, UI.width, UI.height );
+	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
 
-	//Draw a line above the status bar
-	pWind->SetPen(FinalStBG, 6); //line under tool bar when creating draw tool bar
-	pWind->DrawLine(0, UI.height - UI.StatusBarHeight+1, UI.width, UI.height - UI.StatusBarHeight+1);
+
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateDrawToolBar() const
@@ -151,9 +146,9 @@ void Output::CreatePlayToolBar() const
 	MenuItemImages[ITM_EXITP] = "images\\MenuItems\\Menu_Exit.jpg";
 
 	//Clear draw toolbar
-	pWind->SetPen(WHITE, 3);
+	pWind->SetPen(WHITE, 1);
 	pWind->SetBrush(WHITE);
-	pWind->DrawRectangle(0, 0, 24 * UI.MenuItemWidth, 72, FILLED);
+	pWind->DrawRectangle(0, 0, 24 * UI.MenuItemWidth, 70, FILLED);
 
 	//Draw play toolbar menu items
 	for (int i = 0; i < PLAY_ITM_COUNT; i++)
@@ -171,9 +166,9 @@ void Output::CreatePlayToolBar() const
 
 void Output::ClearDrawArea() const
 {
-	pWind->SetPen(FinalBG, 3);
+	pWind->SetPen(FinalBG, 1);
 	pWind->SetBrush(UI.BkGrndColor);
-	pWind->DrawRectangle(0, UI.ToolBarHeight +2 , UI.width, UI.height - UI.StatusBarHeight +2);
+	pWind->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
 
 }
 
@@ -244,11 +239,11 @@ string Output::getColorName(color& CLR) {
 	return "NO_FILL";
 }
 color Output::getColorObj(string str)
-{	
+{
 	if (str == "BLACK") {
 		return BLACK;
 	}
-	else if (str== "WHITE") {
+	else if (str == "WHITE") {
 		return WHITE;
 
 	}
@@ -346,7 +341,7 @@ void Output::DrawCir(Point P1, Point P2, GfxInfo CirGfxInfo, bool selected) cons
 	}
 	else
 		style = FRAME;
-	
+
 	pWind->DrawCircle(P1.x, P1.y, sqrt(pow(P2.x - P1.x, 2) + pow(P2.y - P1.y, 2) * 1.0), style);
 
 
@@ -373,7 +368,7 @@ void Output::DrawLin(Point P1, Point P2, GfxInfo LineGfxInfo, bool selected) con
 
 	pWind->DrawLine(P1.x, P1.y, P2.x, P2.y, style);
 
-	
+
 }	// -- GILANY GILANY GILANY GILANY GILANY GILANY GILANY GILANY GILANY
 
 //////////////////////////////////////////////////////////////////////////////////////////

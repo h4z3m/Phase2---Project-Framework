@@ -1,5 +1,5 @@
-#ifndef PLAY_FILL_COLOR_ACTION_H
-#define PLAY_FILL_COLOR_ACTION_H
+#ifndef PLAY_FILL_COLOR_H
+#define PLAY_FILL_COLOR_H
 #include "Action.h"
 
 class Play_FillColorAction :public Action

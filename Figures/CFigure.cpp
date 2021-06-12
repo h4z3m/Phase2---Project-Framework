@@ -74,6 +74,7 @@ void CFigure::ChngFillClr(color Fclr)
 
 void CFigure::SetHidden(bool val)
 {
+
 	FigGfxInfo.isHidden = val;
 }
 

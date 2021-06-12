@@ -56,47 +56,52 @@ void Play_Fill_and_Type::ReadActionParameters()
 
 void Play_Fill_and_Type::Execute()
 {
-
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-
-	ReadActionParameters();
-	int x, y;
-	//Loop until all figures have been picked
-	do {
-		//For unique figures
-		if (CorrectFigsToSelect == 1) { break; }
-
-		//Temp figure that the user clicks on
-		pIn->GetPointClicked(x, y);
-		//Check for a click NOT in an empty place
-		if (pManager->GetFigure(x, y) && pIn->DrawArea_ValidClick(x, y, UI.height)) {
-			CFigure* TempFig = pManager->GetFigure(x, y);
-			//Correct pick AND not a previously picked/hidden figure
-			if (RefColor == TempFig->GetFillColorObj() && !TempFig->IsHidden() && TempFig->FigType == PlayFigType) {
-				++CorrectPicks;
-				TempFig->SetHidden(true);
-			}
-			//Wrong pick OR a click on an empty place
-			else if (!TempFig->IsHidden()) {
-				++WrongPicks;
-				TempFig->SetHidden(true);
-			}
-			pManager->UpdateInterface(); //Updated with hidden figures
-
-			//Print correct & wrong picks for the user
-			pOut->PrintMessage("Correct picks: " + std::to_string(CorrectPicks) + " Wrong picks: " + std::to_string(WrongPicks));
-		}
-		//+1 to include the Reference figure click
-	} while (!(CorrectPicks + 1 == (CorrectFigsToSelect)) && !(pManager->GetFigCount() == (CorrectPicks + WrongPicks)) && !(CorrectFigsToSelect == 1));
-
-	//Printing final score
-	//In case it was a unique figure e.g. the only blue rectangle
-	if (CorrectFigsToSelect == 1) {
-		pOut->PrintMessage("Final score: 100%, it was a unique figure.");
+	if (pManager->GetColorFillCount(NULL) == pManager->GetFigCount()) {
+	//If ALL figures are UNFILLED
+		pOut->PrintMessage("No filled figures on graph, go back to Draw mode and draw some filled figures !");
 	}
 	else {
-		//+1 to include the Reference figure click
-		pOut->PrintMessage("Final score: " + std::to_string((((float)CorrectPicks+1 - WrongPicks) / CorrectFigsToSelect * 100.0))+" %");
+
+		ReadActionParameters();
+		int x, y;
+		//Loop until all figures have been picked
+		do {
+			//For unique figures
+			if (CorrectFigsToSelect == 1) { break; }
+
+			//Temp figure that the user clicks on
+			pIn->GetPointClicked(x, y);
+			//Check for a click NOT in an empty place
+			if (pManager->GetFigure(x, y) && pIn->DrawArea_ValidClick(x, y, UI.height)) {
+				CFigure* TempFig = pManager->GetFigure(x, y);
+				//Correct pick AND not a previously picked/hidden figure
+				if (RefColor == TempFig->GetFillColorObj() && !TempFig->IsHidden() && TempFig->FigType == PlayFigType) {
+					++CorrectPicks;
+					TempFig->SetHidden(true);
+				}
+				//Wrong pick OR a click on an empty place
+				else if (!TempFig->IsHidden()) {
+					++WrongPicks;
+					TempFig->SetHidden(true);
+				}
+				pManager->UpdateInterface(); //Updated with hidden figures
+
+				//Print correct & wrong picks for the user
+				pOut->PrintMessage("Correct picks: " + std::to_string(CorrectPicks) + " Wrong picks: " + std::to_string(WrongPicks));
+			}
+			//+1 to include the Reference figure click
+		} while (!(CorrectPicks + 1 == (CorrectFigsToSelect)) && !(pManager->GetFigCount() == (CorrectPicks + WrongPicks)) && !(CorrectFigsToSelect == 1));
+
+		//Printing final score
+		//In case it was a unique figure e.g. the only blue rectangle
+		if (CorrectFigsToSelect == 1) {
+			pOut->PrintMessage("Final score: 100%, it was a unique figure.");
+		}
+		else {
+			//+1 to include the Reference figure click
+			pOut->PrintMessage("Final score: " + std::to_string((((float)CorrectPicks + 1 - WrongPicks) / CorrectFigsToSelect * 100.0)) + " %");
+		}
 	}
 }

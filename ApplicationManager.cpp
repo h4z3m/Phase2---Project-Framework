@@ -13,7 +13,7 @@
 #include "Actions\SwitchToPlayMode.h"
 #include "Actions\SwitchToDrawAction.h"
 #include "Actions\Play_Area.h"
-#include "Actions\Play_FillColorAction.h"
+#include "Actions\Play_FillColor.h"
 #include "Actions\Play_Fill_and_Type.h"
 #include "Figures\CFigure.h"
 #include "Figures\CRectangle.h"
@@ -292,15 +292,25 @@ int ApplicationManager::GetRectCountWColor(color clr)
 		return count;
 	}
 }
-//Get count of figures given a color
+//Get count of figures given a color, if clr==NULL, get count of ALL filled figures
 int ApplicationManager::GetColorFillCount(color clr)
 {
-	int count = 0;
-	for (int i = 0; i < FigCount; i++) {
-		if (clr == FigList[i]->GetFillColorObj())
-			count++;
+	if (!(clr ==NULL)) {
+		int count = 0;
+		for (int i = 0; i < FigCount; i++) {
+			if (clr == FigList[i]->GetFillColorObj())
+				count++;
+		}
+		return count;
 	}
-	return count;
+	else {
+		int count = 0;
+		for (int i = 0; i < FigCount; i++) {
+			if (!FigList[i]->IsFilled())
+				count++;
+		}
+		return count;
+	}
 }
 //Check if graph is empty
 bool ApplicationManager::isGraphEmpty() {
@@ -630,6 +640,9 @@ void ApplicationManager::UpdateInterface() const
 		if (!FigList[i]->IsHidden()) {
 			FigList[i]->Draw(pOut);//Call Draw function (virtual member fn)
 		}
+	if (UI.InterfaceMode == MODE_DRAW) {
+		pOut->CreateDrawToolBar();
+	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
@@ -719,7 +732,7 @@ void ApplicationManager::UnhideAllFigs()
 {
 
 	if (!isGraphEmpty()) {
-		for (int i = 0; i < MaxFigCount; i++) {
+		for (int i = 0; i < FigCount; i++) {
 			FigList[i]->SetHidden(FALSE);
 		}
 	}

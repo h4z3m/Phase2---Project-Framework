@@ -1,4 +1,4 @@
-#include "Play_FillColorAction.h"
+#include "Play_FillColor.h"
 #include "..\Figures\CFigure.h"
 
 #include "..\ApplicationManager.h"
@@ -23,7 +23,7 @@ void Play_FillColorAction::ReadActionParameters()
 	CFigure* RefFig = pManager->GetFigure(x, y);
 
 	//If user doesn't click on a figure
-	while ((RefFig = pManager->GetFigure(x, y)) == NULL || !RefFig->IsFilled()) {
+	while ((RefFig = pManager->GetFigure(x, y)) == NULL || !RefFig->IsFilled() && !pIn->DrawArea_ValidClick(x, y, UI.height)) {
 		pOut->PrintMessage("ERROR: Please click on a FILLED figure");
 		pIn->GetPointClicked(x, y);
 	}

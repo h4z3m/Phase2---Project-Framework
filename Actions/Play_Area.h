@@ -11,6 +11,8 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
+void Correct();
+
 
 class Play_Area : public Action
 {
@@ -22,10 +24,13 @@ private:
 	bool PastWrongSlection;
 	int WorongCount;
 public:
-	Play_Area::Play_Area(ApplicationManager* pApp);
+	Play_Area(ApplicationManager* pApp);
 
-	void Play_Area::ReadActionParameters();
+	void ReadActionParameters();
 
-	void Play_Area::Execute();
+	void Execute();
+
+	~Play_Area();
+
 };
 

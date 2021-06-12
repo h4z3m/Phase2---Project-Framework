@@ -1,5 +1,78 @@
 #include "Play_Area.h"
 
+int DoDynamicCheck(CFigure* f) {
+	CRectangle* rect = dynamic_cast<CRectangle*> (f);
+	CLine* line = dynamic_cast<CLine*> (f);
+	CTriangle* tri = dynamic_cast<CTriangle*> (f);
+	CCircle* cir = dynamic_cast<CCircle*> (f);
+
+	//rectangle >>> 0
+	//triangle >>> 1
+	//circle >>> 2
+	//line >>> 3
+	//empty >>> 4
+
+	if (rect != NULL)
+		return 0;
+	else if (tri != NULL)
+		return 1;
+	else if (cir != NULL)
+		return 2;
+	else if (line != NULL)
+		return 3;
+	else
+		return 4;
+}
+
+void CheckValidationPoint(Point& P2, Output* pOut, Input* pIn) {
+
+	if (P2.y < UI.StatusBarHeight || P2.y > UI.height - UI.ToolBarHeight) {
+		pOut->PrintMessage("Not a valid point ya haywan");
+
+		bool NotInValidPoint = true;
+		while (NotInValidPoint) {
+			pIn->GetPointClicked(P2.x, P2.y); // get the new Point
+			if (!(P2.y < UI.StatusBarHeight || P2.y > UI.height - UI.ToolBarHeight)) {
+				NotInValidPoint = false;
+				pOut->ClearStatusBar();
+			}
+		}
+
+	}
+}
+
+void CorrectSelection(int &WorongCount, bool &PastWrongSlection, int &CorrectSelections,
+	CFigure* NextFig, ApplicationManager* pManager, int &GoNext, Output* pOut, int &WrongSelections) {
+	for (int j = 0; j < WorongCount; j++)
+		if (PastWrongSlection == true)
+			GoNext++;
+
+	PastWrongSlection = false;
+
+	CorrectSelections++;
+	NextFig->SetHidden(true);
+	pManager->UpdateInterface();
+	GoNext++;
+
+	WorongCount = 0;
+
+	pOut->ClearStatusBar();
+	pOut->PrintMessage("Correct Selections: " + std::to_string(CorrectSelections) + " - Wrong Selections: " + std::to_string(WrongSelections));
+}
+
+void WrongSelection(bool &PastWrongSlection, int &GoNext, int &WrongSelections, CFigure* NextFig, Output* pOut,
+	ApplicationManager* pManager, int &CorrectSelections, int &WorongCount) {
+	if (PastWrongSlection == true)
+		GoNext = GoNext;
+
+	WrongSelections++;
+	NextFig->SetHidden(true);
+	pManager->UpdateInterface();
+	pOut->ClearStatusBar();
+	pOut->PrintMessage("Correct Selections: " + std::to_string(CorrectSelections) + " - Wrong Selections: " + std::to_string(WrongSelections));
+	PastWrongSlection = true;
+	WorongCount++;
+}
 
 Play_Area::Play_Area(ApplicationManager* pApp) : Action (pApp){
 	CorrectSelections = 1;
@@ -7,8 +80,6 @@ Play_Area::Play_Area(ApplicationManager* pApp) : Action (pApp){
 	GoNext = 0;
 	WorongCount = 0;
 	PastWrongSlection = false;
-
-
 }
 
 void Play_Area::ReadActionParameters()
@@ -19,26 +90,11 @@ void Play_Area::ReadActionParameters()
 
 	Point P1;
 
-	//pManager->AreaLoop();
-
 	pOut->PrintMessage("Select the smallest figure");
 
 	pIn->GetPointClicked(P1.x, P1.y); // get the Point
 
-	//check validation of point
-	if (P1.y < UI.StatusBarHeight || P1.y > UI.height - UI.ToolBarHeight) {
-		pOut->PrintMessage("Not a valid point ya haywan");
-
-		bool NotInValidPoint = true;
-		while (NotInValidPoint) {
-			pIn->GetPointClicked(P1.x, P1.y); // get the new Point
-			if (!(P1.y < UI.StatusBarHeight || P1.y > UI.height - UI.ToolBarHeight)) {
-				NotInValidPoint = false;
-				pOut->ClearStatusBar();
-			}
-		}
-
-	}
+	CheckValidationPoint(P1, pOut, pIn);
 
 	 StartFig = pManager->GetFigure(P1.x, P1.y);
 
@@ -79,14 +135,7 @@ void Play_Area::ReadActionParameters()
 			}
 		}
 	}
-
-
-
-
-
 }
-
-
 
 void Play_Area::Execute()
 {
@@ -102,327 +151,175 @@ void Play_Area::Execute()
 
 	Point P2;
 
-	CRectangle* rect = dynamic_cast<CRectangle*> (StartFig);
-	CLine* line = dynamic_cast<CLine*> (StartFig);
-	CTriangle* tri = dynamic_cast<CTriangle*> (StartFig);
-	CCircle* cir = dynamic_cast<CCircle*> (StartFig);
+	//IF THE FIRST FIGURE IS RECTANGLE
+	if (DoDynamicCheck(StartFig) == 0) {
 
-	if (rect != NULL) {
-		pOut->PrintMessage("select the next largest rectangle");
+		pOut->PrintMessage("You selected the smallest rectangle. Now, select the next smallest rectangles");
+
 
 		for (int i = 0; i < pManager->GetRectCount() - 1; i++) {
 
 			pIn->GetPointClicked(P2.x, P2.y); // get the new Point
 
-				//check validation of point
-	if (P2.y < UI.StatusBarHeight || P2.y > UI.height - UI.ToolBarHeight) {
-		pOut->PrintMessage("Not a valid point ya haywan");
+			CheckValidationPoint(P2, pOut, pIn); 	//check validation of point
 
-		bool NotInValidPoint = true;
-		while (NotInValidPoint) {
-			pIn->GetPointClicked(P2.x, P2.y); // get the new Point
-			if (!(P2.y < UI.StatusBarHeight || P2.y > UI.height - UI.ToolBarHeight)) {
-				NotInValidPoint = false;
-				pOut->ClearStatusBar();
-			}
-		}
+			CFigure* NextFig = pManager->GetFigure(P2.x, P2.y);
 
-	}
-
-	CFigure* NextFig = pManager->GetFigure(P2.x, P2.y);
-
-			
-			if (NextFig != NULL && !(NextFig->IsHidden())) {
-				if (NextFig->GetArea() == pManager->GetNextRecArea(GoNext + 1)) {
-
-					for (int j = 0; j < WorongCount; j++)
-						if (PastWrongSlection == true)
-							GoNext++;
-
-					PastWrongSlection = false;
-
-					CorrectSelections++;
-					NextFig->SetHidden(true);
-					pManager->UpdateInterface();
-					GoNext++;
-
-					WorongCount = 0;
-
-					pOut->ClearStatusBar();
-					pOut->PrintMessage("Correct Selections: " + std::to_string(CorrectSelections) + " - Wrong Selections: " + std::to_string(WrongSelections));
-
-				}
-				else if (NextFig->GetArea() != pManager->GetNextRecArea(GoNext + 1)) {
-					if (PastWrongSlection == true)
-						GoNext = GoNext;
-
-					WrongSelections++;
-					NextFig->SetHidden(true);
-					pManager->UpdateInterface();
-					pOut->ClearStatusBar();
-					pOut->PrintMessage("Correct Selections: " + std::to_string(CorrectSelections) + " - Wrong Selections: " + std::to_string(WrongSelections));
-					PastWrongSlection = true;
-					WorongCount++;
-				}
-				
-			}
-
-			else {
-				pOut->PrintMessage("ba2olak select a figure ya ahtal");
-				i--;
-					}
-				
-			
-
-
-
-
-		}
-
+			if (DoDynamicCheck(NextFig) == 0){ 		//IF THE NEXT SELECTED FIGURE IS RECTANGLE
 		
-		pOut->ClearStatusBar();
+				if ( !(NextFig->IsHidden())) { 		//IF THE NEXT SELECTED FIGURE IS NOT HIDDEN
+
+					if (NextFig->GetArea() == pManager->GetNextRecArea(GoNext + 1)) { 	 //IF THE AREA OF THE NEXT SELECTED FIGURE IS NEXT RIGHT SELECTION
+
+						CorrectSelection(WorongCount, PastWrongSlection, CorrectSelections, NextFig, pManager, GoNext, pOut, WrongSelections);
+					}
+
+					else {
+						WrongSelection(PastWrongSlection, GoNext, WrongSelections, NextFig, pOut, pManager, CorrectSelections, WorongCount);
+					}
+				}
+
+				else {
+					pOut->PrintMessage("Wrong Selection. Try Again.");
+					i--;
+				}
+			}
+
+			else {
+				pOut->PrintMessage("Please, select rectangles.");
+				i--;
+			}
+		}
+
 		pOut->PrintMessage("Final Score: " + std::to_string( (CorrectSelections*1.0 / pManager->GetRectCount())*100 ) + "%" );
-
-
-
 	}
 
 
-
-
-
-
-	if (cir != NULL) {
-		pOut->PrintMessage("select the next largest circle");
-
-		for (int i = 0; i < pManager->GetCirCount() - 1; i++) {
-
-			pIn->GetPointClicked(P2.x, P2.y); // get the new Point
-
-							//check validation of point
-			if (P2.y < UI.StatusBarHeight || P2.y > UI.height - UI.ToolBarHeight) {
-				pOut->PrintMessage("Not a valid point ya haywan");
-
-				bool NotInValidPoint = true;
-				while (NotInValidPoint) {
-					pIn->GetPointClicked(P2.x, P2.y); // get the new Point
-					if (!(P2.y < UI.StatusBarHeight || P2.y > UI.height - UI.ToolBarHeight)) {
-						NotInValidPoint = false;
-						pOut->ClearStatusBar();
-					}
-				}
-
-			}
-
-			CFigure* NextFig = pManager->GetFigure(P2.x, P2.y);
-
-
-
-			if (NextFig != NULL && !(NextFig->IsHidden())) {
-				if (NextFig->GetArea() == pManager->GetNextCirArea(GoNext + 1)) {
-
-					for (int j = 0; j < WorongCount; j++)
-						if (PastWrongSlection == true)
-							GoNext++;
-
-					PastWrongSlection = false;
-
-					CorrectSelections++;
-					NextFig->SetHidden(true);
-					pManager->UpdateInterface();
-					GoNext++;
-
-					WorongCount = 0;
-
-					pOut->ClearStatusBar();
-					pOut->PrintMessage("Correct Selections: " + std::to_string(CorrectSelections) + " - Wrong Selections: " + std::to_string(WrongSelections));
-
-				}
-				else {
-					if (PastWrongSlection == true)
-						GoNext = GoNext;
-
-					WrongSelections++;
-					NextFig->SetHidden(true);
-					pManager->UpdateInterface();
-					pOut->ClearStatusBar();
-					pOut->PrintMessage("Correct Selections: " + std::to_string(CorrectSelections) + " - Wrong Selections: " + std::to_string(WrongSelections));
-					PastWrongSlection = true;
-					WorongCount++;
-				}
-
-			}
-			else {
-				pOut->PrintMessage("ba2olak select a figure ya ahtal");
-				i--;
-			}
-
-
-
-		}
-
-
-		pOut->ClearStatusBar();
-		pOut->PrintMessage("Final Score: " + std::to_string((CorrectSelections * 1.0 / pManager->GetCirCount()) * 100) + "%");
-
-
-
-	}
-
-
-
-	if (line != NULL) {
-		pOut->PrintMessage("select the next largest line");
-
-		for (int i = 0; i < pManager->GetLineCount() - 1; i++) {
-
-			pIn->GetPointClicked(P2.x, P2.y); // get the new Point
-
-							//check validation of point
-			if (P2.y < UI.StatusBarHeight || P2.y > UI.height - UI.ToolBarHeight) {
-				pOut->PrintMessage("Not a valid point ya haywan");
-
-				bool NotInValidPoint = true;
-				while (NotInValidPoint) {
-					pIn->GetPointClicked(P2.x, P2.y); // get the new Point
-					if (!(P2.y < UI.StatusBarHeight || P2.y > UI.height - UI.ToolBarHeight)) {
-						NotInValidPoint = false;
-						pOut->ClearStatusBar();
-					}
-				}
-
-			}
-
-			CFigure* NextFig = pManager->GetFigure(P2.x, P2.y);
-
-
-			if (NextFig != NULL && !(NextFig->IsHidden())) {
-				if (NextFig->GetArea() == pManager->GetNextLinArea(GoNext + 1)) {
-
-					for (int j = 0; j < WorongCount; j++)
-						if (PastWrongSlection == true)
-							GoNext++;
-
-					PastWrongSlection = false;
-
-					CorrectSelections++;
-					NextFig->SetHidden(true);
-					pManager->UpdateInterface();
-					GoNext++;
-
-					WorongCount = 0;
-
-					pOut->ClearStatusBar();
-					pOut->PrintMessage("Correct Selections: " + std::to_string(CorrectSelections) + " - Wrong Selections: " + std::to_string(WrongSelections));
-
-				}
-				else {
-					if (PastWrongSlection == true)
-						GoNext = GoNext;
-
-					WrongSelections++;
-					NextFig->SetHidden(true);
-					pManager->UpdateInterface();
-					pOut->ClearStatusBar();
-					pOut->PrintMessage("Correct Selections: " + std::to_string(CorrectSelections) + " - Wrong Selections: " + std::to_string(WrongSelections));
-					PastWrongSlection = true;
-					WorongCount++;
-				}
-
-
-			}
-			else {
-				pOut->PrintMessage("ba2olak select a figure ya ahtal");
-				i--;
-			}
-
-
-		}
-
-
-		pOut->ClearStatusBar();
-		pOut->PrintMessage("Final Score: " + std::to_string((CorrectSelections * 1.0 / pManager->GetLineCount()) * 100) + "%");
-
-
-
-	}
-
-	if (tri != NULL) {
-		pOut->PrintMessage("select the next largest triangle");
+	//IF THE FIRST FIGURE IS TRIANGLE
+	if (DoDynamicCheck(StartFig) == 1) {
+		pOut->PrintMessage("You selected the smallest triangle. Now, select the next smallest triangles");
 
 		for (int i = 0; i < pManager->GetTriCount() - 1; i++) {
 
 			pIn->GetPointClicked(P2.x, P2.y); // get the new Point
 
-							//check validation of point
-			if (P2.y < UI.StatusBarHeight || P2.y > UI.height - UI.ToolBarHeight) {
-				pOut->PrintMessage("Not a valid point ya haywan");
-
-				bool NotInValidPoint = true;
-				while (NotInValidPoint) {
-					pIn->GetPointClicked(P2.x, P2.y); // get the new Point
-					if (!(P2.y < UI.StatusBarHeight || P2.y > UI.height - UI.ToolBarHeight)) {
-						NotInValidPoint = false;
-						pOut->ClearStatusBar();
-					}
-				}
-
-			}
+			CheckValidationPoint(P2, pOut, pIn); 	//check validation of point
 
 			CFigure* NextFig = pManager->GetFigure(P2.x, P2.y);
 
+			if (DoDynamicCheck(NextFig) == 1) { 		//IF THE NEXT SELECTED FIGURE IS TRIANGLE
 
-			if (NextFig != NULL && !(NextFig->IsHidden())) {
-				if (NextFig->GetArea() == pManager->GetNextTriArea(GoNext + 1)) {
+				if (!(NextFig->IsHidden())) { 		//IF THE NEXT SELECTED FIGURE IS NOT HIDDEN
 
-					for (int j = 0; j < WorongCount; j++)
-						if (PastWrongSlection == true)
-							GoNext++;
+					if (NextFig->GetArea() == pManager->GetNextTriArea(GoNext + 1)) { 	 //IF THE AREA OF THE NEXT SELECTED FIGURE IS NEXT RIGHT SELECTION
 
-					PastWrongSlection = false;
+						CorrectSelection(WorongCount, PastWrongSlection, CorrectSelections, NextFig, pManager, GoNext, pOut, WrongSelections);
+					}
 
-					CorrectSelections++;
-					NextFig->SetHidden(true);
-					pManager->UpdateInterface();
-					GoNext++;
-
-					WorongCount = 0;
-
-					pOut->ClearStatusBar();
-					pOut->PrintMessage("Correct Selections: " + std::to_string(CorrectSelections) + " - Wrong Selections: " + std::to_string(WrongSelections));
-
+					else {
+						WrongSelection(PastWrongSlection, GoNext, WrongSelections, NextFig, pOut, pManager, CorrectSelections, WorongCount);
+					}
 				}
+
 				else {
-					if (PastWrongSlection == true)
-						GoNext = GoNext;
-
-					WrongSelections++;
-					NextFig->SetHidden(true);
-					pManager->UpdateInterface();
-					pOut->ClearStatusBar();
-					pOut->PrintMessage("Correct Selections: " + std::to_string(CorrectSelections) + " - Wrong Selections: " + std::to_string(WrongSelections));
-					PastWrongSlection = true;
-					WorongCount++;
+					pOut->PrintMessage("Wrong Selection. Try Again.");
+					i--;
 				}
-
 			}
+
 			else {
-				pOut->PrintMessage("ba2olak select a figure ya ahtal");
+				pOut->PrintMessage("Please, select triangles.");
 				i--;
 			}
-
-
 		}
 
-
-		pOut->ClearStatusBar();
 		pOut->PrintMessage("Final Score: " + std::to_string((CorrectSelections * 1.0 / pManager->GetTriCount()) * 100) + "%");
-
-
-
 	}
 
+	//IF THE FIRST FIGURE IS CIRCLE
+	if (DoDynamicCheck(StartFig) == 2) {
+		pOut->PrintMessage("You selected the smallest circle. Now, select the next smallest circles");
 
+		for (int i = 0; i < pManager->GetCirCount() - 1; i++) {
+
+			pIn->GetPointClicked(P2.x, P2.y); // get the new Point
+
+			CheckValidationPoint(P2, pOut, pIn); 	//check validation of point
+
+			CFigure* NextFig = pManager->GetFigure(P2.x, P2.y);
+
+			if (DoDynamicCheck(NextFig) == 2) { 		//IF THE NEXT SELECTED FIGURE IS CIRCLE
+
+				if (!(NextFig->IsHidden())) { 		//IF THE NEXT SELECTED FIGURE IS NOT HIDDEN
+
+					if (NextFig->GetArea() == pManager->GetNextCirArea(GoNext + 1)) { 	 //IF THE AREA OF THE NEXT SELECTED FIGURE IS NEXT RIGHT SELECTION
+
+						CorrectSelection(WorongCount, PastWrongSlection, CorrectSelections, NextFig, pManager, GoNext, pOut, WrongSelections);
+					}
+
+					else {
+						WrongSelection(PastWrongSlection, GoNext, WrongSelections, NextFig, pOut, pManager, CorrectSelections, WorongCount);
+					}
+				}
+
+				else {
+					pOut->PrintMessage("Wrong Selection. Try Again.");
+					i--;
+				}
+			}
+
+			else {
+				pOut->PrintMessage("Please, select circles.");
+				i--;
+			}
+		}
+
+		pOut->PrintMessage("Final Score: " + std::to_string((CorrectSelections * 1.0 / pManager->GetCirCount()) * 100) + "%");
+	}
+
+	//IF THE FIRST FIGURE IS LINE
+	if (DoDynamicCheck(StartFig) == 3) {
+		pOut->PrintMessage("You selected the smallest line. Now, select the next smallest lines");
+
+		for (int i = 0; i < pManager->GetLineCount() - 1; i++) {
+
+			pIn->GetPointClicked(P2.x, P2.y); // get the new Point
+
+			CheckValidationPoint(P2, pOut, pIn); 	//check validation of point
+
+			CFigure* NextFig = pManager->GetFigure(P2.x, P2.y);
+
+			if (DoDynamicCheck(NextFig) == 3) { 		//IF THE NEXT SELECTED FIGURE IS LINE
+
+				if (!(NextFig->IsHidden())) { 		//IF THE NEXT SELECTED FIGURE IS NOT HIDDEN
+
+					if (NextFig->GetArea() == pManager->GetNextLinArea(GoNext + 1)) { 	 //IF THE AREA OF THE NEXT SELECTED FIGURE IS NEXT RIGHT SELECTION
+
+						CorrectSelection(WorongCount, PastWrongSlection, CorrectSelections, NextFig, pManager, GoNext, pOut, WrongSelections);
+					}
+
+					else {
+						WrongSelection(PastWrongSlection, GoNext, WrongSelections, NextFig, pOut, pManager, CorrectSelections, WorongCount);
+					}
+				}
+
+				else {
+					pOut->PrintMessage("Wrong Selection. Try Again.");
+					i--;
+				}
+			}
+
+			else {
+				pOut->PrintMessage("Please, select lines.");
+				i--;
+			}
+		}
+
+		pOut->PrintMessage("Final Score: " + std::to_string((CorrectSelections * 1.0 / pManager->GetLineCount()) * 100) + "%");
+	}
+	
+	pManager->ResetFigAreas();
 
 	
 }
+

@@ -106,6 +106,9 @@ public:
 	int GetNextLinArea(int p);
 	int GetNextTriArea(int p);
 
+	friend bool CheckValidationPoint(Point P2);
+
+	void ResetFigAreas();
 
 	//////////////********** GILANY'S PART ************//////////////////
 

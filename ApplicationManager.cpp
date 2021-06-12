@@ -545,6 +545,15 @@ int ApplicationManager::GetNextLinArea(int p) {
 }
 
 
+void ApplicationManager::ResetFigAreas(){
+	RecAreas.clear();
+	CirAreas.clear();
+	TriAreas.clear();
+	LinAreas.clear();
+
+}
+
+
 
 //////////////********** GILANY'S PART ************//////////////////
 

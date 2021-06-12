@@ -6,6 +6,11 @@
 #include "GUI\input.h"
 #include "GUI\output.h"
 #include <vector>
+#include <iostream>
+
+#include <algorithm>
+
+using namespace std;
 
 
 //Main class that manages everything in the application.
@@ -24,7 +29,25 @@ private:
 
 	//////////////********** GILANY'S PART ************//////////////////
 	vector <CFigure*> FigVector;
+	CFigure* SmallestArea;
+
+
+
 	int MoveLoopCount;
+
+
+
+	vector <int> RecAreas;
+	vector <int> CirAreas;
+	vector <int> TriAreas;
+	vector <int> LinAreas;
+
+
+	int RecAreaCount;
+	int TriAreaCount;
+	int LinAreaCount;
+	int CirAreaCount;
+
 	//////////////********** GILANY'S PART ************//////////////////
 
 
@@ -64,8 +87,26 @@ public:
 	Point MakeRefrencePoint();
 	vector <CFigure*> GetFigVector();
 	CFigure* MoveLoop();
+	void AreaLoop();
+
 	int GetVectorSize();
 	void ResetCount();
+
+	bool CheckSmallest(CFigure*);
+
+	void CreateAreasVector();
+	void CreateRecAreasVector();
+	void CreateTriAreasVector();
+	void CreateCirAreasVector();
+	void CreateLinAreasVector();
+
+
+	int GetNextRecArea(int p);
+	int GetNextCirArea(int p);
+	int GetNextLinArea(int p);
+	int GetNextTriArea(int p);
+
+
 	//////////////********** GILANY'S PART ************//////////////////
 
 };

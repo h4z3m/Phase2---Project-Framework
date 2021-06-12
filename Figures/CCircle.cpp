@@ -127,4 +127,9 @@ void CCircle::ChangeCorners(Point newPoint, Point MainRefrence) {
 
  }
 
+int CCircle::GetArea() {
+	radius = ( sqrt(pow(R2.x - R1.x, 2) + pow(R2.y - R1.y, 2) * 1.0 ) );
+	return (3.141592654*pow(radius,2));
+}
+
 //////////////********** GILANY'S PART ************//////////////////

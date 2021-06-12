@@ -190,6 +190,7 @@
     <ClCompile Include="Actions\Play_FillColorAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\Play_Area.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -322,6 +323,7 @@
     <ClInclude Include="Actions\Play_FillColorAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
+    <ClInclude Include="Actions\Play_Area.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

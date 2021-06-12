@@ -140,4 +140,10 @@ void CRectangle::ChangeCorners(Point newPoint, Point MainRefrence) {
 	else
 		Corner2.y = newPoint.y - abs(MainRefrence.y - Corner2.y);
 }
+
+
+int CRectangle::GetArea() {
+	return (abs(Corner1.x - Corner2.x) * abs(Corner1.y - Corner2.y));
+ }
+
 //////////////********** GILANY'S PART ************//////////////////

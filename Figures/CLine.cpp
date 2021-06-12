@@ -132,4 +132,8 @@ void CLine::ChangeCorners(Point newPoint, Point MainRefrence) {
 		Point2.y = newPoint.y - abs(MainRefrence.y - Point2.y);
  }
 
+int CLine::GetArea() {
+	return  (sqrt(pow(Point1.x - Point2.x, 2) + pow(Point1.y - Point2.y, 2) * 1.0));
+}
+
 //////////////********** GILANY'S PART ************//////////////////

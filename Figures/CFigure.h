@@ -46,7 +46,9 @@ public:
 	virtual bool Fig(int, int) = 0;
 
 
-	virtual void ChangeCorners(Point, Point);
+	virtual void ChangeCorners(Point, Point) = 0;
+	virtual int GetArea() = 0;
+
 };
 
 #endif

@@ -53,3 +53,4 @@ void CFigure::SetHidden(bool val)
 }
 
 
+

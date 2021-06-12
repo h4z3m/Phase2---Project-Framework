@@ -20,6 +20,7 @@ public:
 	//void ChangeLinPoints(Point, Point);
 	Point GetLinHighPoint();
 	virtual void ChangeCorners(Point, Point);
+	virtual int GetArea();
 
 	//////////////********** GILANY'S PART ************//////////////////
 };

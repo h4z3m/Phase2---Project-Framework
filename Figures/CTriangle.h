@@ -21,6 +21,7 @@ public:
 	//void ChangeTriPoints(Point, Point);
 	Point GetTriHighPoint();
 	virtual void ChangeCorners(Point, Point);
+	virtual int GetArea();
 
 	//////////////********** GILANY'S PART ************//////////////////
 };

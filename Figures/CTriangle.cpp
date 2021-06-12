@@ -185,4 +185,8 @@ void CTriangle::ChangeCorners(Point newPoint, Point MainRefrence) {
 	else
 		Point3.y = newPoint.y - abs(MainRefrence.y - Point3.y);
 }
+
+int CTriangle::GetArea() {
+	return (12*abs(Point1.x * (Point2.y-Point3.y) + Point2.x * (Point3.y -Point1.y) + Point3.x * (Point1.y - Point2.y) ));
+}
 //////////////********** GILANY'S PART ************//////////////////

@@ -20,6 +20,7 @@ public:
 	//void ChangeRecCorners(Point, Point);
 	Point GetRecHighPoint();
 	virtual void ChangeCorners(Point, Point);
+	virtual int GetArea();
 
 	//////////////********** GILANY'S PART ************//////////////////
 };

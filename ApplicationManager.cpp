@@ -15,6 +15,7 @@
 #include "Actions\SwitchToPlayMode.h"
 #include "Actions\SwitchToDrawAction.h"
 #include "Actions\Play_FillColorAction.h"
+#include "Actions\Play_Area.h"
 #include "Figures\CFigure.h"
 #include "Figures\CRectangle.h"
 #include "Figures\CCircle.h"
@@ -36,6 +37,11 @@ ApplicationManager::ApplicationManager()
 		FigList[i] = NULL;
 
 	MoveLoopCount = 0;
+	RecAreaCount=0;
+	TriAreaCount=0;
+	LinAreaCount=0;
+	CirAreaCount=0;
+
 }
 
 //==================================================================================//
@@ -152,6 +158,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case Figure_Area:
+		pAct = new Play_Area(this);
 		break;
 
 	case DRAWING_AREA:
@@ -383,6 +390,162 @@ void ApplicationManager::ResetCount() {
 }
 
 
+//void ApplicationManager::AreaLoop() {
+//	while (AreaLoopCount < FigVector.size()) {
+//
+//		//CHECK THE TYPE OF THE FIGURE 
+//		CRectangle* rect = dynamic_cast<CRectangle*> (FigVector[MoveLoopCount]);
+//		CLine* line = dynamic_cast<CLine*> (FigVector[MoveLoopCount]);
+//		CTriangle* tri = dynamic_cast<CTriangle*> (FigVector[MoveLoopCount]);
+//		CCircle* cir = dynamic_cast<CCircle*> (FigVector[MoveLoopCount]);
+//
+//		//IF THE FIGURE IS RECTANGLE
+//		if (rect != NULL) {
+//			AreaLoopCount++;
+//			RecAreas.push_back(FigVector[AreaLoopCount]);
+//
+//
+//		}
+//
+//		//IF THE FIGURE IS TRIANGLE
+//		else if (tri != NULL) {
+//			AreaLoopCount++;
+//			TriAreas.push_back(FigVector[AreaLoopCount]);
+//
+//
+//
+//		}
+//
+//		//IF THE FIGURE IS LINE
+//		else if (line != NULL) {
+//			AreaLoopCount++;
+//
+//			LinAreas.push_back(FigVector[AreaLoopCount]);
+//
+//		}
+//
+//		else if (cir != NULL) {
+//			AreaLoopCount++;
+//
+//			CirAreas.push_back(FigVector[AreaLoopCount]);
+//
+//		}
+//
+//	}
+//}
+
+
+bool ApplicationManager::CheckSmallest(CFigure* fig) {
+	CRectangle* rect = dynamic_cast<CRectangle*> (fig);
+	CLine* line = dynamic_cast<CLine*> (fig);
+	CTriangle* tri = dynamic_cast<CTriangle*> (fig);
+	CCircle* cir = dynamic_cast<CCircle*> (fig);
+
+
+
+	//IF THE FIGURE IS RECTANGLE
+	if (rect != NULL) {
+		if (fig->GetArea() == RecAreas[0])
+			return true;
+		else
+			return false;
+	}
+
+	//IF THE FIGURE IS TRIANGLE
+	else if (tri != NULL) {
+			if (fig->GetArea() == TriAreas[0])
+				return true;
+			else
+				return false;
+	}
+
+	//IF THE FIGURE IS LINE
+	else if (line != NULL) {
+		if (fig->GetArea() == LinAreas[0])
+			return true;
+		else
+			return false;
+
+	}
+
+	else if (cir != NULL) {
+		if (fig->GetArea() == CirAreas[0])
+			return true;
+		else
+			return false;
+	}
+
+
+}
+
+
+
+void ApplicationManager::CreateRecAreasVector() {
+
+	for (int i = 0; i < FigCount; i++) {
+		CRectangle* P = dynamic_cast<CRectangle*> (FigList[i]);
+		if(P != NULL)
+		RecAreas.push_back(FigList[i]->GetArea());
+	}
+
+	sort(RecAreas.begin(), RecAreas.end());
+
+}
+
+void ApplicationManager::CreateTriAreasVector() {
+
+	for (int i = 0; i < FigCount; i++) {
+		CTriangle* P = dynamic_cast<CTriangle*> (FigList[i]);
+		if (P != NULL)
+			TriAreas.push_back(FigList[i]->GetArea());
+	}
+
+	sort(TriAreas.begin(), TriAreas.end());
+
+}
+
+void ApplicationManager::CreateCirAreasVector() {
+
+	for (int i = 0; i < FigCount; i++) {
+		CCircle* P = dynamic_cast<CCircle*> (FigList[i]);
+		if (P != NULL)
+			CirAreas.push_back(FigList[i]->GetArea());
+	}
+
+	sort(CirAreas.begin(), CirAreas.end());
+
+}
+
+void ApplicationManager::CreateLinAreasVector() {
+
+	for (int i = 0; i < FigCount; i++) {
+		CLine* P = dynamic_cast<CLine*> (FigList[i]);
+		if (P != NULL)
+			LinAreas.push_back(FigList[i]->GetArea());
+	}
+
+	sort(LinAreas.begin(), LinAreas.end());
+
+}
+
+int ApplicationManager::GetNextRecArea(int p) {
+	return RecAreas[p];
+}
+
+int ApplicationManager::GetNextCirArea(int p) {
+	return CirAreas[p];
+}
+
+int ApplicationManager::GetNextTriArea(int p) {
+	return TriAreas[p];
+}
+
+int ApplicationManager::GetNextLinArea(int p) {
+	return LinAreas[p];
+}
+
+
+
 //////////////********** GILANY'S PART ************//////////////////
 
 
@@ -488,7 +651,7 @@ int ApplicationManager::GetFigCount()
 void ApplicationManager::UnhideAllFigs()
 {
 	if (!isGraphEmpty()) {
-		for (int i = 0; i < MaxFigCount; i++) {
+		for (int i = 0; i < FigCount; i++) {
 			FigList[i]->SetHidden(FALSE);
 		}
 	}

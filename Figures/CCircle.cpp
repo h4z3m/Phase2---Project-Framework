@@ -196,3 +196,21 @@ void CCircle::zooming(float factor)
 
 
 }
+Point CCircle::GetMid()
+{
+	Point Mid;
+	Mid = R1;
+	return Mid;
+}
+CFigure* CCircle::Copy()
+{
+	CCircle* C = new CCircle(*this);
+	C->SetSelected(false);
+	return C;
+}
+void CCircle::Paste(Point p, Point Mid) {
+	R1.x = p.x - (Mid.x - R1.x);
+	R1.y = p.y - (Mid.y - R1.y);
+	R2.x = p.x - (Mid.x - R2.x);
+	R2.y = p.y - (Mid.y - R2.y);
+}

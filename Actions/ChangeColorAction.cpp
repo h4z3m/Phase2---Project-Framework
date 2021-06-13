@@ -110,7 +110,7 @@ void ChangeColorAction::Execute() {
 					case black:
 						UI.FillColor = BLACK;
 						SetFillClrStatus(true);
-						pOut->PrintMessage("Fill color changed to: Blue");
+						pOut->PrintMessage("Fill color changed to: Black");
 						break;
 					case white:
 						UI.FillColor = WHITE;

@@ -28,7 +28,9 @@ public:
 	color GetFillColorObj() const;	//gets color of a figure
 	color GetDrawColorObj() const;
 	virtual void Draw(Output* pOut) const = 0;		//Draw the figure
-	
+	virtual Point GetMid() = 0;
+	virtual void Paste(Point p, Point Mid) = 0;
+	virtual CFigure* Copy() = 0;
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
 	void SetHidden(bool);

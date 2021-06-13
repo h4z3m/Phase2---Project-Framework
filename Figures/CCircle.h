@@ -20,6 +20,9 @@ public:
 	//////////////********** Ali'S PART ************//////////////////
 	virtual void resize(float);
 	virtual void zooming(float);
+	Point GetMid();
+	CFigure* Copy();
+	void Paste(Point p, Point Mid);
 	//////////////********** Ali'S PART ************//////////////////
 	//////////////********** GILANY'S PART ************//////////////////
 		//void ChangeCirPoints(Point);

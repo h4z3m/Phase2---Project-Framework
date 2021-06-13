@@ -20,6 +20,9 @@ public:
 	virtual void resize(float);
 	void Rotate(int rotation);
 	virtual void zooming(float);
+	Point GetMid();
+	CFigure* Copy();
+	void Paste(Point p, Point Mid);
 	//////////////********** Ali'S PART ************//////////////////
 	//////////////********** GILANY'S PART ************//////////////////
 	//void ChangeLinPoints(Point, Point);

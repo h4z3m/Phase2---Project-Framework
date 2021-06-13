@@ -69,7 +69,7 @@ void MoveAction::Execute() {
 		for (int i = 0; i < VectorSize; i++) {
 
 
-			FigPtr = pManager->MoveLoop();
+			FigPtr = pManager->GetFigPtr();
 
 			FigPtr->ChangeCorners(newPoint, MainRefrence);
 			pOut->ClearStatusBar();

@@ -146,7 +146,13 @@ void CRectangle::ChangeCorners(Point newPoint, Point MainRefrence) {
 int CRectangle::GetArea() {
 	return (abs(Corner1.x - Corner2.x) * abs(Corner1.y - Corner2.y));
 }
+Point CRectangle::GetCorner1() {
+	return Corner1;
+}
 
+Point CRectangle::GetCorner2() {
+	return Corner2;
+}
 //////////////********** GILANY'S PART ************//////////////////
 //////////////********** Ali'S PART ************//////////////////
 void CRectangle::resize(float factor)
@@ -162,14 +168,26 @@ void CRectangle::Rotate(int rotation) {
 	//Temp pts
 	Point P1 = Corner1;
 	Point P2 = Corner2;
-	int side_x = Corner2.x - Corner1.x;
-	int side_y = Corner2.y - Corner1.y;
+	//1->180, 0=90,2=270
 	//Rotate 180 degrees counter clockwise
-  	Corner2.x = Corner1.x + (side_x  );
-	Corner2.y = Corner1.y - (side_y );
-	//Rotate 90 degrees counter clockwise
-	Corner2.x = abs(P2.x - P1.x);
-	Corner2.y = abs(P1.y-side_y);
+	if (rotation == 1) {
+		int side_x = Corner2.x - Corner1.x;
+		int side_y = Corner2.y - Corner1.y;
+		Corner2.x = Corner1.x + (side_x);
+		Corner2.y = Corner1.y - (side_y);
+	}
+	//Rotate 90/270 degrees counter clockwise
+	else {
+		for (int i = 0; i < rotation + 1; i++) {
+			//Temp pts
+			Point P1 = Corner1;
+			Point P2 = Corner2;
+			int side_x = Corner2.x - Corner1.x;
+			int side_y = Corner2.y - Corner1.y;
+			Corner2.x = P1.x - side_y;
+			Corner2.y = P1.y + side_x;
+		}
+	}
 }
 
 void CRectangle::zooming(float factor)
@@ -220,4 +238,23 @@ void CRectangle::zooming(float factor)
 	}
 
 
+}
+Point CRectangle::GetMid()
+{
+	Point Mid;
+	Mid.x = abs(Corner1.x - Corner2.x) / 2;
+	Mid.y = abs(Corner1.y - Corner2.y) / 2;
+	return Mid;
+}
+CFigure* CRectangle::Copy() {
+	CRectangle* R = new CRectangle(*this);
+	R->SetSelected(false);
+	return R;
+}
+
+void CRectangle::Paste(Point p, Point Mid) {
+	Corner1.x = p.x - (Mid.x - Corner1.x);
+	Corner1.y = p.y - (Mid.y - Corner1.y);
+	Corner2.x = p.x - (Mid.x - Corner2.x);
+	Corner2.y = p.y - (Mid.y - Corner2.y);
 }

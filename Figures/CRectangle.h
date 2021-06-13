@@ -19,13 +19,17 @@ public:
 	virtual void resize(float);
 	void Rotate(int rotation);
 	virtual void zooming(float);
+	Point GetMid();
+	CFigure* Copy();
+	void Paste(Point p, Point Mid);
 	//////////////********** Ali'S PART ************//////////////////
 	//////////////********** GILANY'S PART ************//////////////////
 	//void ChangeRecCorners(Point, Point);
 	Point GetRecHighPoint();
 	virtual void ChangeCorners(Point, Point);
 	virtual int GetArea();
-
+	Point GetCorner1();
+	Point GetCorner2();
 	//////////////********** GILANY'S PART ************//////////////////
 };
 

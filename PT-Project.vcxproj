@@ -134,10 +134,13 @@
     <ClCompile Include="Actions\AddTriangleAction.cpp" />
     <ClCompile Include="Actions\BringToFrontAction.cpp" />
     <ClCompile Include="Actions\ChangeColorAction.cpp" />
+    <ClCompile Include="Actions\Copy.cpp" />
+    <ClCompile Include="Actions\CutAction.cpp" />
     <ClCompile Include="Actions\Delete.cpp" />
     <ClCompile Include="Actions\Exit.cpp" />
     <ClCompile Include="Actions\LoadAction.cpp" />
     <ClCompile Include="Actions\MoveAction.cpp" />
+    <ClCompile Include="Actions\PasteAction.cpp" />
     <ClCompile Include="Actions\Play_Figure_Type.cpp" />
     <ClCompile Include="Actions\RotateAction.cpp" />
     <ClCompile Include="Actions\SendToBackAction.cpp" />
@@ -202,10 +205,13 @@
     <ClInclude Include="Actions\AddTriangleAction.h" />
     <ClInclude Include="Actions\BringToFrontAction.h" />
     <ClInclude Include="Actions\ChangeColorAction.h" />
+    <ClInclude Include="Actions\Copy.h" />
+    <ClInclude Include="Actions\CutAction.h" />
     <ClInclude Include="Actions\Delete.h" />
     <ClInclude Include="Actions\Exit.h" />
     <ClInclude Include="Actions\LoadAction.h" />
     <ClInclude Include="Actions\MoveAction.h" />
+    <ClInclude Include="Actions\PasteAction.h" />
     <ClInclude Include="Actions\Play_Figure_Type.h" />
     <ClInclude Include="Actions\RotateAction.h" />
     <ClInclude Include="Actions\SendToBackAction.h" />

@@ -216,17 +216,28 @@ void CTriangle::resize(float factor)
 }
 //////////////********** Ali'S PART ************//////////////////
 void CTriangle::Rotate(int rotation) {
-	//Temp pts
-	Point P1 = Point1;
-	Point P2 = Point2;
-	Point P3 = Point3;
-	//Rotate 90 degrees counter clockwise
-	Point1.x = P1.y;
-	Point1.y = -P1.x;
-	Point2.x = P2.y;
-	Point2.y = -P2.x;
-	Point3.x = P3.y;
-	Point3.y = -P3.x;
+	
+	for (int i = 0; i < rotation + 1; i++) {
+		Point Center;
+		Center.x = (Point1.x + Point2.x + Point3.x) / 3;
+		Center.y = (Point1.y + Point2.y + Point3.y) / 3;
+
+
+		Point NewPoint1;
+		NewPoint1.x = Center.x - (Point1.y - Center.y);
+		NewPoint1.y = Center.y + (Point1.x - Center.x);
+		Point NewPoint2;
+		NewPoint2.x = Center.x - (Point2.y - Center.y);
+		NewPoint2.y = Center.y + (Point2.x - Center.x);
+		Point NewPoint3;
+		NewPoint3.x = Center.x - (Point3.y - Center.y);
+		NewPoint3.y = Center.y + (Point3.x - Center.x);
+
+		Point1 = NewPoint1;
+		Point2 = NewPoint2;
+		Point3 = NewPoint3;
+	
+	}
 }
 void CTriangle::zooming(float factor)
 {
@@ -296,5 +307,28 @@ void CTriangle::zooming(float factor)
 		Point3.y = centery - sin(anglepoint3) * length3;
 	}
 
+
+}
+
+Point CTriangle::GetMid()
+{
+	Point Mid;
+	Mid.x = (Point1.x + Point2.x + Point3.x) / 3;
+	Mid.y = (Point1.y + Point2.y + Point3.y) / 3;
+	return Mid;
+}
+CFigure* CTriangle::Copy() {
+	CTriangle* T = new CTriangle(*this);
+	T->SetSelected(false);
+	return T;
+}
+
+void CTriangle::Paste(Point p, Point Mid) {
+	Point1.x = p.x - (Mid.x - Point1.x);
+	Point1.y = p.y - (Mid.y - Point1.y);
+	Point2.x = p.x - (Mid.x - Point2.x);
+	Point2.y = p.y - (Mid.y - Point2.y);
+	Point3.x = p.x - (Mid.x - Point3.x);
+	Point3.y = p.y - (Mid.y - Point3.y);
 
 }

@@ -9,6 +9,9 @@
 #include "Actions\ChangeColorAction.h"
 #include "Actions\SelectAction.h"
 #include "Actions\Delete.h"
+#include "Actions/Copy.h"
+#include "Actions/CutAction.h"
+#include "Actions/PasteAction.h"
 #include "Actions\MoveAction.h"
 #include "Actions\Resize.h"
 #include "Actions\zoom.h"
@@ -147,12 +150,15 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case COPY:
+		pAct = new Copy(this);
 		break;
 
 	case CUT:
+		pAct = new CutAction(this);
 		break;
 
 	case PASTE:
+		pAct = new PasteAction(this);
 		break;
 
 	case Figure_Type:
@@ -366,9 +372,6 @@ void ApplicationManager::MakeItUnSelected(CFigure* fig) {
 	FigVector.erase(FigVector.begin() + index);
 }
 
-//MAKE A REFRENCE POINT OF THE FIRST SELECTED FIGURE 
-//TO MOVE THE OTHER SELECTED FIGURES WITH RESPECT TO IT
-//IF YOU UNSELECT THE FIRST FIGURE, THE POINT OF THE OTHER FIGURE WILL BE TAKEN AS A REFRENCE 
 Point ApplicationManager::MakeRefrencePoint() {
 
 	CRectangle* rect = dynamic_cast<CRectangle*> (FigVector[0]);
@@ -391,6 +394,11 @@ Point ApplicationManager::MakeRefrencePoint() {
 
 }
 
+//MAKE A REFRENCE POINT OF THE FIRST SELECTED FIGURE 
+//TO MOVE THE OTHER SELECTED FIGURES WITH RESPECT TO IT
+//IF YOU UNSELECT THE FIRST FIGURE, THE POINT OF THE OTHER FIGURE WILL BE TAKEN AS A REFRENCE 
+
+
 //IF THE FIGURE IS RECTANGLE
 
 vector <CFigure*> ApplicationManager::GetFigVector() {
@@ -401,8 +409,7 @@ vector <CFigure*> ApplicationManager::GetFigVector() {
 		return FigVector;
 }
 
-
-CFigure* ApplicationManager::MoveLoop() {
+CFigure* ApplicationManager::GetFigPtr() {
 	while (MoveLoopCount < FigVector.size()) {
 
 		//CHECK THE TYPE OF THE FIGURE 
@@ -414,34 +421,25 @@ CFigure* ApplicationManager::MoveLoop() {
 		//IF THE FIGURE IS RECTANGLE
 		if (rect != NULL) {
 			MoveLoopCount++;
-
 			return rect;
-
 		}
 
 		//IF THE FIGURE IS TRIANGLE
 		if (tri != NULL) {
 			MoveLoopCount++;
-
 			return tri;
-
 		}
 
 		//IF THE FIGURE IS LINE
 		if (line != NULL) {
 			MoveLoopCount++;
-
 			return line;
-
 		}
 
 		if (cir != NULL) {
 			MoveLoopCount++;
-
 			return cir;
-
 		}
-
 	}
 }
 
@@ -686,6 +684,31 @@ void ApplicationManager::ReorderFigList(vector<CFigure*> figs, int posShift, int
 	else {
 		pOut->PrintMessage("No selected figures");
 	}
+}
+void ApplicationManager::set_Clipboard(vector<CFigure*> clip) //the clipboard to store on it figures temporary
+{
+	Clipboard = clip;
+}
+void ApplicationManager::RemoveFig(vector<CFigure*>figs)
+{
+	for (int i = 0; i < SelectedNumber() - 1; i++)
+	{
+		auto arrayEnd = std::remove(begin(FigList), end(FigList), figs[i]);
+		FigCount--;
+	}
+}
+Point ApplicationManager::FiguresMid(vector<CFigure*> C, int CCount)
+{
+	Point Mid;
+	Mid.x = 0; Mid.y = 0;
+	for (int i = 0; i < CCount; i++)
+	{
+		Mid.x += C[i]->GetMid().x;
+		Mid.y += C[i]->GetMid().y;
+	}
+	Mid.x = Mid.x / CCount;
+	Mid.y = Mid.y / CCount;
+	return Mid;
 }
 //==================================================================================//
 //							Interface Management Functions							//

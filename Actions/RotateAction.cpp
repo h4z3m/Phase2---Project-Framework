@@ -1,4 +1,6 @@
 #include "RotateAction.h"
+#include <string>
+using namespace std;
 RotateAction::RotateAction(ApplicationManager* pApp) :Action(pApp)
 {}
 
@@ -6,28 +8,27 @@ void  RotateAction::ReadActionParameters()
 {}
 
 void RotateAction::Execute() {
-	vector <CFigure*> SelItems = pManager->GetFigVector();
-	for (int i = 0; i < SelItems.size(); i++) {
-		switch (SelItems[i]->FigType) {
-		case line:
-			Point MainRefrence = pManager->MakeRefrencePoint(); //GET A REFRENCE POINT TO MOVE THE FIGURES WITH RESPECT TO IT  
-			SelItems[i]->Rotate(0);
-			break;
-		case circle:
-			SelItems[i]->Rotate(0);
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 
-			break; 
-		case rectangle:
-			SelItems[i]->Rotate(0);
+	if (pManager->SelectedNumber()) {
+		vector <CFigure*> SelItems = pManager->GetFigVector();
+		string uChoice = "";
+		try {
+			pOut->ClearStatusBar();
+			pOut->PrintMessage(" Degrees of rotation: (0) 90 degrees (1) 180 degrees (2) 270 degrees: ");
+			uChoice = pIn->GetSrting(pOut).at(0);
+			for (int i = 0; i < SelItems.size(); i++) {
 
-			break;
-		case triangle:
-			SelItems[i]->Rotate(0);
-			break;
-		default:
-			break;
+				SelItems[i]->Rotate(stoi(uChoice));
+				pOut->PrintMessage(SelItems[i]->PrintInfo(pOut));
 
+			}
+		}
+		catch (...) {
+			pOut->PrintMessage("Please select a valid option !");
 		}
 	}
+
 }
 

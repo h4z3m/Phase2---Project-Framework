@@ -138,7 +138,7 @@ bool CLine::Fig(int x, int y)
 {
 
 	double area = Triangle_area(x, y, Point1.x, Point1.y, Point2.x, Point2.y);
-	if (area >= 0 && area <= 400 && (x >= min(Point1.x, Point2.x) && x <= max(Point1.x, Point2.x) && y >= min(Point1.y, Point2.y) && y <= max(Point1.y, Point2.y)))
+	if (area >= 0 && area <= 1000 && (x >= min(Point1.x, Point2.x) && x <= max(Point1.x, Point2.x) && y >= min(Point1.y, Point2.y) && y <= max(Point1.y, Point2.y)))
 	{
 		return true;
 	}
@@ -158,19 +158,26 @@ void CLine::resize(float factor)
 }
 //////////////********** Ali'S PART ************//////////////////
 void CLine::Rotate(int rotation) {
-	//Temp pts
-	Point P1 = Point1;
-	Point P2 = Point2;
+	for (int i = 0; i < rotation + 1; i++) {
+		//Temp pts
+		Point P1 = Point1;
+		Point P2 = Point2;
+		int sidex = Point2.x - Point1.x;
+		int sidey = Point2.y - Point1.y;
 
-	float sidex = Point2.x - Point1.x;
-	float sidey = Point2.y - Point1.y;
-	float length = sqrt(pow(sidex, 2) + pow(sidey, 2));
-	//length = length * factor;
-	float angle = atan(sidey / sidex);
-	float angle2 = angle + 90;
-	Point2.x = Point1.x + cos(angle2) * length;
-	Point2.y = Point1.y + sin(angle2) * length;
-
+		if (sidex > 0 && sidey > 0) {
+			Point2.x = P2.x - 2 * abs(sidex);
+		}
+		else if (sidex < 0 && sidey > 0) {
+			Point2.y = P2.y - 2 * abs(sidey);
+		}
+		else if (sidex < 0 && sidey < 0) {
+			Point2.x = P2.x + 2 * abs(sidex);
+		}
+		else if (sidex > 0 && sidey < 0) {
+			Point2.y = P2.y + 2 * abs(sidey);
+		}
+	}
 }
 void CLine::zooming(float factor)
 {
@@ -219,7 +226,24 @@ void CLine::zooming(float factor)
 		Point2.y = centery - sin(anglepoint2) * length2;
 	}
 
+}
+Point CLine::GetMid()
+{
+	Point Mid;
+	Mid.x = (Point1.x + Point1.x) / 2;
+	Mid.y = (Point1.y + Point1.y) / 2;
+	return Mid;
+}
+CFigure* CLine::Copy() {
+	CLine* L = new CLine(*this);
+	L->SetSelected(false);
+	return L;
+}
 
-
-
+void CLine::Paste(Point p, Point Mid)
+{
+	Point1.x = p.x - (Mid.x - Point1.x);
+	Point1.y = p.y - (Mid.y - Point1.y);
+	Point2.x = p.x - (Mid.x - Point2.x);
+	Point2.y = p.y - (Mid.y - Point2.y);
 }

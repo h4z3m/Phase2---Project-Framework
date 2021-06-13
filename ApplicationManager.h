@@ -6,7 +6,7 @@
 #include "GUI\input.h"
 #include "GUI\output.h"
 #include <vector>
-
+#include <math.h>       
 
 //Main class that manages everything in the application.
 class ApplicationManager
@@ -32,6 +32,9 @@ private:
 	vector <int> CirAreas;
 	vector <int> TriAreas;
 	vector <int> LinAreas;
+
+	vector <int> YsPoints;
+	vector <int> XsPoints;
 
 	int RecAreaCount;
 	int TriAreaCount;
@@ -79,8 +82,7 @@ public:
 	void MakeItUnSelected(CFigure*);
 	Point MakeRefrencePoint();
 	vector <CFigure*> GetFigVector();
-	CFigure* MoveLoop();
-	void AreaLoop();
+	CFigure* GetFigPtr();
 
 	int GetVectorSize();
 	void ResetCount();
@@ -104,9 +106,14 @@ public:
 	friend bool CheckValidationPoint(Point P2);
 
 	void ResetFigAreas();
+
+	Point MakeRefrenceCenter();
 	//////////////********** GILANY'S PART ************//////////////////
 	void ReorderFigList(vector<CFigure*>, int, int);
-	
+	void set_Clipboard(vector<CFigure*> clip);
+	vector<CFigure*> Clipboard;
+	Point FiguresMid(vector<CFigure*> C, int CCount);
+	void RemoveFig(vector<CFigure*>);
 };
 
 #endif

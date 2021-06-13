@@ -84,6 +84,8 @@ public:
 	int GetVectorSize();
 	void ResetCount();
 
+	void ResetFigCount();
+
 	bool CheckSmallest(CFigure*);
 
 	void CreateAreasVector();
@@ -102,7 +104,7 @@ public:
 
 	void ResetFigAreas();
 	//////////////********** GILANY'S PART ************//////////////////
-	void ReorderFigList(CFigure*[], int, int);
+	void ReorderFigList(vector<CFigure*>, int, int);
 	
 };
 

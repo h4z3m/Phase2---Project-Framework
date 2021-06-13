@@ -35,6 +35,7 @@ void LoadAction::ReadActionParameters()
 		}
 		//Delete all figures
 		pManager->DeleteAllFigs();
+		pManager->ResetFigCount();
 		//Read filename from user input
 		pOut->PrintMessage("Please enter a graph savefile to load from: ");
 		fileName = pIn->GetSrting(pOut);

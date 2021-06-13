@@ -452,7 +452,9 @@ int ApplicationManager::GetVectorSize() {
 void ApplicationManager::ResetCount() {
 	MoveLoopCount = 0;
 }
-
+void ApplicationManager::ResetFigCount() {
+	FigCount = 0;
+}
 
 //void ApplicationManager::AreaLoop() {
 //	while (AreaLoopCount < FigVector.size()) {
@@ -621,43 +623,69 @@ void ApplicationManager::ResetFigAreas() {
 
 //////////////********** GILANY'S PART ************//////////////////
 //Given an arry of figures, shift to start from (0=back,else=front) and the selected array item count
-void ApplicationManager::ReorderFigList(CFigure* figs[], int posShift, int sel)
+void ApplicationManager::ReorderFigList(vector<CFigure*> figs, int posShift, int sel)
 {
-	/*CFigure* tempFig=NULL;
-	for (int i = 0; i < sel - 1; i++) {
-		for (int j = 0; j < FigCount - 1; j++) {
+	///*CFigure* tempFig=NULL;
+	//for (int i = 0; i < sel - 1; i++) {
+	//	for (int j = 0; j < FigCount - 1; j++) {
 
-			tempFig = FigList[j+1];
-			FigList[j + 1] = FigList[j];
-			FigList[j] = NULL;
-			FigList[j + 2] = tempFig;
-		}
+	//		tempFig = FigList[j+1];
+	//		FigList[j + 1] = FigList[j];
+	//		FigList[j] = NULL;
+	//		FigList[j + 2] = tempFig;
+	//	}
+	//}
+	//for (int i = 0; i < sel-1; i++) {
+	//	FigList[i] = figs[i];
+	//}*/
+	////Put elements starting from zero index (send to back)
+	//if (posShift == 0) {
+	//	//Remove selected elements from FigList array (only removes pointers not the figure itself)
+	//	for (int i = 0; i < sel - 1; i++) {
+	//		auto arrayEnd = std::remove(begin(FigList), end(FigList), figs[i]);
+	//	}
+	//	//Copy unselected contents into shifted position
+	//	memcpy(FigList + (sel - 1), FigList, 8 * sizeof(CFigure*));
+	//	//Copy selected contents at the start of fig list, FigList or &FigList[i] is the pointer to the zero index to start copying to
+	//	copy(figs, figs + sel - 1, FigList);
+	//}
+	////Put elements starting from (FigCount-1) index (bring to front)
+	//else {
+	//	//Remove selected elements from FigList array (only removes pointers not the figure itself)
+	//	for (int i = 0; i < sel - 1; i++) {
+	//		auto arrayEnd = std::remove(begin(FigList), end(FigList), figs[i]);
+	//	}
+	//	//No need to copy, std::remove already orders the elements at the start of the array
+	//	//memcpy(FigList + (sel - 1), FigList, 8 * sizeof(CFigure*));
+	//	//Copy selected contents starting at total num of figures-selected figures
+	//	copy(figs, figs + sel - 1, &FigList[FigCount-sel+1]);
+	//}
+	//Remove selected elements from FigList array (only removes pointers not the figure itself)
+	for (int i = 0; i < sel - 1; i++) {
+		auto arrayEnd = std::remove(begin(FigList), end(FigList), figs[i]);
 	}
-	for (int i = 0; i < sel-1; i++) {
-		FigList[i] = figs[i];
-	}*/
-	//Put elements starting from zero index (send to back)
+	
 	if (posShift == 0) {
-		//Remove selected elements from FigList array (only removes pointers not the figure itself)
-		for (int i = 0; i < sel - 1; i++) {
-			auto arrayEnd = std::remove(begin(FigList), end(FigList), figs[i]);
+		for (int i = 0; i < figs.size(); i++) {
+			//Shift all figures by 1
+			for (int j = FigCount; j >= 0; j--) {
+				FigList[j] = FigList[j - 1];
+			}
+			//1st pos always empty, insert sel. figure
+			FigList[0] = figs[i];
 		}
-		//Copy unselected contents into shifted position
-		memcpy(FigList + (sel - 1), FigList, 8 * sizeof(CFigure*));
-		//Copy selected contents at the start of fig list, FigList or &FigList[i] is the pointer to the zero index to start copying to
-		copy(figs, figs + sel - 1, FigList);
 	}
-	//Put elements starting from (FigCount-1) index (bring to front)
 	else {
-		//Remove selected elements from FigList array (only removes pointers not the figure itself)
-		for (int i = 0; i < sel - 1; i++) {
-			auto arrayEnd = std::remove(begin(FigList), end(FigList), figs[i]);
-		}
-		//No need to copy, std::remove already orders the elements at the start of the array
-		//memcpy(FigList + (sel - 1), FigList, 8 * sizeof(CFigure*));
-		//Copy selected contents starting at total num of figures-selected figures
-		copy(figs, figs + sel - 1, &FigList[FigCount-sel+1]);
+	for (int i = 0; i < figs.size(); i++) {
+		//Add figures one by one at the very beginning
+		FigList[FigCount - i-1] = figs[i];
 	}
+}
+
+
+
+
+
 }
 //==================================================================================//
 //							Interface Management Functions							//

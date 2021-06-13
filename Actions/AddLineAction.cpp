@@ -47,9 +47,11 @@ void AddLineAction::Execute()
 		CLine* L = new CLine(P1, P2, LineGfxInfo,line);
 		//Add the rectangle to the list of figures
 		pManager->AddFigure(L);
+		pOut->ClearStatusBar();
 	}
 	else
 	{
+		pOut->ClearStatusBar();
 		pOut->PrintMessage("ERROR: Please click in the drawing area!");
 	}
 }

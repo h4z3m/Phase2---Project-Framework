@@ -20,6 +20,7 @@ void SaveAction::Execute() {
 	//Pass filename to Appmanager save function
 	ofstream saveFile(fileName + ".txt");
 	pManager->SaveAll(saveFile);
+	pOut->ClearStatusBar();
 	pOut->PrintMessage("File saved successfully as: " + fileName + ".txt");
 
 }

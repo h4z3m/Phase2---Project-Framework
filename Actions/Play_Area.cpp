@@ -28,7 +28,7 @@ int DoDynamicCheck(CFigure* f) {
 void CheckValidationPoint(Point& P2, Output* pOut, Input* pIn) {
 
 	if (P2.y < UI.StatusBarHeight || P2.y > UI.height) {
-		pOut->PrintMessage("Not a valid point ya haywan");
+		pOut->PrintMessage("Not a valid point");
 
 		bool NotInValidPoint = true;
 		while (NotInValidPoint) {
@@ -101,7 +101,7 @@ void Play_Area::ReadActionParameters()
 
 	if (StartFig == NULL) {
 
-		pOut->PrintMessage("Yasta select a figure yasta ARGOOK");
+		pOut->PrintMessage("Please select a figure");
 
 		bool NotInValidPoint = true;
 		while (NotInValidPoint) {
@@ -123,7 +123,7 @@ void Play_Area::ReadActionParameters()
 
 	if (!(pManager->CheckSmallest(StartFig))) { //CHECK IF THE FIRST SELECTION WAS THE SMALLEST FIGURE OF ANY TYPE
 
-		pOut->PrintMessage("yasta selecte the smallest yasta bellah 3alek");
+		pOut->PrintMessage("yasta select the smallest yasta bellah 3alek");
 
 		bool NotInValidPoint = true;
 		while (NotInValidPoint) { //KEEP ASKING UNTIL THE USER SELECT THE SMALLEST 

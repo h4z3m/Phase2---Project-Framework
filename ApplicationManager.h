@@ -12,7 +12,6 @@
 class ApplicationManager
 {
 	enum { MaxFigCount = 200 };	//Max no of figures
-
 private:
 	int FigCount;
 	int SelectedCount=0;		//Actual number of figures

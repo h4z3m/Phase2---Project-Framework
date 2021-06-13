@@ -24,20 +24,25 @@ void Resize::Execute() {
 	int factor = stoi(factor_string);
 	if (factor == 1) {
 		pManager->Changesize(4);
+		pOut->ClearStatusBar();
 	}
 	else if (factor == 2)
 	{
 		pManager->Changesize(2);
+		pOut->ClearStatusBar();
 	}
 	else if (factor == 3)
 	{
 		pManager->Changesize(0.5);
+		pOut->ClearStatusBar();
 	}
 	else if (factor == 4)
 	{
 		pManager->Changesize(0.25);
+		pOut->ClearStatusBar();
 	}
 	else {
+		pOut->ClearStatusBar();
 		pOut->PrintMessage("Sorry,you undefined reply ");
 	}
 	

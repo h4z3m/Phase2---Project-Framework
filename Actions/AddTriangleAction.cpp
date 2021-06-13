@@ -54,9 +54,12 @@ void AddTriangleAction::Execute()
 		CTriangle* T = new CTriangle(P1, P2, P3, TriangleGfxInfo,triangle);
 		//Add the triangle to the list of figures
 		pManager->AddFigure(T);
+		pOut->ClearStatusBar();
+
 	}
 	else
 	{
+		pOut->ClearStatusBar();
 		pOut->PrintMessage("ERROR: Please click in the drawing area!");
 	}
 }

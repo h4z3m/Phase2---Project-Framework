@@ -38,7 +38,6 @@ void Play_Figure_Type::ReadActionParameters()
 		break;
 	case rectangle:
 		CorrectFigsToSelect = pManager->GetRectCountWColor(NULL);
-
 		break;
 	case triangle:
 		CorrectFigsToSelect = pManager->GetTriCountWColor(NULL);

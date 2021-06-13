@@ -33,7 +33,7 @@ void MoveAction::ReadActionParameters() {
 
 		//check validation of point
 		if (newPoint.y < UI.StatusBarHeight || newPoint.y > UI.height - UI.ToolBarHeight) {
-			pOut->PrintMessage("Not a valid point ya haywan");
+			pOut->PrintMessage("Not a valid point");
 
 			bool NotInValidPoint = true;
 			while (NotInValidPoint) {
@@ -75,13 +75,13 @@ void MoveAction::Execute() {
 			pOut->ClearStatusBar();
 
 		}
-
+		pOut->ClearStatusBar();
 		pManager->ResetCount();
 	}
 
 	else
 		pOut->ClearStatusBar();
-		pOut->PrintMessage("Select a figure first");
+		pOut->PrintMessage("yasta select a figure first yasta bellah 3alek");
 
 	}
 

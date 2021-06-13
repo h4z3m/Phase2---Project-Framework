@@ -52,9 +52,12 @@ void AddRectAction::Execute()
 		CRectangle* R = new CRectangle(P1, P2, RectGfxInfo,rectangle);
 		//Add the rectangle to the list of figures
 		pManager->AddFigure(R);
+		pOut->ClearStatusBar();
+
 	}
 	else
 	{
+		pOut->ClearStatusBar();
 		pOut->PrintMessage("ERROR: Please click in the drawing area!");
 	}
 }

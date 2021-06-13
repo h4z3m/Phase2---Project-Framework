@@ -404,7 +404,7 @@ Point ApplicationManager::MakeRefrencePoint() {
 vector <CFigure*> ApplicationManager::GetFigVector() {
 
 	if (FigVector.size() == 0)
-		pOut->PrintMessage("Select a figure first ya haywan");
+		pOut->PrintMessage("Select a figure first");
 	else
 		return FigVector;
 }
@@ -810,6 +810,7 @@ void ApplicationManager::zooming(float in) {
 
 	}
 	pOut->ClearDrawArea();
+	pOut->ClearStatusBar();
 }
 
 void ApplicationManager::DeleteAllFigs()

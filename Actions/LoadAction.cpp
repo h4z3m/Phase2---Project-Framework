@@ -93,9 +93,9 @@ void LoadAction::Execute()
 				UI.DrawColor = pOut->getColorObj(DrawClr);
 				UI.FillColor = pOut->getColorObj(FillClr);
 				UI.BkGrndColor = pOut->getColorObj(BkGClr);
-
 			}
 		}
 		file.close();
 	}
+	pOut->ClearStatusBar();
 }

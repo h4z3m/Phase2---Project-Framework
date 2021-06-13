@@ -17,8 +17,6 @@ void  zoom::ReadActionParameters()
 	else if (key == 2) {
 		pOut->PrintMessage("Zooming out");
 	}
-	
-	
 
 }
 
@@ -29,12 +27,15 @@ void zoom::Execute() {
 	
 	if (key == 1) {
 		pManager->zooming(1.6);
+		pOut->ClearStatusBar();
 	}
 	else if (key == 2)
 	{
 		pManager->zooming(0.625);
+		pOut->ClearStatusBar();
 	}
 	else {
+		pOut->ClearStatusBar();
 		pOut->PrintMessage("Sorry, undefined reply ");
 	}
 

@@ -21,6 +21,7 @@ void RotateAction::Execute() {
 			for (int i = 0; i < SelItems.size(); i++) {
 
 				SelItems[i]->Rotate(stoi(uChoice));
+				pOut->ClearStatusBar();
 				pOut->PrintMessage(SelItems[i]->PrintInfo(pOut));
 
 			}

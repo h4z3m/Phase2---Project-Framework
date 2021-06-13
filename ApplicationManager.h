@@ -7,6 +7,7 @@
 #include "GUI\output.h"
 #include <vector>
 #include <iostream>
+#include <math.h>       
 
 #include <algorithm>
 
@@ -36,12 +37,13 @@ private:
 	int MoveLoopCount;
 
 
-
 	vector <int> RecAreas;
 	vector <int> CirAreas;
 	vector <int> TriAreas;
 	vector <int> LinAreas;
 
+	vector <int> YsPoints;
+	vector <int> XsPoints;
 
 	int RecAreaCount;
 	int TriAreaCount;
@@ -86,8 +88,7 @@ public:
 	void MakeItUnSelected(CFigure*);
 	Point MakeRefrencePoint();
 	vector <CFigure*> GetFigVector();
-	CFigure* MoveLoop();
-	void AreaLoop();
+	CFigure* GetFigPtr();
 
 	int GetVectorSize();
 	void ResetCount();
@@ -109,6 +110,10 @@ public:
 	friend bool CheckValidationPoint(Point P2);
 
 	void ResetFigAreas();
+
+	Point MakeRefrenceCenter();
+
+
 
 	//////////////********** GILANY'S PART ************//////////////////
 

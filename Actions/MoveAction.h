@@ -9,30 +9,9 @@ class MoveAction : public Action {
 private:
 	Point newPoint;
 	Point MainRefrence;
-
 	vector <CFigure*> MovedFigVector;
-
-
-
 	bool SelectedFlag;
-
-
-	Point SecondNewPoint;
-	Point ThirdNewPoint;
-
-	Point Refrence1;
-
-
-
-	CFigure* MovedFigure;
-
-	CFigure* MovedFiguresList[200];
 	GfxInfo FigGfxInfo;
-
-	int numSelRec;
-	int numSelTri;
-
-
 public:
 	MoveAction(ApplicationManager* pApp);
 
@@ -42,15 +21,5 @@ public:
 	//Add  to the ApplicationManager
 	virtual void Execute();
 
-
-
-
-
 };
-
-
-
-
-
-
 #endif

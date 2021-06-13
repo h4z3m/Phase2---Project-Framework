@@ -12,6 +12,8 @@
 #include "Actions\SelectAction.h"
 #include "Actions\Delete.h"
 #include "Actions\MoveAction.h"
+#include "Actions\RotateAction.h"
+
 #include "Actions\SwitchToPlayMode.h"
 #include "Actions\SwitchToDrawAction.h"
 #include "Actions\Play_FillColorAction.h"
@@ -41,6 +43,7 @@ ApplicationManager::ApplicationManager()
 	TriAreaCount=0;
 	LinAreaCount=0;
 	CirAreaCount=0;
+
 
 }
 
@@ -106,6 +109,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case ROTATE:
+		pAct = new RotateAction(this);
+
 		break;
 
 	case SEND_BACK:
@@ -338,7 +343,7 @@ vector <CFigure*> ApplicationManager::GetFigVector() {
 }
 
 
-CFigure* ApplicationManager::MoveLoop() {
+CFigure* ApplicationManager::GetFigPtr() {
 	while ( MoveLoopCount < FigVector.size() ) {
 
 		//CHECK THE TYPE OF THE FIGURE 
@@ -350,34 +355,25 @@ CFigure* ApplicationManager::MoveLoop() {
 		//IF THE FIGURE IS RECTANGLE
 		if (rect != NULL) {
 			MoveLoopCount++;
-
 			return rect;
-
 		}
 
 		//IF THE FIGURE IS TRIANGLE
 		if (tri != NULL) {
 			MoveLoopCount++;
-
 			return tri;
-
 		}
 
 		//IF THE FIGURE IS LINE
 		if (line != NULL) {
 			MoveLoopCount++;
-
 			return line;
-
 		}
 
 		if (cir != NULL) {
 			MoveLoopCount++;
-
 			return cir;
-
 		}
-
 	}
 }
 
@@ -397,8 +393,6 @@ bool ApplicationManager::CheckSmallest(CFigure* fig) {
 	CLine* line = dynamic_cast<CLine*> (fig);
 	CTriangle* tri = dynamic_cast<CTriangle*> (fig);
 	CCircle* cir = dynamic_cast<CCircle*> (fig);
-
-
 
 	//IF THE FIGURE IS RECTANGLE
 	if (rect != NULL) {
@@ -422,7 +416,6 @@ bool ApplicationManager::CheckSmallest(CFigure* fig) {
 			return true;
 		else
 			return false;
-
 	}
 
 	else if (cir != NULL) {
@@ -431,8 +424,6 @@ bool ApplicationManager::CheckSmallest(CFigure* fig) {
 		else
 			return false;
 	}
-
-
 }
 
 
@@ -510,6 +501,27 @@ void ApplicationManager::ResetFigAreas(){
 
 }
 
+Point ApplicationManager::MakeRefrenceCenter() {
+
+
+	for (int i = 0; i < FigVector.size(); i++) {
+		CRectangle* rect = dynamic_cast<CRectangle*> (FigVector[i]);
+		YsPoints.push_back(rect->GetCorner1().y);
+		YsPoints.push_back(rect->GetCorner2().y);
+		XsPoints.push_back(rect->GetCorner1().x);
+		XsPoints.push_back(rect->GetCorner2().x);
+	}
+
+	sort(YsPoints.begin(), YsPoints.end() - 1 );
+	sort(XsPoints.begin(), XsPoints.end() - 1);
+
+	Point RefrenceCenter;
+	RefrenceCenter.x = (XsPoints.end() - XsPoints.begin())/2;
+	RefrenceCenter.y = (YsPoints.end() - YsPoints.begin())/2;
+
+	return RefrenceCenter;
+}
+
 
 
 //////////////********** GILANY'S PART ************//////////////////
@@ -527,6 +539,7 @@ void ApplicationManager::UpdateInterface() const
 		if (!FigList[i]->IsHidden()) {
 			FigList[i]->Draw(pOut);//Call Draw function (virtual member fn)
 		}
+
 
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -622,3 +635,5 @@ void ApplicationManager::UnhideAllFigs()
 		}
 	}
 }
+
+

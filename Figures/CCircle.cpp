@@ -132,4 +132,7 @@ int CCircle::GetArea() {
 	return (3.141592654*pow(radius,2));
 }
 
+void CCircle::RotateFigure() {
+
+}
 //////////////********** GILANY'S PART ************//////////////////

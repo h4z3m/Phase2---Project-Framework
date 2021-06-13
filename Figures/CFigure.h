@@ -49,6 +49,9 @@ public:
 	virtual void ChangeCorners(Point, Point) = 0;
 	virtual int GetArea() = 0;
 
+
+	virtual void RotateFigure() = 0;
+
 };
 
 #endif

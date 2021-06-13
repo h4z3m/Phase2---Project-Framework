@@ -21,6 +21,9 @@ public:
 	Point GetRecHighPoint();
 	virtual void ChangeCorners(Point, Point);
 	virtual int GetArea();
+	Point GetCorner1();
+	Point GetCorner2();
+	virtual void RotateFigure();
 
 	//////////////********** GILANY'S PART ************//////////////////
 };

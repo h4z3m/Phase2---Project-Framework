@@ -92,41 +92,7 @@ string CTriangle::PrintInfo(Output* pOut)
 
 
 //////////////********** GILANY'S PART ************//////////////////
-//void CTriangle::ChangeTriPoints(Point newPoint, Point MainRefrence) {
-//
-//	if (Point1.x > MainRefrence.x)
-//		Point1.x = newPoint.x + abs(MainRefrence.x - Point1.x);
-//	else
-//		Point1.x = newPoint.x - abs(MainRefrence.x - Point1.x);
-//
-//	if (Point1.y > MainRefrence.y)
-//		Point1.y = newPoint.y + abs(MainRefrence.y - Point1.y);
-//	else
-//		Point1.y = newPoint.y - abs(MainRefrence.y - Point1.y);
-//
-//
-//	if (Point2.x > MainRefrence.x)
-//		Point2.x = newPoint.x + abs(MainRefrence.x - Point2.x);
-//	else
-//		Point2.x = newPoint.x - abs(MainRefrence.x - Point2.x);
-//
-//	if (Point2.y > MainRefrence.y)
-//		Point2.y = newPoint.y + abs(MainRefrence.y - Point2.y);
-//	else
-//		Point2.y = newPoint.y - abs(MainRefrence.y - Point2.y);
-//
-//
-//
-//	if (Point3.x > MainRefrence.x)
-//		Point3.x = newPoint.x + abs(MainRefrence.x - Point3.x);
-//	else
-//		Point3.x = newPoint.x - abs(MainRefrence.x - Point3.x);
-//
-//	if (Point3.y > MainRefrence.y)
-//		Point3.y = newPoint.y + abs(MainRefrence.y - Point3.y);
-//	else
-//		Point3.y = newPoint.y - abs(MainRefrence.y - Point3.y);
-//}
+
 
 Point CTriangle::GetTriHighPoint() {
 
@@ -189,4 +155,43 @@ void CTriangle::ChangeCorners(Point newPoint, Point MainRefrence) {
 int CTriangle::GetArea() {
 	return (12*abs(Point1.x * (Point2.y-Point3.y) + Point2.x * (Point3.y -Point1.y) + Point3.x * (Point1.y - Point2.y) ));
 }
+
+void CTriangle::RotateFigure() {
+	
+	
+	/*Point NewPoint2;
+	NewPoint2.x = Point1.x - (Point2.y - Point1.y);
+	NewPoint2.y = Point1.y + (Point2.x - Point1.x);
+	Point NewPoint3;
+	NewPoint3.x = Point1.x - (Point3.y - Point1.y);
+	NewPoint3.y = Point1.y + (Point3.x - Point1.x);
+
+	Point2 = NewPoint2;
+	Point3 = NewPoint3;*/
+
+
+	//With Respect to Center
+	
+	Point Center;
+	Center.x = (Point1.x + Point2.x + Point3.x) / 3;
+	Center.y = (Point1.y + Point2.y + Point3.y) / 3;
+
+
+	Point NewPoint1;
+	NewPoint1.x = Center.x - (Point1.y - Center.y);
+	NewPoint1.y = Center.y + (Point1.x - Center.x);
+	Point NewPoint2;
+	NewPoint2.x = Center.x - (Point2.y - Center.y);
+	NewPoint2.y = Center.y + (Point2.x - Center.x);
+	Point NewPoint3;
+	NewPoint3.x = Center.x - (Point3.y - Center.y);
+	NewPoint3.y = Center.y + (Point3.x - Center.x);
+
+	Point1 = NewPoint1;
+	Point2 = NewPoint2;
+	Point3 = NewPoint3;
+	
+
+}
+
 //////////////********** GILANY'S PART ************//////////////////

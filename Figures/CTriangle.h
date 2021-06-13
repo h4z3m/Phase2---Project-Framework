@@ -22,6 +22,7 @@ public:
 	Point GetTriHighPoint();
 	virtual void ChangeCorners(Point, Point);
 	virtual int GetArea();
+	virtual void RotateFigure();
 
 	//////////////********** GILANY'S PART ************//////////////////
 };

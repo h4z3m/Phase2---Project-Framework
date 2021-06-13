@@ -17,23 +17,23 @@ void MoveAction::ReadActionParameters() {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
-	int VectorSize = pManager->GetVectorSize();
+	int VectorSize = pManager->GetVectorSize(); //GET THE NUMBER OF SELECTED FIGURES 
 
-	if (VectorSize == 0) {
+	if (VectorSize == 0) { //IF THERE IS NO FIGURE SELECTED 
 		SelectedFlag = false;
 	}
-	else {
+
+	else { //IF THERE ARE SELECTED FIGURES, START MOVING 
 
 
 
 		SelectedFlag = true;
 		pOut->PrintMessage("Choose a Point to move to it");
-
 		pIn->GetPointClicked(newPoint.x, newPoint.y); // get the new Point
 
 		//check validation of point
 		if (newPoint.y < UI.StatusBarHeight || newPoint.y > UI.height - UI.ToolBarHeight) {
-			pOut->PrintMessage("Not a valid point ya haywan");
+			pOut->PrintMessage("Not a valid point");
 
 			bool NotInValidPoint = true;
 			while (NotInValidPoint) {
@@ -57,30 +57,32 @@ void MoveAction::Execute() {
 
 	ReadActionParameters();
 
-	if (SelectedFlag == true) {
+
+	if (SelectedFlag == true) { //IF THERE ARE SELECTED FIGURES, START MOVING 
 		MainRefrence = pManager->MakeRefrencePoint(); //GET A REFRENCE POINT TO MOVE THE FIGURES WITH RESPECT TO IT  
 
-		int VectorSize = pManager->GetVectorSize();
+		int VectorSize = pManager->GetVectorSize(); //GET THE NUMBER OF SELECTED FIGURES 
 
 		CFigure* FigPtr;
 
-
-		// LOOP TO CHECK EACH FIGURE OF THE SELECTED FIGURES WITH ITS OWN
+		// LOOP TO MOVE EACH FIGURE OF THE SELECTED FIGURES WITH ITS OWN 
 		for (int i = 0; i < VectorSize; i++) {
 
+			// GET A POINTER OF THE TYPE OF THE SELECTED FIGURE 
+			FigPtr = pManager->GetFigPtr();
 
-			FigPtr = pManager->MoveLoop();
-
+			// CHANGE THE CORNER OF THE SPECIFIC TYPE OF THE FIGURE
 			FigPtr->ChangeCorners(newPoint, MainRefrence);
 			pOut->ClearStatusBar();
 
 		}
-
+		// RESET THE COUNTER OF THE MOVED FIGURE
 		pManager->ResetCount();
 	}
 
-	else
-		pOut->PrintMessage("Select a figure first ya behema");
+	//IF THERE IS NO FIGURE SELECTED 
+	else 
+		pOut->PrintMessage("Yasta select a figure first yasta bellah 3alek");
 
 	}
 

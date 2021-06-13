@@ -5,8 +5,6 @@
 class BringToFrontAction :public Action
 {
 private:
-	int sel = 0;
-	CFigure* newFigList[200];
 public:
 	BringToFrontAction(ApplicationManager* pApp);
 

@@ -80,7 +80,8 @@ void MoveAction::Execute() {
 	}
 
 	else
-		pOut->PrintMessage("Select a figure first ya behema");
+		pOut->ClearStatusBar();
+		pOut->PrintMessage("Select a figure first");
 
 	}
 

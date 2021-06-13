@@ -165,8 +165,8 @@ void CRectangle::Rotate(int rotation) {
 	int side_x = Corner2.x - Corner1.x;
 	int side_y = Corner2.y - Corner1.y;
 	//Rotate 180 degrees counter clockwise
-//	Corner2.x = Corner1.x + (side_x  );
-	//Corner2.y = Corner1.y - (side_y );
+  	Corner2.x = Corner1.x + (side_x  );
+	Corner2.y = Corner1.y - (side_y );
 	//Rotate 90 degrees counter clockwise
 	Corner2.x = abs(P2.x - P1.x);
 	Corner2.y = abs(P1.y-side_y);

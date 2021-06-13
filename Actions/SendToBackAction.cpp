@@ -8,21 +8,13 @@ SendToBackAction::SendToBackAction(ApplicationManager* pApp) :  Action(pApp)
 }
 
 void SendToBackAction::ReadActionParameters()
-{
-	
-
-	int sel = (pManager->SelectedNumber()) - 1;
-	
+{	
 }
 
 void SendToBackAction::Execute()
 {
-	ReadActionParameters();
-	vector<CFigure*> selectedFigs = pManager->GetFigVector();
+	if (pManager->SelectedNumber() > 0) {
 
-	//Put selected figures in new figlist
-	if (selectedFigs.size() != 0) {
-
-		pManager->ReorderFigList(selectedFigs, 0, pManager->SelectedNumber());
+		pManager->ReorderFigList(pManager->GetFigVector(), 0, pManager->SelectedNumber());
 	}
 }

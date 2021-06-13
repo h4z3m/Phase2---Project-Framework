@@ -58,7 +58,7 @@ void SelectAction::Execute()
 			fig->SetSelected(true);
 			string x = fig->PrintInfo(pOut);
 
-			if (Count <=1)
+			if (Count <=0)
 			{
 				pOut->PrintMessage(x);
 				//////////////********** GILANY'S PART ************//////////////////
@@ -69,7 +69,7 @@ void SelectAction::Execute()
 			}
 			else
 			{
-				string s = to_string(Count);
+				string s = to_string(Count+1);
 				pOut->PrintMessage("Number of Selected figures: " + s);
 				//////////////********** GILANY'S PART ************//////////////////
 				pManager->MakeItSelected(fig);

@@ -4,8 +4,6 @@
 #include "..\Figures\CFigure.h"
 class SendToBackAction:public Action
 {	private:
-	int sel = 0;
-	CFigure* newFigList[200];
 	public:
 	SendToBackAction(ApplicationManager* pApp);
 

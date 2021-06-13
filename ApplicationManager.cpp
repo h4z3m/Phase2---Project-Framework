@@ -661,31 +661,31 @@ void ApplicationManager::ReorderFigList(vector<CFigure*> figs, int posShift, int
 	//	copy(figs, figs + sel - 1, &FigList[FigCount-sel+1]);
 	//}
 	//Remove selected elements from FigList array (only removes pointers not the figure itself)
-	for (int i = 0; i < sel - 1; i++) {
-		auto arrayEnd = std::remove(begin(FigList), end(FigList), figs[i]);
-	}
-	
-	if (posShift == 0) {
-		for (int i = 0; i < figs.size(); i++) {
-			//Shift all figures by 1
-			for (int j = FigCount; j >= 0; j--) {
-				FigList[j] = FigList[j - 1];
+	if (figs.size() > 0) {
+		for (int i = 0; i < sel; i++) {
+			auto arrayEnd = std::remove(begin(FigList), end(FigList), figs[i]);
+		}
+
+		if (posShift == 0) {
+			for (int i = 0; i < figs.size(); i++) {
+				//Shift all figures by 1
+				for (int j = FigCount; j >= 0; j--) {
+					FigList[j] = FigList[j - 1];
+				}
+				//1st pos always empty, insert sel. figure
+				FigList[0] = figs[i];
 			}
-			//1st pos always empty, insert sel. figure
-			FigList[0] = figs[i];
+		}
+		else if (figs.size() > 0) {
+			for (int i = 0; i < figs.size(); i++) {
+				//Add figures one by one at the very beginning
+				FigList[FigCount - i - 1] = figs[i];
+			}
 		}
 	}
 	else {
-	for (int i = 0; i < figs.size(); i++) {
-		//Add figures one by one at the very beginning
-		FigList[FigCount - i-1] = figs[i];
+		pOut->PrintMessage("No selected figures");
 	}
-}
-
-
-
-
-
 }
 //==================================================================================//
 //							Interface Management Functions							//
@@ -732,20 +732,22 @@ ApplicationManager::~ApplicationManager()
 
 }
 void ApplicationManager::Deleting() {
-
-
 	for (int i = 0; i < FigCount; i++)
 	{
 		if (FigList[i]->IsSelected())
 		{
-
+			delete[] FigList[i];
+			
 			for (int j = i; j < FigCount; j++)
 			{
-				if (j < FigCount)
+				if (j < FigCount) {
+
 					FigList[j] = FigList[j + 1];
+				}
+
 				else
 				{
-					delete FigList[j];
+					delete[] FigList[j];
 					FigList[j] = NULL;
 
 				}
@@ -755,6 +757,7 @@ void ApplicationManager::Deleting() {
 			FigCount--;
 		}
 	}
+	FigVector.clear();
 	pOut->ClearDrawArea();
 	pOut->PrintMessage("Remaining figures: " + to_string(FigCount));
 
@@ -797,15 +800,16 @@ void ApplicationManager::DeleteAllFigs()
 }
 
 int ApplicationManager::SelectedNumber() {
-	c = 1;
+	SelectedCount = 0;
+
 	for (int i = 0; i < FigCount; i++)
 	{
 		if (FigList[i]->IsSelected())
 		{
-			c = c + 1;
+			SelectedCount++;
 		}
 	}
-	return c;
+	return SelectedCount;
 }
 
 int ApplicationManager::GetFigCount()
